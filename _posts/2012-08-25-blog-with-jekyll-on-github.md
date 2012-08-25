@@ -40,7 +40,7 @@ title: 利用Jekyll在Github上写博客
 	$ pip install html2text
 	$ ruby -rubygems -e 'require "jekyll/migrators/tumblr"; Jekyll::Tumblr.process("http://www.your_blog_url.com", format="md")'
 
-数据迁移完成之后，需要在[Github][4]上创建项目username.github.com「username是你的Github用户名]，然后把博客的origin替换为新建的项目，并且push到Github，十分钟后就可以通过http://username.github.com来访问了。
+数据迁移完成之后，需要在[Github][4]上创建项目username.github.com「username是你的Github用户名」，然后把博客的origin替换为新建的项目，并且push到Github，十分钟后就可以通过http://username.github.com来访问了。
 	
 	$ cd myblog
 	$ git remote rm origin
