@@ -1,0 +1,160 @@
+---
+layout: post
+title: 解析PHP INI文件
+---
+
+<p><strong>介绍</strong></p>
+
+<p>PHP的配置文件(php.ini)格式简洁，可以在自己的应用中作为配置文件来使用。 INI文件格式：</p>
+
+<pre>[PHP]
+
+;;;;;;;;;;;;;;;;;;;;
+
+; Language Options ;
+
+;;;;;;;;;;;;;;;;;;;;
+
+
+
+; Enable the PHP scripting language engine under Apache.
+
+engine = On
+
+include_path = ".;/path/to/php/include_path/"
+
+...
+
+...
+
+[Memcache]
+
+memcache.allow_failover = 1
+
+memcache.max_failover_attempts=20
+
+memcache.chunk_size =8192
+
+memcache.default_port = 11211
+
+</pre>
+
+<p>其中;代表注释，配置内容是key=value格式，如下的词不能作为key：</p>
+
+<pre>null yes no true false on off none  ?{}|&amp;~![()^"
+
+</pre>
+
+<p>value中的null,no,false等字符串会被解析成空字符串，yes,true 会被解析成&#8221;1&#8221;，如果在value中包含任何非字母数字(non alphanumeric)的字符，那么这个value值需要用双引号括起来。[PHP]这个字符代表一个区块(section)，这个区块下面的内容都 是属于这个区块的，便于管理。</p>
+
+<p><strong>解析</strong></p>
+
+<p>在PHP中可以用parse_ini_file(PHP4,PHP5)函数来解析PHP INI格式的配置文件</p>
+
+<pre>// 得到PHP INI文件路径
+
+$loaded_path = php_ini_loaded_file();
+
+
+
+// 解析并处理section，
+
+$res = parse_ini_file($loaded_path, TRUE);
+
+
+
+// 结果如下
+
+array(31) {
+
+["PHP"] =&gt;
+
+  array(58){
+
+	["engine"] =&gt;
+
+	string(1) "On"
+
+	["include_path"] =&gt;
+
+	string(20) ".;/path/to/php/include_path/"
+
+	...
+
+  }
+
+ ...
+
+ ...
+
+["Memcache"]=&gt;
+
+  array(4) {
+
+    ["memcache.allow_failover"]=&gt;
+
+    string(1) "1"
+
+    ["memcache.max_failover_attempts"]=&gt;
+
+    string(2) "20"
+
+    ["memcache.chunk_size"]=&gt;
+
+    string(4) "8192"
+
+    ["memcache.default_port"]=&gt;
+
+    string(5) "11211"
+
+  }
+
+}
+
+
+
+// 不处理section
+
+$res = parse_ini_file($loaded_path, FALSE);
+
+
+
+// 结果如下
+
+array(158) {
+
+  ["engine"]=&gt;
+
+  string(1) "1"
+
+  ["include_path"] =&gt;
+
+  string(20) ".;/path/to/php/include_path/"
+
+  ...
+
+  ...
+
+  ["memcache.allow_failover"]=&gt;
+
+    string(1) "1"
+
+    ["memcache.max_failover_attempts"]=&gt;
+
+    string(2) "20"
+
+    ["memcache.chunk_size"]=&gt;
+
+    string(4) "8192"
+
+    ["memcache.default_port"]=&gt;
+
+    string(5) "11211"
+
+}
+
+</pre>
+
+<p>也可以使用parse_ini_string(PHP&gt;=5.3.0)用来解析一个INI格式的字符串，然后返回一个数组，使用方法和parse_ini_file方法一样。</p>
+
+<p>参考：<br/> <a href="http://php.net/manual/en/function.parse-ini-file.php" target="_blank">http://php.net/manual/en/function.parse-ini-file.php</a><br/> <a href="http://www.php.net/manual/en/function.parse-ini-string.php" target="_blank">http://www.php.net/manual/en/function.parse-ini-string.php</a></p>

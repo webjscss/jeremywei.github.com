@@ -1,0 +1,88 @@
+---
+layout: post
+title: 使用Minify来优化网站性能
+---
+
+<p>前言</p>
+
+<p><a href="http://code.google.com/p/minify/" target="_blank">Minify </a>是用PHP5开发的应用，通过遵循一些Yahoo的<a href="http://developer.yahoo.com/performance/index.html#rules" target="_blank">优化规则</a>来提高网站的性能。它会合并多个CSS或者JavaScript文件，移除一些不必要的空格和注释，进行gzip压缩，并且会设置浏览器的缓存头。Minify 在设计上和Yahoo的 <a href="http://yuiblog.com/blog/2008/07/16/combohandler/" rel="nofollow" target="_blank">Combo Handler Service</a>非常像，不过Minify可以合并任何你想要合并的JavaScript和CSS文件。<br/><span id="more-480"></span><br/>一般情况下，网站速度的瓶颈都在前端，而最关键的就是资源的加载速度，但是大多数浏览器都有单个域名并发请求数限制，所以如果一个页面中存在很多的资源，比如CSS和JavaScript文件，那么明显会降低网站的加载速度，比较好处理方式就是把多个文件通过一个请求来访问，这样既不会影响之前的文件维护，又会减少资源的清楚数量，Minify就是为之而生。下面是一些被Minify采用的 Yahoo! 优化准则：</p>
+
+<ul><li><a href="http://developer.yahoo.com/performance/rules.html#num_http" rel="nofollow" target="_blank">Make Fewer HTTP Requests</a></li>
+
+<li><a href="http://developer.yahoo.com/performance/rules.html#expires" rel="nofollow" target="_blank">Add an Expires or a Cache-Control Header</a></li>
+
+<li><a href="http://developer.yahoo.com/performance/rules.html#gzip" rel="nofollow" target="_blank">Gzip Components</a></li>
+
+<li><a href="http://developer.yahoo.com/performance/rules.html#minify" rel="nofollow" target="_blank">Minify JavaScript and CSS</a></li>
+
+<li><a href="http://developer.yahoo.com/performance/rules.html#etags" rel="nofollow" target="_blank">Configure ETags</a></li>
+
+<li><a href="http://developer.yahoo.com/performance/rules.html#under25" rel="nofollow" target="_blank">Keep Components under 25K</a></li>
+
+</ul><p><strong>特性</strong></p>
+
+<ul><li>合并多个CSS或JavaScript文件为一个文件，减少请求数量，并且进行minify处理</li>
+
+<li>使用了多个开源的库，包括<a href="http://code.google.com/p/minify/source/browse/trunk/min/lib/JSMin.php" target="_blank"> JSMin.php </a>，<a href="http://code.google.com/p/minify/source/browse/trunk/min/lib/Minify/CSS.php" rel="nofollow" target="_blank">Minify CSS</a>，<a href="http://code.google.com/p/minify/source/browse/trunk/min/lib/Minify/HTML.php" rel="nofollow" target="_blank">Minify HTML</a></li>
+
+<li>服务端缓存(fils/APC/Memcache)，可以避免不必要的重复处理</li>
+
+<li>当浏览器存在资源的缓存，返回HTTP 304 Not Modified</li>
+
+<li>多个文件合并时，自动生成URI</li>
+
+<li>当开启服务端缓存的时候，在一般的服务器上Minify每秒可以处理几百个并发请求</li>
+
+<li>根据请求头，开启Content-Encoding: gzip。在服务端缓存开启的情况下，Minify提供gzipped 文件速度比Apache’s mod_deflate模块要快</li>
+
+</ul><p><strong>安装</strong></p>
+
+<ul><li><a href="http://code.google.com/p/minify/downloads/list" rel="nofollow" target="_blank">下载</a>最新的Minify，然后解压文件到”min” 文件夹</li>
+
+<li>Copy “min” 文件夹到自己网站的DOCUMENT_ROOT下，如果想要Minify在子目录下工作，看<a href="http://code.google.com/p/minify/wiki/AlternateFileLayouts" target="_blank">这里</a></li>
+
+</ul><p><strong>使用</strong></p>
+
+<ol><li>假设网站域名是http://example.com，Minify安装在了虚拟主机的根目录下，那么访问http://example.com/min/，我们会看到一个“Minify URI Builder”，我们可以输入需要进行合并的文件URI。</li>
+
+<li><span>点击Update之后，系统会自动生成一个合并后的URI：http://example.com/min/?b=js&amp;f=jquery-a.js,jquery-b.js,jquery-c.js。如果觉得URI太长，可以通过配置文件来指定group，编辑min目录下的groupsConfig.php文件，加入以下内容：</span>
+
+<pre>return array(
+
+    'js' =&gt; array('//js/jquery-a.js', '//js/jquery-b.js', '//js/jquery-c.js')
+
+    //相对于DOCUMENT_ROOT
+
+    );</pre>
+
+之后就可以通过http://example.com/min/?g=js来访问了 </li>
+
+<li>Minify在资源首次被请求的时候，会对多个文件进行合并，gzip，去除空格，注释等处理，然后会把处理的结果进行缓存，默认情况下是进行文件缓存，缓存的key以minify_开头，修改min/config.php文件，配置缓存文件存放的位置：
+
+<pre>$min_cachePath = '/tmp'; </pre>
+
+除了通过文件进行缓存之外，Minify还支持Memcache缓存，修改min/index.php文件，加入以下代码：
+
+<pre>require 'lib/Minify/Cache/Memcache.php';
+
+$memcache = new Memcache; 
+
+$memcache-&gt;connect('localhost', 11211); 
+
+$min_cachePath = new Minify_Cache_Memcache($memcache);</pre>
+
+</li>
+
+<li>Minify支持两种debug方式，一种是通过firephp调试PHP错误，修改min/config.php文件，加入以下代码：
+
+<pre>$min_errorLogger = true;</pre>
+
+另一种是通过在URL中加入flag进行错误调试，在min/config.php中加入
+
+<pre>$min_allowDebugFlag = true; </pre>
+
+<br/> 之后就能以http://example.com/min/f=jquery-a.js,jquery-b.js,jquery-c.js&amp;debug=1方式进行调试了</li>
+
+</ol><p><strong>参考：</strong></p>
+
+<p><a href="http://code.google.com/p/minify/wiki/UserGuide" target="_blank">http://code.google.com/p/minify/wiki/UserGuide</a> <br/> <a href="http://www.mrclay.org/2008/09/19/minify-21-on-mrclayorg/" target="_blank">http://www.mrclay.org/2008/09/19/minify-21-on-mrclayorg/</a></p>

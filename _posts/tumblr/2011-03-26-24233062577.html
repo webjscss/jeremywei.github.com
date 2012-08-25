@@ -1,0 +1,28 @@
+---
+layout: post
+title: CakePHP使用手记（view篇）
+---
+
+<p>和Smarty集成：（主要是用Smarty view替代cake的默认view）</p>
+
+<p>1.下载<a href="http://cakeforge.org/snippet/detail.php?type=snippet&amp;id=6" target="_blank">Smarty view</a>文件，保存到cake项目的/(app)/views/smarty.php。</p>
+
+<p>2.下载<a href="http://www.smarty.net/download.php" target="_blank">Smarty</a>模版，把libs里边的文件拷贝到/vendors/smarty下面。</p>
+
+<p>3.在/(app)/tmp下边建立smarty/compile，smarty/cache两个临时文件夹。</p>
+
+<p>4.调用方式，在需要使用Smarty的controller里边，添加如下代码：</p>
+
+<pre>var $view = 'Smarty';
+
+</pre>
+
+<p>注意事项：</p>
+
+<p>1.如果你选择了Smarty作为cake的view，view文件必须以.tpl为扩展名，在此view文件中将不能使用cake的helper了，但是在不使用Smarty以.ctp为扩展名的view文件中helper是正常的。</p>
+
+<p>2.如果你选择了Smarty，那么会出现在controller中调用flash不起作用，只需要在调用flash之前对view重新赋值即可。</p>
+
+<pre>$this-&gt;view = 'View';
+
+</pre>

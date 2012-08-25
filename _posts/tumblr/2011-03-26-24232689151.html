@@ -1,0 +1,44 @@
+---
+layout: post
+title: 简单的HTTP Cache(PHP实现)
+---
+
+<p>一个简单的HTTP cache(PHP实现)：</p>
+
+<pre>&lt;?php
+
+$local_file = 'hello.jpg';
+
+// 如果请求头信息中有If-Modified-Since
+
+if (isset($request_headers['If-Modified-Since'])) {
+
+    $last_modified_time = strtotime($request_headers['If-Modified-Since']);
+
+    // 如果文件的修改时间大于last_modified的时间，输出新的文件，
+
+    // 并设置 Last-Modified 头
+
+    if (filectime($local_file) &gt; $last_modified_time) {
+
+        header("Last-Modified: " . gmdate("D, d M Y H:i:s",   filectime($local_file)) . " GMT");
+
+        readfile($local_file);
+
+    // 如果文件的修改时间小于等于last_modified的时间，直接返回304
+
+    }else {
+
+        header("HTTP/1.1 304 Not Modified");
+
+    }
+
+}else {
+
+    header("Last-Modified: " . gmdate("D, d M Y H:i:s", filectime($local_file)) . " GMT");
+
+    readfile($local_file);
+
+}
+
+</pre>

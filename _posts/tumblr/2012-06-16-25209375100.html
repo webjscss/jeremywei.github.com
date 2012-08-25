@@ -1,0 +1,236 @@
+---
+layout: post
+title: 使用Gitosis搭建Git服务器
+---
+
+<h2>1.　安装gitosis</h2>
+
+<p>首先是获取gitosis（这里假设你已经安装过git）：</p>
+
+<pre>git clone git://github.com/res0nat0r/gitosis.git</pre>
+
+<p>接下来安装gitosis：</p>
+
+<pre>sudo python setup.py install</pre>
+
+<p>如果出现以下错误：</p>
+
+<pre>Traceback (most recent call last):
+
+  File "setup.py", line 2, in ?
+
+    from setuptools import setup, find_packages
+
+ImportError: No module named setuptools
+
+</pre>
+
+<p>或者</p>
+
+<pre>-bash: python: command not found</pre>
+
+<p>那么你还需要安装python-setuptools：</p>
+
+<pre>sudo yum install python-setuptools</pre>
+
+<p>接下来添加用来管理仓库的用户，用户名任意，我们这里使用git：</p>
+
+<pre>useradd git</pre>
+
+<p>Mac用户在&#8221;系统偏好设置　-&gt;　用户与群组 &#8220;中添加。</p>
+
+<p>修改PATH，使git用户可以调用git：</p>
+
+<pre>vi /home/git/.bashrc
+
+PATH=/usr/local/bin:/usr/local/git/bin:$PATH
+
+</pre>
+
+<p>创建key pair，并拷贝public key到/tmp下，这样可以确保gitosis-init命令对其有读取权限：</p>
+
+<pre>ssh-keygen -t rsa
+
+cp ~/.ssh/id_rsa.pub /tmp/id_rsa.pub
+
+</pre>
+
+<p>以git用户来执行gitosis-init命令：</p>
+
+<pre>sudo -H -u git gitosis-init &lt; /tmp/id_rsa.pub
+
+</pre>
+
+<p>此时/home/git下增加了两个目录：</p>
+
+<pre>gitosis
+
+repositories
+
+</pre>
+
+<p>其中gitosis是gitosis的根目录，repositories是仓库存放目录。</p>
+
+<p>如果出现以下错误：</p>
+
+<pre>if install git from source, otherwise:
+
+raise child_exception
+
+OSError: [Errno 2] No such file or directory
+
+</pre>
+
+<p>那么做个symlink：</p>
+
+<pre>ln -s /usr/local/bin/git /usr/bin/git</pre>
+
+<p>给脚本post-update赋予可执行权限：</p>
+
+<pre>sudo chmod 755 /home/git/repositories/gitosis-admin.git/hooks/post-update</pre>
+
+<h2>2. 添加新仓库</h2>
+
+<p>gitosis的管理是通过git来管理的，clone一下：</p>
+
+<pre>git clone git@localhost:gitosis-admin.git</pre>
+
+<p>如果出现以下错误：</p>
+
+<pre>Cloning into gitosis-admin...
+
+ssh: connect to host 192.168.1.30 port 22: Connection refused
+
+fatal: The remote end hung up unexpectedly 
+
+</pre>
+
+<p>那么确认当前机器openssh是否已经启动，Mac用户通过&#8221;系统偏好　-&gt;　共享　-&gt;　远程登录&#8221;进行设置。</p>
+
+<pre>cd gitosis-admin
+
+ls -l
+
+-rw-r--r--  1 weizhifeng  staff  124  6 14 13:45 gitosis.conf
+
+drwxr-xr-x  3 weizhifeng  staff  102  6 14 13:46 keydir
+
+</pre>
+
+<p>keydir目录用来存放用户的public key(.pub文件)，gitosis.conf为配置文件。</p>
+
+<p>看一下配置文件：</p>
+
+<pre>cat gitosis.conf
+
+[gitosis]
+
+
+
+[group gitosis-admin]
+
+members = Mac
+
+writable = gitosis-admin
+
+</pre>
+
+<p>其中group代表一个组，writable是仓库名，members是此仓库的成员，可以有多个成员，用空格进行分割。</p>
+
+<p>添加一个新仓库：</p>
+
+<pre>[group test]
+
+members = Mac
+
+writable = test
+
+</pre>
+
+<p>把更改提交并push到git@localhost:gitosis-admin.git：</p>
+
+<pre>git commit -a -m "添加新仓库test"
+
+git push
+
+</pre>
+
+<p>在本地创建一个仓库，并push到git@localhost:test.git，gitosis会在/home/git/repositories自动创建test.git这个仓库：</p>
+
+<pre>mkdir test
+
+cd test 
+
+touch README
+
+git init
+
+git remote add origin git@localhost:test.git
+
+git push origin master
+
+</pre>
+
+<h2>3. 添加用户</h2>
+
+<p>假设我们要添加的用户为jeremy，那么需要创建key pair：</p>
+
+<pre>ssh-keygen -t rsa</pre>
+
+<p>假设生成的public key为~/.ssh/jeremy.pub</p>
+
+<pre>cd gitosis-admin</pre>
+
+<p>修改gitosis.conf，修改后为如下：</p>
+
+<pre>[group test]
+
+members = Mac jeremy
+
+writable = test
+
+</pre>
+
+<p>注意.pub文件名和你要在members中添加的用户名要完全一样。</p>
+
+<p>拷贝jeremy.pub到keydir中：</p>
+
+<pre>cp　~/.ssh/jeremy.pub keydir/</pre>
+
+<p>把更改push到gitosis-admin.git：</p>
+
+<pre>git commit -a -m "添加jeremy到test仓库"
+
+git push
+
+</pre>
+
+<p>接下来把private key分发给jeremy，然后他就可以从自己的机器上进行clone了：</p>
+
+<pre>git clone git@SERVER_HOSTNAME:test.git</pre>
+
+<p>如果出现以下错误：</p>
+
+<pre>ERROR:gitosis.serve.main:Repository read access denied
+
+fatal: The remote end hung up unexpectedly
+
+</pre>
+
+<p>是因为使用了内容相同，名字不同的public key(.pub)。</p>
+
+<h2>4. 其他</h2>
+
+<p>如果SSH使用的不是22端口，那么请如下修改：</p>
+
+<pre>vi ~/.ssh/config
+
+Host myserver.com
+
+Port 2345
+
+</pre>
+
+<h2>5. 参考</h2>
+
+<p><a href="http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way" target="_blank">http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way</a><br/> <a href="http://lukhnos.org/blog/en/archives/162/" target="_blank">http://lukhnos.org/blog/en/archives/162/</a><br/> <a href="http://blog.longwin.com.tw/2011/03/linux-gitosis-git-server-2011/" target="_blank">http://blog.longwin.com.tw/2011/03/linux-gitosis-git-server-2011/</a></p>

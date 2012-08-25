@@ -1,0 +1,40 @@
+---
+layout: post
+title: PHP中用Memcache存储Session数据
+---
+
+<p>在PHP中用Memcache来存储Session数据有两种方法：</p>
+
+<p><strong>1.  memcache(PHP的基础memcache客户端)</strong>在配置文件中进行设置：</p>
+
+<pre>session.save_handler = memcache
+
+session.save_path = “tcp://127.0.0.1:11211″
+
+</pre>
+
+<p>或者在程序中如下测试：</p>
+
+<pre>ini_set("session.save_handler","memcached");
+
+ini_set("session.save_path","tcp://127.0.0.1:11211");
+
+</pre>
+
+<p>详见：<a href="http://cn.php.net/manual/en/memcache.ini.php" target="_blank"><a href="http://cn.php.net/manual/en/memcache.ini.php" target="_blank">http://cn.php.net/manual/en/memcache.ini.php</a></a> <strong>2.  memcached (基于libmemcached通用类库的memcache客户端)</strong>在配置文件中进行设置：</p>
+
+<pre>session.save_handler = memcached
+
+session.save_path = “127.0.0.1:11211″ //注意这里不需要tcp
+
+</pre>
+
+<p>或者在程序中如下测试：</p>
+
+<pre>ini_set("session.save_handler","memcached");
+
+ini_set("session.save_path","127.0.0.1:11211");
+
+</pre>
+
+<p>详见：<a href="http://cn.php.net/manual/en/memcached.sessions.php" target="_blank"><a href="http://cn.php.net/manual/en/memcached.sessions.php" target="_blank">http://cn.php.net/manual/en/memcached.sessions.php</a></a> 可以通过<a href="http://livebookmark.net/memcachephp/memcachephp.zip" target="_blank">memcachephp</a>来查询是否session数据被正确设置。</p>

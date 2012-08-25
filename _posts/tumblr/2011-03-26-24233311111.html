@@ -1,0 +1,32 @@
+---
+layout: post
+title: 不重新编译PHP实现扩展的安装
+---
+
+<p>有时候我们编译PHP后发现有些模块没有编译进去，常见的做法是重新编译PHP，这个过程太痛苦了，如下方法可以不用重新编译PHP而是单独编译模块。</p>
+
+<p>以mbstring为例，我的系统是ubuntu server 8.10 ，我的PHP安装在/opt/lamp/php中，源码在/usr/src/php中，extension目录是/opt/lamp/php/lib /php/extension，php.ini在/opt/lamp/php下</p>
+
+<pre>cd /usr/src/php/ext/mbstring
+
+sudo ./configure  --with-php-config=/opt/lamp/php/bin/php-config
+
+#（可能会提示你没有装autoconf，sudo apt-get install autoconf下就可以了）
+
+make
+
+make install
+
+vi /opt/lamp/php/php.ini 添加extension=mbstring.so
+
+sudo /opt/lamp/apache2/bin/apachectl -k restart
+
+</pre>
+
+<pre>&lt;php?
+
+echo phpinfo();//看下mbstring的扩展有没有生效。
+
+?&gt;
+
+</pre>

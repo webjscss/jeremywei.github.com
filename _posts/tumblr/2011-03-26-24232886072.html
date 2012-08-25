@@ -1,0 +1,80 @@
+---
+layout: post
+title: Trick-Out Your Session Handler （自定义会话处理器）
+---
+
+<p>原文：http://devzone.zend.com/article/141</p>
+
+<p>虽然HTTP使用无状态的请求和响应方法来传输网页，但是简单的web应用需要一个在请求过程中存储数据的方式。在PHP中实现这个的最佳方式是使 用会话(session)。一个会话标识(session identifier)会以cookie的形式存储在客户端，其对应的数据会存在服务端，在脚本中可以通过$_SESSION这个超级全局变量来访问。默 认情况下，会话中的数据是以单独的文件存储在文件系统中的。对大多数人来说这已经足够了，但是当存储会话数据时，PHP有一些可用的选项。这篇文章将会讨 论内建的会话存储方式，并且告诉你怎么写自己的session handler。</p>
+
+<h3><strong>各有所好</strong></h3>
+
+<p>PHP中有两个内建的用来存储会话数据的选项。 session handler可以在php.ini中进行设置，名字是：</p>
+
+<pre>session.save_handler
+
+</pre>
+
+<p><strong>文件</strong> 默认情况下，会话数据是被保存在文件中的。这个选项通常对大部分项目来说是足够的。 当存储会话文件的文件夹包含数以千计的会话文件的时候，性能就会大打折扣。 这是因为操作系统处理包含N多文件的文件夹的能力有限。在PHP4.0.1，你可以使用嵌套的文件夹 结构来存储会话文件，但是你需要提前创建文件夹结构，同时实现你自己的垃圾回收程序。 获得有关这些选项的更多信息，请查看php.ini文件中的说明。用文件来存储会话数据最担心的问题是 数据会被保存在本地，其他人可以看到，在共享主机上这可能是个安全隐患。 <strong>sqlite</strong>可选的，你可以把会话数据存在sqlite 数据库中。 用以下配置文件可以实现:</p>
+
+<pre>session.save_handler = files
+
+session.save_path = /tmp/phpsess.db
+
+</pre>
+
+<p><strong>mm</strong> 为了提高会话存储的性能，你可以用 mm 内存共享模块把会话文件存储在内存中。你需要在编译PHP时候选择支持mm模块。这有一篇入门文章<a href="http://www.zend.com/tips/tips.php?id=164&amp;single=1" target="_blank">configure session handling with mm.</a>注意由于会话数据是存在RAM中，你应该把它当做易失的数据，当断电或者重启的时候数据会丢失。 <em>注意：上面入门指南的链接已经过期。你可以从</em><em><a href="http://www.ossp.org/pkg/lib/mm/" target="_blank">OSSP.org website </a>找到</em><em>mm模块。我没有亲自测试mm模块，所以我不能确保其目前能在PHP下能工作。如果</em><em>谁在用这个模块，请留个回复。</em></p>
+
+<h3>Do It Yourself</h3>
+
+<p>如果你正在使用共享主机环境并且在会话中存储敏感的数据，一种使其变安全的方式是把数据存储在数据库中。如果要这么做，你可以写一个个人的会话处理器。 如果你有一个程序部署到了多个web服务器上，又一个问题出现了。当通过负载均衡或者DNS轮循技术，一个用户会访问不同的服务器，要保证在不同的服务器上会话数据总是可以访问很重要。把会话数据存储在数据库中，这样所有的服务器都可以访问到，从而优雅地解决了这个问题。 创建一个自定义会话处理器并不难，但是有些问题需要知道。Chris Shiflett 在他的书《Essential PHP Security》中<a href="http://phpsecurity.org/code/ch08-2" target="_blank">提供了一个例子</a> ，同时我有一个<a href="http://devzone.zend.com/content/samples/jherren/mysqlsessionstore.zip" target="_blank">利用MySQL实现的面向对象的例子</a>，你可以去下载源码并且可以修改以满足你的需求。两个例子都使用的MySQL数据库，并且包括了所需要的表模型（table schema）。 要让PHP使用你自定义的会话处理器，使用如下函数： <a href="http://www.php.net/manual/en/function.session-set-save-handler.php" target="_blank">session_set_save_handler()</a>你需要写6个回调函数来供PHP调用，你要如下指定它们：</p>
+
+<pre>session_set_save_handler("myopen", "myclose", "myread", "mywrite", "mydestroy", "mygc");
+
+</pre>
+
+<p>如果你使用一个面向对象的处理器，你要如下指定这些方法：</p>
+
+<pre>$sh = New SexySessionHandler();
+
+session_set_save_handler(
+
+    array($sh,"open"),
+
+    array($sh,"close"),
+
+    array($sh,"read"),
+
+    array($sh,"write"),
+
+    array($sh,"destroy"),
+
+    array($sh,"gc")
+
+);
+
+</pre>
+
+<p>让我们来看看这六个函数，它们的参数和它们应该返回的值。 <strong>open( $save_path, $session_name )</strong> 这个函数应该打开一个到你数据库的连接并且返回一个布尔值来标示成功。这种情况下你不需要 save path 和 session name 这两个参数，你可以忽略掉这两个参数的值。 <strong>close()</strong>你的close函数应该关闭你的数据库连接，并返回一个布尔值表示成功。 <strong>read( $session_id ) </strong>你的read函数是唯一一个有些麻烦的函数。你应该从数据库中查询到和<strong>$session_id</strong>相匹配的记录，并以字符串的形式返回会话数据。 注意你不需要反序列化数据，因为PHP会处理好这个步骤。如果没有和<strong>$session_id</strong>相对应的会话，或者会话中没有数据，你必须返回一个空的字符串而不是NULL，false，或者其他。这个非常重要，所以我再啰嗦下：</p>
+
+<pre>return '';
+
+</pre>
+
+<p>好极了！ <strong>write($session_id, $session_data )</strong> 你的write函数事实上把会话数据存储在数据库中。这个$session_id变量是你的会话标识，在cookie中保存有同样的值，默认是长度 为32的字符串（可以改变，所以你的数据库字段应该考虑到更长的字符串）。这个$session_data变量是序列化格式的会话数据。 你的函数应该把会话数据插入或者更新恰当的记录，存储访问时间是一个好主意，那样的话你可以为垃圾处理找出过期的会话。使用time()函数很方便，因为 垃圾回收函数中的过期时间也可以转换成一个Unix时间戳。 <strong>destroy( $session_id )</strong> 你的destroy函数是一个不需要花脑筋的函数。从你的数据库中删除和<strong>$session_id</strong>相匹配的记录，并返回一个布尔值作为这个操作的结果。 <strong>gc( $max_expire_time ) </strong>gc或者garbage collection函数是一个类似家务管理的函数，它使你的数据库从旧的，危险的，过期的记录中摆脱。一个会话表中充斥着很多或者都是过期的会话记录是件很糟糕的事情。你的垃圾回收函数会接受到Unix时间戳的形式的最大过期时间<strong> $max_expire_time </strong>参数，这个值是在PHP配置中进行设置的（session.gc_maxlifetime ）。你所提供的函数应该删除超过最大过期时间的记录，并在成功后返回一个布尔值。</p>
+
+<h3>使用你自定义的会话处理器</h3>
+
+<p>使用你自定义的会话处理器没有任何复杂性。当你调用了session_set_save_handler()函数以后，你可以像原来那样来使用会话。记住下面所有普通的调用警告：</p>
+
+<ul><li>你仍然需要调用session_start()函数如果你没有在 php.ini中指定session.autostart。</li>
+
+<li>如果你想把对象存入到会话中，你必须在调用session_start()之前加载类的定义。</li>
+
+<li>你不能把PHP不能序列化的东西存入会话中：比如像文件句柄，数据库连接，包含循环引用的对象等资源类型。</li>
+
+<li>这有一个问题是关于对象析构函数和会话处理器。手册上说：“自从PHP5.0.5以后Write 和Close处理器会被调用在析构对象之后。因此析构函数可以使用会话，但是会话处理器却不能使用对象。在以前的版本中，它们的调用顺序是相反的。可以在析构函数中调用<a href="http://www.php.net/manual/en/function.session-write-close.php" target="_blank"><strong>session_write_close()</strong></a> 来解决这个鸡生蛋，蛋生鸡的问题”</li>
+
+<li>对<a href="http://shiflett.org/articles/security-corner-feb2004" target="_blank">session fixation</a>攻击进行防护。</li>
+
+</ul><p>家庭作业 如果你想练习着写一个自定义的会话处理器，请跳到Shared Memory Functions 那页，并期待能给我们提供一个速度很快的用内存进行会话存储的例子。Zend 仍然在为Zend Framework寻找一个好的Session模块，让我们开始吧。 结尾 全文结束了，我已经介绍了满足你应用需要的几种存储会话数据的方式。你应该从这些存储方式的性能，安全，数据生命期等因素来选择恰当的存储方式。记 住，会话是被用来处理少量的数据的。记住，在适当的情况下来校验和更新会话数据，优雅的处理好会话数据的丢失，并且只存储你真正需要的东西。</p>

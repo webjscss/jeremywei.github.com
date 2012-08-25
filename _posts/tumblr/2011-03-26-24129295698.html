@@ -1,0 +1,44 @@
+---
+layout: post
+title: URL Encode
+---
+
+<h2>1.JavaScript中的实现</h2>
+
+<h3>escape/unescape</h3>
+
+<p>使用：JavaScript使用数据时可以使用escape<br/>不编码字符有69个：</p>
+
+<pre>* + - . / @ _ 0-9 a-z A-Z
+
+</pre>
+
+<h3>encodeURI/decodeURI</h3>
+
+<p>使用：进行url跳转时可以整体使用encodeURI<br/>不编码字符有82个：</p>
+
+<pre>! # $ &amp; ' ( ) * + , - . / : ; = ? @ _ ~ 0-9 a-z A-Z
+
+</pre>
+
+<h3>encodeURIComponent/decodeURIComponent</h3>
+
+<p>使用：传递参数时需要使用encodeURIComponent，这样组合的url才不会被#等特殊字符截断<br/>不编码字符有71个：</p>
+
+<pre>! ' ( ) * - . _ ~ 0-9 a-z A-Z
+
+</pre>
+
+<p>escape对0-255以外的unicode值进行编码时输出%u****格式，其它情况下escape，encodeURI，encodeURIComponent编码结果相同。</p>
+
+<h2>2.PHP中的实现</h2>
+
+<h3>urlencode/urldecode 和 rawurlencode/rawurldecode</h3>
+
+<p>二者都是对“-_.”以外的所有非字母数字字符进行编码，区别在于urlencode会把空格编码为‘+’，与application/x- www-form-urlencoded保持一致，而rawurlencode会把空格编码为‘%20’，与RFC 1738 中描述的编码保持一致。</p>
+
+<p>注意：$_GET中的内容或者通过$_REQUEST访问的内容已经自动decode了，但是$_POST中内容不会自动decode。<br/>The superglobals $_GET and $_REQUEST are already decoded. Using urldecode() on an element in $_GET or $_REQUEST could have unexpected and dangerous results.</p>
+
+<p>参考资料：</p>
+
+<p><a href="http://blog.csdn.net/fengzi_shen/archive/2009/04/01/4041488.aspx" target="_blank">http://blog.csdn.net/fengzi_shen/archive/2009/04/01/4041488.aspx</a><br/> <a href="http://cn.php.net/manual/en/function.urldecode.php" target="_blank">http://cn.php.net/manual/en/function.urldecode.php</a></p>

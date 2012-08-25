@@ -1,0 +1,10 @@
+---
+layout: post
+title: Solr 短语查询问题
+---
+
+<p>最近遇到了一个问题，如果用 text:南京哪里好玩 来查询的话，Solr只会返回完全包含“南京哪里好玩”的document，这样的话基本上搜不到东西。而如果用 text:南京 哪里 好玩 这个语句来查询的话，就会返回很多结果。</p>
+
+<p>通过设置debugQuery=on，打开debug之后发现：text:南京哪里好玩 这个查询<br/>语句被转换成了PhraseQuery：text:”南京哪里好玩”, text:南京 哪里 好玩 被转换成了BooleanQuery。</p>
+
+<p>把查询语句直接改成 text:”南京哪里好玩”~1000000，这样的话Solr会进行PhraseQuery，通过把PhraseQuery的slop值设置成无限大，这样就会搜到包含“南京” “哪里” “好玩” 的document，而且这些词不必连在一起。</p>

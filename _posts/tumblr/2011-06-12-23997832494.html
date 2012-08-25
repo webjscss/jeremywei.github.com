@@ -1,0 +1,68 @@
+---
+layout: post
+title: $_REQUEST数组浅析
+---
+
+<p>$_REQUEST数组是PHP中比较常用的数组，一般从其中取出POST,GET,COOKIE等参数，在这里写明一下$_REQUEST数组的填充方式，防止出现一些意想不到的问题。</p>
+
+<p><span>在php.ini中有如下的配置：</span></p>
+
+<pre>; This directive determines which super global data (G,P,C,E &amp; S) should
+
+; be registered into the super global array REQUEST. If so, it also determines
+
+; the order in which that data is registered. The values for this directive are
+
+; specified in the same manner as the variables_order directive, EXCEPT one.
+
+; Leaving this value empty will cause PHP to use the value set in the
+
+; variables_order directive. It does not mean it will leave the super globals
+
+; array REQUEST empty.
+
+; Default Value: None
+
+; Development Value: "GP"
+
+; Production Value: "GP"
+
+; <a href="http://php.net/request-order" target="_blank">http://php.net/request-order</a>
+
+request_order = "GP"
+
+</pre>
+
+<p>request_order这个配置项说明哪些全局变量（G,P,C,E,S分别代表$_GET,$_POST,$COOKIE,$_ENV,$_SERVER）的内容会被添加到$_REQUEST数组中，并且会指明变量填充的顺序，如果重名，那么后面填充的变量会覆盖前面填充的变量内容。如果把request_order置空，那么PHP将会使用variables_order(如下)配置项所指定的全局变量注册顺序来填充$_REQUEST数组，而不是说把$_REQUEST置空。</p>
+
+<pre>; This directive determines which super global arrays are registered when PHP
+
+; starts up. If the register_globals directive is enabled, it also determines
+
+; what order variables are populated into the global space. G,P,C,E &amp; S are
+
+; abbreviations for the following respective super globals: GET, POST, COOKIE,
+
+; ENV and SERVER. There is a performance penalty paid for the registration of
+
+; these arrays and because ENV is not as commonly used as the others, ENV is
+
+; is not recommended on productions servers. You can still get access to
+
+; the environment variables through getenv() should you need to.
+
+; Default Value: "EGPCS"
+
+; Development Value: "GPCS"
+
+; Production Value: "GPCS";
+
+; <a href="http://php.net/variables-order" target="_blank">http://php.net/variables-order</a>
+
+variables_order = "GPCS"
+
+</pre>
+
+<p>variables_order这个配置项用来指定全局变量EGPCS (Environment, Get, Post, Cookie, and Server)的解析顺序。如果variables_order被设置为SP，那么PHP会创建$_SERVER和$_POST，而不会创建$_ENV，$_GET，$_COOKIE等变量，如果被设置为”&#8221;，那么PHP不会创建任何超级全局变量。</p>
+
+<p>注意：有时候从$_REQUEST中取出的值不是想要的，考虑这样一个场景，如果在php.ini中设置request_order = “GPCES”，在HTTP请求中GET或者POST参数的name恰好与COOKIE的name相同，假如为foo，那么在程序逻辑中想通过$_REQUEST[&#8216;foo&#8217;]来获取到值是名为foo的一个cookie的值，而不是GET或者POST请求的值，所以$_REQUEST尽量不用，应该从$_GET,$_POST,$COOKIE,$_ENV,$_SERVER等变量中取出需要的值。</p>

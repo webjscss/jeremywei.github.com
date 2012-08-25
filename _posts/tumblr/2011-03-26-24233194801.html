@@ -1,0 +1,28 @@
+---
+layout: post
+title: PHP下载时中文文件名乱码问题
+---
+
+<p>最近要为每个<a href="http://www.tuniu.com/places/" target="_blank">景点</a>提供KML下载功能，但是发现采用UTF8编码，IE下中文文件名会是乱码，对文件名进行urlencode就OKl了，Firefox下是没有问题的。代码如下：</p>
+
+<pre>&lt;?php
+
+$filename = "南京.KML";
+
+$agent = $_SERVER["HTTP_USER_AGENT"];
+
+if(preg_match("/MSIE/i", $agent)){
+
+$filename = urlencode($filename);
+
+}
+
+header('Content-Type: text/xml‘);
+
+header('Content-Disposition: attachment; filename=' . $filename);
+
+echo $xml;
+
+?&gt;
+
+</pre>

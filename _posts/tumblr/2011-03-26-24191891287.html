@@ -1,0 +1,44 @@
+---
+layout: post
+title: Lucene的短语查询(PhraseQuery)
+---
+
+<h2>1.短语查询使用场景</h2>
+
+<p>假设某个域(field)中有“the quick brown fox jumped over the lazy dog”这个短语，我们现在想查找域中包含“quick fox”（Term位置相连）或者“quick[不相关的词]fox”（中间隔着一个词）的文档，如果用TermQuery是实现不了的。这种情况下就要 用到PhraseQuery了。</p>
+
+<p>Term：文档中每个域的存储单位，“the quick brown fox jumped over the lazy dog”这个短语中每个单词为一个Term，并且每个Term包含此单词在短语中的位置信息。</p>
+
+<p>slop：在匹配的情况下，两个Term之间允许的最大距离称为slop。距离是指Term按照顺序组成给定的短语，所需要移动位置的次数。</p>
+
+<p>比如说域中存在“quick brown fox”这个短语，那么“quick fox”需要slop为1的移动才能和“quick brown fox”匹配，而“fox quick”需要slop为3的移动才能匹配。</p>
+
+<p>quick fox  → quick [空位] fox 和 quick brown fox 匹配了。（slop 为1）</p>
+
+<p>fox quick  → （quick  fox 两个Term在同一个位置）</p>
+
+<p>→ quick fox → quick [空位] fox  和 quick brown fox 匹配了。（slop 为3）</p>
+
+<p>默认情况下slop的值为0，也就是说quick fox只能查到域中包含“[其他]quick fox[其他]”这样的文档。</p>
+
+<h2>2.使用方式</h2>
+
+<p>手动创建PhraseQuery对象：</p>
+
+<pre>PhraseQuery query = new PhraseQuery();
+
+query.setSlop(3); //可以设置slop
+
+query.add(new Term('field','fox'));
+
+query.add(new Term('field','quick''));
+
+Hits hits = searcher.search(query);
+
+</pre>
+
+<p>使用QueryParser来创建PhraseQuery对象：</p>
+
+<pre>field:”fox quick”~3  //3为slop的值</pre>
+
+<p>这两种方式都可以查询到包含“quick brown fox”的文档。</p>
