@@ -17,13 +17,16 @@ html, body {
 
 body {
   background-color: white;
-  font: 13.34px helvetica, arial, clean, sans-serif;
+  font: 12px helvetica, arial, clean, sans-serif;
   *font-size: small;
   text-align: center;
+  color: #6e6e6e;   
+  background: #fff;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-size: 100%;
+  margin-top: 10px;
 }
 
 h1 {
@@ -35,16 +38,17 @@ p {
 }
 
 a {
-  color: #00a;
+  color: #0082FF;
+  text-decoration: none;
 }
 
 a:hover {
   color: black;
 }
 
-a:visited {
+/*a:visited {
   color: #a0a;
-}
+}*/
 
 table {
   font-size: inherit;
@@ -87,60 +91,88 @@ ul.posts {
 }
 
 .title {
-  color: #a00;
-  font-weight: bold;
-  margin-bottom: 2em;
+	color: #0082FF;
+	font-weight: bold;
+	margin-bottom: 2em;
 }
 
-  .site .title a {
-    color: #a00;
-    text-decoration: none;
-  }
+.site .title a {
+	color: #0082FF;
+	text-decoration: none;
+}
 
-  .site .title a:hover {
-    color: black;
-  }
+.site .title a:hover {
+	color: black;
+}
 
-  .site .title a.extra {
-    color: #aaa;
-    text-decoration: none;
-    margin-left: 1em;
-  }
+.site .title a.extra {
+	color: #0082FF;
+	text-decoration: none;
+	margin-left: 1em;
+}
 
-  .site .title a.extra:hover {
-    color: black;
-  }
+.site .title a.extra:hover {
+	color: black;
+}
 
-  .site .meta {
-    color: #aaa;
-  }
+.site .meta {
+	color: #aaa;
+}
 
-  .site .footer {
-    font-size: 80%;
-    color: #666;
-    border-top: 4px solid #eee;
-    margin-top: 2em;
-    overflow: hidden;
-  }
+.site .footer {
+	font-size: 80%;
+	color: #666;
+	border-top: 4px solid #eee;
+	margin-top: 2em;
+	overflow: hidden;
+}
 
-    .site .footer .contact {
-      float: left;
-      margin-right: 3em;
-    }
+.site .footer .contact {
+	float: left;
+	margin-right: 3em;
+}
 
-      .site .footer .contact a {
-        color: #8085C1;
-      }
+.site .footer .contact a {
+	color: #8085C1;
+}
 
-    .site .footer .rss {
-      margin-top: 1.1em;
-      margin-right: -.2em;
-      float: right;
-    }
+.site .footer .rss {
+	margin-top: 1.1em;
+	margin-right: -.2em;
+	float: right;
+}
 
-      .site .footer .rss img {
-        border: 0;
-      }
+.site .footer .rss img {
+	border: 0;
+}
+
+.copyright {
+	margin-top: .25em;
+	padding-top: 2px;
+	font-weight: normal;
+	font-size:12px;
+	display: block;
+	border-top: 1px double;
+	padding-bottom: .3em;
+	color:#bfbfbf;
+	line-height:120%
+}
+
+.copyright a {
+	color:#bfbfbf;
+}
+
+.post-info {
+	margin-top: 4px;
+	padding-top: 5px;
+	font-weight: normal;
+	font-size: 12px;
+	text-align: right;
+	display: block;
+	border-top: 1px double;
+	padding-bottom: 10px;
+	color:#bfbfbf;
+}
 
 /*****************************************************************************/
 /*
@@ -152,6 +184,9 @@ ul.posts {
 
 }
 
+.poem-post {
+	text-align : center;
+}
   /* standard */
 
   #post pre {
@@ -198,6 +233,6 @@ ul.posts {
   
   .power {
   	font-size: 80%;
-	color: #666;
+	color: #AAA;
   }
   

@@ -3,8 +3,25 @@ layout: default
 ---
 <div id="post">
 <h1>{{ page.title }}</h1>
+<div class="copyright">
+作者: JeremyWei | 可以转载, 但必须以超链接形式标明文章原始出处和作者信息及版权声明<br />
+网址: http://weizhifeng.net{{page.url}}
+</div>
+
 {{ content }}
 (完)
+
+<div class="post-info">
+	{{ page.date | date_to_string }}  
+	
+	{% if city %} 
+		于 {{ city }} 
+	{% endif %}
+	
+	{% if more %}
+		| {{ more }}
+	{% endif %}
+</div>
 </div>
 
 <!-- disqus start -->
@@ -26,9 +43,9 @@ layout: default
 
 <!-- related start -->
 <div id="related">
-  <h2>Related Posts</h2>
+  <h2>相关内容</h2>
   <ul class="posts">
-    {% for post in site.related_posts limit:3 %}
+    {% for post in site.related_posts limit:5 %}
       <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
     {% endfor %}
   </ul>

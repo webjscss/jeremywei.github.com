@@ -4,15 +4,29 @@ title: 念
 ---
 
 <div id="home">
-  <h1>文章</h1>
+  <h1>Tech</h1>
   <ul class="posts">
-    {% for post in site.posts %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+	{% for post in site.tags.tech limit:10 %}    
+		<li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
     {% endfor %}
+	<a href="/tech.html">更多</a>
   </ul>
-    
-  <h1>Awesome Projects</h1>
+
+  <h1>诗</h1>
   <ul class="posts">
-    <li><a href="http://unicorn.bogomips.org/">Unicorn:</a> Rack HTTP server for fast clients and Unix.</li>
+    {% for post in site.tags.poem limit:10 %}
+		<li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+	<a href="/poem.html">更多</a>
   </ul>
+  
+  {% if site.tags.history %}
+  <h1>国史</h1>
+  <ul class="posts">
+      {% for post in site.tags.hist limit:10 %}
+  		<li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% endfor %}
+	  <a href="/5000years.html">更多</a>
+  </ul>  
+  {% endif %}
 </div>
