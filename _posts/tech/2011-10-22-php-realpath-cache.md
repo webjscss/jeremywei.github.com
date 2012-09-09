@@ -1,7 +1,6 @@
 ---
 layout: post
 title: PHP的Realpath Cache
-permalink: http://weizhifeng.net/php-realpath-cache.html
 city: 南京
 tags: [tech]
 ---

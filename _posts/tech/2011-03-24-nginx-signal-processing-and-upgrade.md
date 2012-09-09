@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Nginx信号处理与平滑升级
-permalink: http://weizhifeng.net/nginx-signal-processing-and-upgrade.html
 city: 南京
 tags: [tech]
 ---

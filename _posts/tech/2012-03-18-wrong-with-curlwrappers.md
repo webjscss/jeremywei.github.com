@@ -1,7 +1,6 @@
 ---
 layout: post
 title: PHP –with-curlwrappers 导致的问题
-permalink: http://weizhifeng.net/wrong-with-curlwrappers.html
 city: 南京
 tags: [tech]
 ---

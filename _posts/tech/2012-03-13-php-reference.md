@@ -1,7 +1,6 @@
 ---
 layout: post
 title: PHP引用以及误区
-permalink: http://weizhifeng.net/php-reference.html
 city: 南京
 tags: [tech]
 ---

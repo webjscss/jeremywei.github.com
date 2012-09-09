@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Diff与Patch
-permalink: http://weizhifeng.net/diff-and-patch.html
 city: 南京
 tags: [tech]
 ---

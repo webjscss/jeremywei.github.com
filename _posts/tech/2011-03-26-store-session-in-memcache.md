@@ -1,7 +1,6 @@
 ---
 layout: post
 title: PHP中用Memcache存储Session数据
-permalink: http://weizhifeng.net/store-session-in-memcache.html
 city: 南京
 tags: [tech]
 ---

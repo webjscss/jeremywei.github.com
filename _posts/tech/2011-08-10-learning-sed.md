@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Sed
-permalink: http://weizhifeng.net/learning-sed.html
 city: 南京
 tags: [tech]
 ---

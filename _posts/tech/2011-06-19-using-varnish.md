@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Varnish安装与配置
-permalink: http://weizhifeng.net/using-varnish.html
 city: 南京
 tags: [tech]
 ---

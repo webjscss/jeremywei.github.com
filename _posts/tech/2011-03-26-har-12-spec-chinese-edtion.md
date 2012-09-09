@@ -1,7 +1,6 @@
 ---
 layout: post
 title: HAR(HTTP Archive)规范
-permalink: http://weizhifeng.net/har-12-spec-chinese-edtion.html
 city: 南京
 tags: [tech]
 ---

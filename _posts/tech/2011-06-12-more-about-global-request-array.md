@@ -1,7 +1,6 @@
 ---
 layout: post
 title: $_REQUEST数组详解
-permalink: http://weizhifeng.net/more-about-global-request-array.html
 city: 南京
 tags: [tech]
 ---

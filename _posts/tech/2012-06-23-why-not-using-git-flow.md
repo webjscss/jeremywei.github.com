@@ -1,7 +1,6 @@
 ---
 layout: post
 title: 「翻译」为什么还不快使用git-flow？
-permalink: http://weizhifeng.net/why-not-using-git-flow.html
 city: 南京
 tags: [tech]
 ---

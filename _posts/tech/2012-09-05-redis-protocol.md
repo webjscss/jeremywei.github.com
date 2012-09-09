@@ -1,7 +1,6 @@
 ---
 layout: post
 title: 「翻译」Redis协议
-permalink: http://weizhifeng.net/redis-protocol.html
 city: 南京
 tags: [tech]
 ---

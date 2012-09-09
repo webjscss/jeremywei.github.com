@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Apache性能优化
-permalink: http://weizhifeng.net/high-performance-with-apache.html
 city: 南京
 tags: [tech]
 ---

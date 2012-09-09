@@ -1,7 +1,6 @@
 ---
 layout: post
 title: HAProxy配置
-#permalink: http://weizhifeng.net/using-haproxy.html
 city: 南京
 tags: [tech]
 ---

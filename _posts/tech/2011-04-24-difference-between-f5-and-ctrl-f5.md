@@ -1,7 +1,6 @@
 ---
 layout: post
 title: 浏览器中F5和CTRL F5的行为区别 
-#permalink: http://weizhifeng.net/difference-between-f5-and-ctrl-f5.html
 city: 南京
 tags: [tech]
 ---

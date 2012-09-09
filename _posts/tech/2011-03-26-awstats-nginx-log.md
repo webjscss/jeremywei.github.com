@@ -1,7 +1,6 @@
 ---
 layout: post
 title: 使用Awstats分析Nginx日志
-permalink: http://weizhifeng.net/awstats-nginx-log.html
 city: 南京
 tags: [tech]
 ---

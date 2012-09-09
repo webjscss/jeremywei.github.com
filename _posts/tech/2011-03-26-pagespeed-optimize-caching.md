@@ -1,7 +1,6 @@
 ---
 layout: post
 title: 「翻译」Pagespeed优化准则之缓存优化
-permalink: http://weizhifeng.net/pagespeed-optimize-caching.html
 city: 南京
 tags: [tech]
 ---

@@ -1,7 +1,6 @@
 ---
 layout: post
 title: 利用Proxy Cache使Nginx对静态资源进行缓存
-permalink: http://weizhifeng.net/nginx-proxy-cache.html
 city: 南京
 tags: [tech]
 ---

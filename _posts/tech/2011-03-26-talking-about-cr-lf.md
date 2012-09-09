@@ -1,7 +1,6 @@
 ---
 layout: post
 title: CR, LF, CR/LF区别与关系
-permalink: http://weizhifeng.net/talking-about-cr-lf.html
 city: 南京
 tags: [tech]
 ---

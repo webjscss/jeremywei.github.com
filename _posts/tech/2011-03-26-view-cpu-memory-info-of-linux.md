@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Linux下查看内存,CPU信息
-permalink: http://weizhifeng.net/view-cpu-memory-info-of-linux.html
 city: 南京
 tags: [tech]
 ---

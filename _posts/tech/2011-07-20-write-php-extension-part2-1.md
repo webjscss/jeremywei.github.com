@@ -1,7 +1,6 @@
 ---
 layout: post
 title: 「翻译」PHP扩展编写第二步：参数，数组，以及ZVAL
-permalink: http://weizhifeng.net/write-php-extension-part2-1.html
 city: 南京
 tags: [tech]
 ---

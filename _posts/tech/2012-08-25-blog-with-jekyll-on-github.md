@@ -1,7 +1,6 @@
 ---
 layout: post
 title: 利用Jekyll在Github上写博客
-permalink: http://weizhifeng.net/blog-with-jekyll-on-github.html
 city: 南京
 tags: [tech]
 ---

@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Keepalived配置与使用
-permalink: http://weizhifeng.net/using-keepalived.html
 city: 南京
 tags: [tech]
 ---

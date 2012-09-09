@@ -1,7 +1,6 @@
 ---
 layout: post
 title: 「翻译」PHP扩展编写第一步：PHP和Zend介绍
-permalink: http://weizhifeng.net/write-php-extension-part1.html
 city: 南京
 tags: [tech]
 ---

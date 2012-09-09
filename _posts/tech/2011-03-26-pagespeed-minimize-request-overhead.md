@@ -1,7 +1,6 @@
 ---
 layout: post
 title: 「翻译」Pagespeed优化准则之减少请求开销
-#permalink: http://weizhifeng.net/pagespeed-minimize-request-overhead.html
 city: 南京
 tags: [tech]
 ---

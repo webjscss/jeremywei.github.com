@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Form的enctype和action属性
-permalink: http://weizhifeng.net/enctype-and-action-in-form.html
 city: 南京
 tags: [tech]
 ---

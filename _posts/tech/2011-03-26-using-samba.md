@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Samba配置与使用
-permalink: http://weizhifeng.net/using-samba.html
 city: 南京
 tags: [tech]
 ---

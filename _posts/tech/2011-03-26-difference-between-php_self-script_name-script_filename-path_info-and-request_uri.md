@@ -1,7 +1,6 @@
 ---
 layout: post
 title: PHP_SELF，SCRIPT_NAME，SCRIPT_FILENAME，PATH_INFO，REQUEST_URI的区别
-permalink: http://weizhifeng.net/difference-between-php_self-script_name-script_filename-path_info-and-request_uri.html
 city: 南京
 tags: [tech]
 ---

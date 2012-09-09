@@ -1,7 +1,6 @@
 ---
 layout: post
 title: PHP安全函数
-permalink: http://weizhifeng.net/php-security-functions.html
 city: 南京
 tags: [tech]
 ---

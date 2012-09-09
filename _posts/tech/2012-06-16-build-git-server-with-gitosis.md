@@ -1,7 +1,6 @@
 ---
 layout: post
 title: 使用Gitosis搭建Git服务器
-permalink: http://weizhifeng.net/build-git-server-with-gitosis.html
 city: 南京
 tags: [tech]
 ---

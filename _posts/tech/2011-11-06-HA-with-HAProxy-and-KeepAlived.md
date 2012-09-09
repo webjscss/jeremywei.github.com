@@ -1,7 +1,6 @@
 ---
 layout: post
 title: 用HAProxy和KeepAlived构建高可用的反向代理系统
-permalink: http://weizhifeng.net/HA-with-HAProxy-and-KeepAlived.html
 city: 南京
 tags: [tech]
 ---

@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Apache SSL配置
-permalink: http://weizhifeng.net/apache-ssl.html
 city: 南京
 tags: [tech]
 ---

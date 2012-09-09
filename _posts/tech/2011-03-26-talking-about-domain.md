@@ -1,7 +1,6 @@
 ---
 layout: post
 title: 域名详解
-permalink: http://weizhifeng.net/talking-about-domain.html
 city: 南京
 tags: [tech]
 ---

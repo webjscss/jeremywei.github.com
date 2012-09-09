@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Memcachedb的安装与使用
-permalink: http://weizhifeng.net/using-memcachedb.html
 city: 南京
 tags: [tech]
 ---

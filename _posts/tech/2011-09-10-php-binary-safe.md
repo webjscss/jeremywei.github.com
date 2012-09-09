@@ -1,7 +1,6 @@
 ---
 layout: post
 title: PHP二进制安全
-permalink: http://weizhifeng.net/php-binary-safe.html
 city: 南京
 tags: [tech]
 ---
