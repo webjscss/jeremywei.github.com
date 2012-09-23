@@ -10,7 +10,7 @@ tags: [tech]
 
 我非常吃惊许多人之前根本没有听说过它，所以在这篇文章里我将要告诉你为什么它可以让你整天都心情愉悦。
 
-![Redis](/images/gitflow.png "Redis")
+![Redis](/images/tech/gitflow.png "Redis")
 
 
 安装好git-flow之后，你可以在当前目录里开始一个新的仓库或者把一个已经存在的仓库转换成新的分支结构：
