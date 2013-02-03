@@ -7,11 +7,11 @@ tags: [tech]
 
 ##前言
 
-JavaScript做为一门前端开发语言越来越受到关注，对于后端开发者（JAVA，C++，PHP等）来说想要掌握JavaScript，其中最容易出现问题的地方就是对象模型以及原型链继承模型，本文作者根据自身的经验和理解，对JavaScript的原型(prototype)进行介绍。
+JavaScript做为一门前端开发语言越来越受到关注，对于后端开发者（JAVA，C++，PHP等）来说想要掌握JavaScript，其中最容易出现问题的地方就是对象模型以及原型链继承模型，本文作者根据自身的经验和理解，对JavaScript的对象和__prototype__（原型）进行介绍。
 
 ##对象
 
-在JavaScript中数据类型分为原生数据类型（Primitive type 其中包括数字，字符串，布尔，undefined，null）和对象（Object）。注意不要把String，Number，Boolean等包装对象与原生类型混淆，看下面的例子：
+在JavaScript中数据类型分为原生数据类型（Primitive type 其中包括数字，字符串，布尔，undefined，null）和对象（Object）。注意不要把__String__，__Number__，__Boolean__等包装对象与原生类型混淆，看下面的例子：
 
 	var string = "string";
 	console.log(typeof string); //string
@@ -26,7 +26,7 @@ JavaScript做为一门前端开发语言越来越受到关注，对于后端开�
 	console.log(book.name); // JavaScript Good Parts
 	
 
-如果要在JavaScript中创建一个自定义对象，那么首先需要创建构造函数（constructor，与JAVA类中的构造函数不是一个概念），一个构造函数就是一个函数对象（在里边定义对象的属性），你可以通过function关键词来创建构造函数，也可以使用全局对象Function（注意Function是运行环境中预定义的对象）来创建。构造函数创建之后，就可以使用new操作符后面紧跟构造函数的形式（new functionName()）来创建对象，如下：
+如果要在JavaScript中创建一个自定义对象，那么首先需要创建构造函数（Constructor，与JAVA类中的构造函数不是一个概念），一个构造函数就是一个函数对象（在里边定义对象的属性），你可以通过function关键词来创建构造函数，也可以使用全局对象Function（注意Function是运行环境中预定义的对象）来创建。构造函数创建之后，就可以使用new操作符后面紧跟构造函数的形式（new functionName()）来创建对象，如下：
 
 	// 使用function关键词
 	function Book() {
@@ -47,13 +47,14 @@ JavaScript做为一门前端开发语言越来越受到关注，对于后端开�
 	var book = new Book();  // create Object
 	console.log(book.name); // JavaScript Good Parts2
 
-JavaScript环境中预先定义了很多[全局对象][1]，其中包括：Function，Object，Array，Boolean，Date，Number，String，RegExp，Math。
+JavaScript环境中预先定义了很多[全局对象][1]，其中包括：__Function__，__Object__，
+__Array__，__Boolean__，__Date__，__Number__，__String__，__RegExp__，__Math__。
 
 ##原型
 
-有了对象，那么我们就需要继承，这也是OOP的精华所在，在JAVA,C++等OO的语言中继承是在定义类的时候进行指定的，既然JavaScript中没有类的概念，那么其实现继承的方式需要与众不同了，对，这就是接下来的重点内容：原型（prototype）。
+有了对象，那么我们就需要继承，这也是OOP的精华所在，在JAVA,C++等OO的语言中继承是在定义类的时候进行指定的，既然JavaScript中没有类的概念，那么其实现继承的方式需要与众不同了，对，这就是接下来的重点内容：__Prototype__（原型）。
 
-根据我们上面的介绍，知道JavaScript中没有类，只有对象，那么怎么进行继承呢？在JavaScript中，为了实现继承，其在全局对象（除了Math）中加入了prototype对象属性，用户可以把能够复用的行为放在prototype对象之中，可以把prototype看成是一个对象的模板，看如下代码：
+根据我们上面的介绍，知道JavaScript中没有类，只有对象，那么怎么进行继承呢？在JavaScript中，为了实现继承，其在全局对象（除了Math）中加入了__prototype__对象属性，用户可以把能够复用的行为放在__prototype__对象之中，可以把__prototype__看成是一个对象的模板，看如下代码：
 
 	// constructor
 	function Book(name, price) {
@@ -74,7 +75,7 @@ JavaScript环境中预先定义了很多[全局对象][1]，其中包括：Funct
 	book.print();  //name: JavaScript Good Parts    price: 35.00元
 	book2.print(); //name: JavaScript权威指南 第6版    price: 128.00元
 
-在以上的例子中book，book2两个对象并没有print函数，但是却输出了书籍信息，这是因为其连接到了Book.prototype对象，从而继承了其中的print函数，这就是JavaScript中实现继承的方式。
+在以上的例子中book，book2两个对象并没有print函数，但是却输出了书籍信息，这是因为其连接到了__Book.prototype__对象，从而继承了其中的print函数，这就是JavaScript中实现继承的方式。
 
 如果我们需要为Book对象添加一个通用属性（type，用以标识书籍种类），那么添加如下代码（prototype对象是运行时绑定，所以如下代码可以正常运行）：
 
@@ -107,7 +108,7 @@ JavaScript环境中预先定义了很多[全局对象][1]，其中包括：Funct
 
 book对象并没有定义type属性，所以其输出是来自prototype对象，book2对象显示定义了type属性，其输出的是自身信息。
 
-在prototype模型中，如果一个对象试图访问一个属性，那么JavaScript先去对象本身中查找，如果存在则返回；如果不存在，那么去对象连接到的prototype对象中查找，如果存在返回属性值，不存在则返回undefined。逻辑如下：
+在__prototype__模型中，如果一个对象试图访问一个属性，那么JavaScript先去对象本身中查找，如果存在则返回；如果不存在，那么去对象连接到的__prototype__对象中查找，如果存在返回属性值，不存在则返回__undefined__。逻辑如下：
 
 	if (对象拥有此属性) {
 		// 返回属性值
@@ -129,7 +130,7 @@ book对象并没有定义type属性，所以其输出是来自prototype对象，
 	| book|  | book2|
 	+-----+  +------+
 
-JavaScript中提供了一个函数hasOwnProperty来检测属性是来自对象本身还是从prototype中继承来的：
+JavaScript中提供了一个函数__hasOwnProperty__来检测属性是来自对象本身还是从prototype中继承来的：
 
 	var book = new Book("JavaScript Good Parts", "35.00元");
 	console.log(book.hasOwnProperty("type")) // false
@@ -138,7 +139,7 @@ JavaScript中提供了一个函数hasOwnProperty来检测属性是来自对象�
 	book2.type = "JavaScript (defined by self)";
 	console.log(book2.hasOwnProperty("type")) // true
 
-接下来我们来看下在JavaScript中整个原型链是如何工作的。JavaScript的每个对象都会有一个__proto__属性，用来指定对象连接到的原型对象，看个简单的例子：
+接下来我们来看下在JavaScript中整个原型链是如何工作的。JavaScript的每个对象都会有一个__\_\_proto\_\___属性，用来指定对象连接到的原型对象，看个简单的例子：
 
 	// constructor
 	function Book(name, price) {
