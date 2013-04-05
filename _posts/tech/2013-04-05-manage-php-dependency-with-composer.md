@@ -102,7 +102,7 @@ archive)，PHP的归档格式，也可以像其他命令一样在命令行上运
 
 ## 使用Composer
 
-我们接下来要使用Composer来安装项目的依赖。如果你在当前目录下没有一个叫作`composer.json`的文件，请跳到「基本使用」(01-basic-usage.md)章节。
+我们接下来要使用Composer来安装项目的依赖。如果你在当前目录下没有一个叫作`composer.json`的文件，请跳到[基本使用][1]章节。
 
 为了解决并下载依赖，运行`install`命令：
 
@@ -124,3 +124,5 @@ archive)，PHP的归档格式，也可以像其他命令一样在命令行上运
 
 ## 参考
 英文原文：[http://getcomposer.org/doc/00-intro.md](http://getcomposer.org/doc/00-intro.md)
+
+[1]: http://getcomposer.org/doc/01-basic-usage.md
