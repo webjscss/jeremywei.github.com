@@ -13,22 +13,23 @@ Composer是PHP中的一个依赖管理工具. 它可以让你声明自己项目�
 
 ## 依赖管理
 
-Composer不是包管理器。是的，它和"包"或者库打交道，但是它是以每个项目为单位进行管理，把它们安装到你项目中的一个目录（例如`vendor`）。默认情况下它不会全局的安装任何东西。因此，它是一个依赖管理器。
+Composer不是包管理器。是的，它实际上和"包"或者库打交道，但是它是以项目为单位进行管理，把它们安装到你项目中的一个目录（例如`vendor`）。默认情况下它不会以全局的方式安装任何东西。因此，它是一个依赖管理器。
 
 这个想法并不新鲜，Composer的灵感是来自于node的[npm](http://npmjs.org/)和ruby的[bundler](http://gembundler.com/)。但是目前PHP还没有一个这样的工具。
 
 Composer解决的问题是：
+
 a) 你有一个依赖N多库的项目。
 
 b) 这些库中一些又依赖于其他的库。
 
 c) 你声明你所依赖的库。
 
-d) Composer找出哪些包的那个版本将会被安装，然后安装它们（也就是把它们下载到你的项目中）。
+d) Composer找出哪些包的哪个版本将会被安装，然后安装它们（也就是把它们下载到你的项目中）。
 
 ## 声明依赖关系
 
-假设你正在创建一个项目，然后你需要一个写日志的库。你决定使用[monolog](https://github.com/Seldaek/monolog)。为了把它加入到你的项目中，你需要做的就是创建一个名为`composer.json`的文件，其描述这个项目的依赖关系。
+假设你正在创建一个项目，然后你需要一个日志操作的库。你决定使用[monolog](https://github.com/Seldaek/monolog)。为了把它加入到你的项目中，你需要做的就是创建一个名为`composer.json`的文件，其描述这个项目的依赖关系。
 
     {
         "require": {
@@ -121,8 +122,11 @@ archive)，PHP的归档格式，也可以像其他命令一样在命令行上运
     require 'vendor/autoload.php';
 
 哇哦！现在开始使用monolog吧! 如果想进一步学习Composer，继续阅读「基本使用」章节。
+如果想要找需要的package，到[Packagist][2]。
 
 ## 参考
-英文原文：[http://getcomposer.org/doc/00-intro.md](http://getcomposer.org/doc/00-intro.md)
+
+* 英文原文：[http://getcomposer.org/doc/00-intro.md](http://getcomposer.org/doc/00-intro.md)
 
 [1]: http://getcomposer.org/doc/01-basic-usage.md
+[2]: https://packagist.org/
