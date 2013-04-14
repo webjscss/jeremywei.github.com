@@ -78,6 +78,17 @@ tags: [tech]
 			msgId : ""
 		} 
 		
+*  `eventMsg(function(msg) {})`  
+	说明：监听事件信息  
+	msg结构：  
+		{  
+			toUserName : "",
+			fromUserName : "",
+			createTime : "",
+			msgType : "event",
+			event : "",
+			eventKey : ""
+		} 
 	
 ### 消息回复
 
