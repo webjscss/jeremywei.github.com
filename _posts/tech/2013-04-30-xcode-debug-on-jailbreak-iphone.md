@@ -36,42 +36,42 @@ tags: [tech]
 首先打开`钥匙串访问`应用，然后打开`钥匙串访问->证书助理->创建证书`开始创建证书，
 注意要保证证书名称为`iPhone Developer`：
 
-![01](/images/tech/xcode2/01.png "01")
+![01](http://img.iyuewe.com/images/weizhifeng/xcode/01.png "01")
 
 点击继续：
 
-![02](/images/tech/xcode2/02.png "02")
+![02](http://img.iyuewe.com/images/weizhifeng/xcode/02.png "02")
 
 添加邮箱：
 
-![03](/images/tech/xcode2/03.png "03")
+![03](http://img.iyuewe.com/images/weizhifeng/xcode/03.png "03")
 
 点击继续，勾选`签名`：
 
-![04](/images/tech/xcode2/04.png "04")
+![04](http://img.iyuewe.com/images/weizhifeng/xcode/04.png "04")
 
 点击继续，勾选`代码签名`：
 
-![05](/images/tech/xcode2/05.png "05")
+![05](http://img.iyuewe.com/images/weizhifeng/xcode/05.png "05")
 
 然后一路点击「继续」就可以了。
 
 # Xcode
 打开`Xcode`，选择`TARGETS`中的`Build Settings`选项卡，然后在`Code Signing`中选择我们刚创建的证书`iPhone Developer`：
 
-![06](/images/tech/xcode2/06.png "06")
+![06](http://img.iyuewe.com/images/weizhifeng/xcode/06.png "06")
 
 然后选择`Summary`选项卡，勾选`Use Entitlements File`：
 
-![07](/images/tech/xcode2/07.png "07")
+![07](http://img.iyuewe.com/images/weizhifeng/xcode/07.png "07")
 
 选中刚生成的`.entitlements`文件（不同的项目名称，生成的文件名不一样）：
 
-![08](/images/tech/xcode2/08.png "08")
+![08](http://img.iyuewe.com/images/weizhifeng/xcode/08.png "08")
 
 在文件中添加一个名为`get-task-allow`的配置项，类型为`Boolean`，值为`YES`：
 
-![09](/images/tech/xcode2/09.png "09")
+![09](http://img.iyuewe.com/images/weizhifeng/xcode/09.png "09")
 
 重启`Xcode`
 
@@ -79,25 +79,25 @@ tags: [tech]
 
 首先确保你的IPhone已经越狱，打开`Cydia`：
 
-![10](/images/tech/xcode2/10.png "10")
+![10](http://img.iyuewe.com/images/weizhifeng/xcode/10.png "10")
 
 然后打开`管理->编辑->添加`，添加源`http://repo.hackyouriphone.org/`：
 
-![11](/images/tech/xcode2/11.png "11")
+![11](http://img.iyuewe.com/images/weizhifeng/xcode/11.png "11")
 
 可能会提示源有问题，点击`仍然添加`：
 
-![12](/images/tech/xcode2/12.png "12")
+![12](http://img.iyuewe.com/images/weizhifeng/xcode/12.png "12")
 
 然后搜索`appsync`，安装`AppSync fo IOS 6`：
 
-![13](/images/tech/xcode2/13.png "13")
+![13](http://img.iyuewe.com/images/weizhifeng/xcode/13.png "13")
 
 # 调试
 
 选择`IOS Device`进行调试：
 
-![14](/images/tech/xcode2/14.png "14")
+![14](http://img.iyuewe.com/images/weizhifeng/xcode/14.png "14")
 
 然后你就可以在自己的真机上调试了，Enjoy Coding　：）
 
