@@ -24,7 +24,7 @@ a.txt，b.txt的内容如下：
 
 利用[diff]命令来完成，更多的选项可以通过`diff --help`查看
 
-	diff -uN a/a.txt b/b.txt < a.patch
+	diff -uN a/a.txt b/b.txt > a.patch
 
 ###补丁文件格式
 
