@@ -20,7 +20,7 @@ body {
   font: 12px helvetica, arial, clean, sans-serif;
   *font-size: small;
   text-align: center;
-  color: #6e6e6e;   
+  color: #6e6e6e;
   background: #fff;
 }
 
@@ -227,12 +227,25 @@ ul.posts {
   margin-top: 2em;
 }
 
-  #related h2 {
-    margin-bottom: 1em;
-  }
-  
-  .power {
-  	font-size: 80%;
-	color: #AAA;
-  }
-  
+#related h2 {
+margin-bottom: 1em;
+}
+
+.power {
+font-size: 80%;
+color: #AAA;
+}
+
+.right-banner {
+	position: absolute;
+	right: 0; 
+	border: 0;
+}
+
+.right-banner.first {
+	top: 0; 	
+}
+
+.right-banner.second {
+	top: 150px; 	
+}
