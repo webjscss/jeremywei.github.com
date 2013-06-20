@@ -3,6 +3,8 @@ layout: post
 title: HAR(HTTP Archive)规范
 city: 南京
 tags: [tech]
+redirects:
+- /2011/03/26/http-archive-specification-chinese/
 ---
 
 [HAR][1]（HTTP Archive），是一个用来储存HTTP请求/响应信息的通用文件格式，基于[JSON]。这个格式的出现可以使HTTP监测工具以一种通用的格式导出所收集的数据，这些数据可以被其他支持HAR的HTTP[分析工具]（包括[Firebug]，[httpwatch]，[Fiddler]等）所使用，来分析网站的性能瓶颈。目前HAR规范最新版本为[HAR 1.2][1]。HAR文件必须是UTF-8编码，有无BOM无所谓。
