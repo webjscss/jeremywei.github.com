@@ -1,1 +1,19 @@
-<iframe scrolling='no' frameborder='0' src='http://yibo.iyiyun.com/js/yibo404/key/6073' width='640' height='462' style='display:block;'></iframe>
+<iframe id="404-iframe" scrolling='no' frameborder='0' src='http://yibo.iyiyun.com/js/yibo404/key/6073' width='640' height='462' style='display:none;'></iframe>
+
+<script src="js/jquery-1.7.1.js"></script>
+<script type="text/javascript">
+var redirects = [{
+	newUrl : "/har-12-spec-chinese-edtion.html",
+	oldUrl : "/2011/03/26/http-archive-specification-chinese/"
+}];
+
+$(function(){
+	console.log(window.location.pathname);
+	for(var redirect in redirects) {
+		if (redirect["oldUrl"] == window.location.pathname) {
+			 window.location.href = redirect["newUrl"];
+		}
+	}
+	$("#404-iframe").show();
+})
+</script>
