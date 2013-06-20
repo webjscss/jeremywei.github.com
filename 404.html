@@ -9,9 +9,10 @@ var redirects = [{
 
 $(function(){
 	console.log(window.location.pathname);
-	for(var redirect in redirects) {
-		if (redirect["oldUrl"] == window.location.pathname) {
-			 window.location.href = redirect["newUrl"];
+	for(var index in redirects) {
+		console.log(redirects[index]);
+		if (redirects[index].oldUrl == window.location.pathname) {
+			 window.location.href = redirects[index].newUrl;
 		}
 	}
 	$("#404-iframe").show();
