@@ -7,43 +7,45 @@
 /* Global Reset */
 
 * {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 html, body {
-  height: 100%;
+	height: 100%;
 }
 
 body {
-  background-color: white;
-  font: 12px helvetica, arial, clean, sans-serif;
-  *font-size: small;
-  text-align: center;
-  color: #6e6e6e;
-  background: #fff;
+	background-color: white;
+	font-family: Georgia,"Times New Roman",Times,"Kaiti SC","KaiTi","BiauKai","楷体","楷体_GB2312",serif;
+	font-size: 13px;
+	/*font: 12px helvetica, arial, clean, sans-serif;*/
+	*font-size: small;
+	text-align: center;
+	color: #6e6e6e;
+	background: #fff;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-size: 100%;
-  margin-top: 10px;
+	font-size: 100%;
+	margin-top: 10px;
 }
 
 h1 {
-  margin-bottom: 1em;
+	margin-bottom: 1em;
 }
 
 p {
-  margin: 1em 0;
+	margin: 1em 0;
 }
 
 a {
-  color: #0082FF;
-  text-decoration: none;
+	color: #0082FF;
+	text-decoration: none;
 }
 
 a:hover {
-  color: black;
+	color: black;
 }
 
 /*a:visited {
@@ -51,8 +53,8 @@ a:hover {
 }*/
 
 table {
-  font-size: inherit;
-  font: 100%;
+	font-size: inherit;
+	font: 100%;
 }
 
 /*****************************************************************************/
@@ -62,19 +64,19 @@ table {
 /*****************************************************************************/
 
 ul.posts {
-  list-style-type: none;
-  margin-bottom: 2em;
+	list-style-type: none;
+	margin-bottom: 2em;
 }
 
-  ul.posts li {
-    line-height: 1.75em;
-  }
+ul.posts li {
+	line-height: 1.75em;
+}
 
-  ul.posts span {
-    color: #aaa;
-    font-family: Monaco, "Courier New", monospace;
-    font-size: 80%;
-  }
+ul.posts span {
+	color: #aaa;
+	font-family: Monaco, "Courier New", monospace;
+	font-size: 80%;
+}
 
 /*****************************************************************************/
 /*
@@ -179,61 +181,77 @@ ul.posts {
 /* Posts
 /*
 /*****************************************************************************/
-
 #post {
 
 }
-
+/* poem */
 .poem-post {
 	text-align : center;
+	font-size: 18px;
 }
-  /* standard */
 
-  #post pre {
-    border: 1px solid #ddd;
-    background-color: #eef;
-    padding: 0 .4em;
-  }
+.poem-post h1 {
+	font-size: 25px;
+}
 
-  #post ul,
-  #post ol {
-    margin-left: 1.35em;
-  }
+/* history */
+/*.history-post {
+	text-align : left;
+}
+*/
+.history-post {
+	text-align : left;
+	font-size: 18px;
+}
 
-  #post code {
-    border: 1px solid #ddd;
-    background-color: #eef;
-    font-size: 85%;
-    padding: 0 .2em;
-  }
+.history-post h1 {
+	font-size: 25px;
+}
 
-    #post pre code {
-      border: none;
-    }
+/* standard */
+#post pre {
+	border: 1px solid #ddd;
+	background-color: #eef;
+	padding: 0 .4em;
+}
 
-  /* terminal */
+#post ul, #post ol {
+	margin-left: 1.35em;
+}
 
-  #post pre.terminal {
-    border: 1px solid black;
-    background-color: #333;
-    color: white;
-  }
+#post code {
+	border: 1px solid #ddd;
+	background-color: #eef;
+	font-size: 85%;
+	padding: 0 .2em;
+}
 
-  #post pre.terminal code {
-    background-color: #333;
-  }
+#post pre code {
+	border: none;
+}
+
+/* terminal */
+#post pre.terminal {
+	border: 1px solid black;
+	background-color: #333;
+	color: white;
+}
+
+#post pre.terminal code {
+	background-color: #333;
+}
 
 #related {
-  margin-top: 2em;
+	margin-top: 2em;
 }
 
 #related h2 {
-margin-bottom: 1em;
+	margin-bottom: 1em;
 }
 
 .power {
-font-size: 80%;
-color: #AAA;
+	font-size: 80%;
+	color: #AAA;
 }
 
 .right-banner {

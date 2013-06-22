@@ -12,7 +12,7 @@ title: 念
 	<a href="/tech.html">更多</a>
   </ul>
 
-  <h1>诗</h1>
+  <h1>詩</h1>
   <ul class="posts">
     {% for post in site.tags.poem limit:10 %}
 		<li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
@@ -21,7 +21,7 @@ title: 念
   </ul>
   
   {% if site.tags.history %}
-  <h1>国史</h1>
+  <h1>國史</h1>
   <ul class="posts">
       {% for post in site.tags.hist limit:10 %}
   		<li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
