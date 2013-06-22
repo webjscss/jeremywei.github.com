@@ -1,15 +1,14 @@
 ---
 layout: poem
 title: 八月西湖
-city: 南京
-place: 西湖苏堤
+place: 西湖蘇堤
 tags: [poem]
 ---
 
-潇潇西湖雨     
-斜风落苏堤     
-伞下青山外     
-舟行烟波里     
+瀟瀟西湖雨     
+斜風落蘇堤     
+傘下青山外     
+舟行煙波裏     
 
 ![八月西湖](images/poem/bayuexihu.jpg "八月西湖")
 
