@@ -5,7 +5,7 @@ city: 南京
 tags: [tech]
 ---
 
-![Xcode](/images/tech/xcode.jpg "Xcode")
+![Xcode](http://{{ site.cdn }}/images/tech/xcode.jpg "Xcode")
 
 # 说明
 

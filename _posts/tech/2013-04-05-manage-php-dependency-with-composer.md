@@ -5,7 +5,7 @@ city: 南京
 tags: [tech]
 ---
 
-![Composer](/images/tech/composer.png "Composer")
+![Composer](http://{{ site.cdn }}/images/tech/composer.png "Composer")
 
 # 介绍
 

@@ -5,7 +5,7 @@ city: 南京
 tags: [tech]
 ---
 
-![Ruby On Rails](/images/tech/rails.png "Ruby On Rails")
+![Ruby On Rails](http://{{ site.cdn }}/images/tech/rails.png "Ruby On Rails")
 
 ##前言
 

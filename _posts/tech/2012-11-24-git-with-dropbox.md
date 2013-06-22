@@ -5,7 +5,7 @@ city: 南京
 tags: [tech]
 ---
 
-![Git](/images/tech/git.jpg "Git") ![Dropbox](/images/tech/dropbox.jpg "Dropbox")　
+![Git](http://{{ site.cdn }}/images/tech/git.jpg "Git") ![Dropbox](http://{{ site.cdn }}/images/tech/dropbox.jpg "Dropbox")　
 
 ##前言
 

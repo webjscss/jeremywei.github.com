@@ -5,7 +5,7 @@ city: 南京
 tags: [tech]
 ---
 
-![Redis](/images/tech/redis.png "Redis")
+![Redis](http://{{ site.cdn }}/images/tech/redis.png "Redis")
 
 Redis协议是从以下几个方面做的一个折中方案：
 

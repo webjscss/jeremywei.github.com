@@ -5,7 +5,7 @@ city: 南京
 tags: [tech]
 ---
 
-![Node.js](/images/tech/nodejs.jpg "Node.js")
+![Node.js](http://{{ site.cdn }}/images/tech/nodejs.jpg "Node.js")
 
 # 介绍
 

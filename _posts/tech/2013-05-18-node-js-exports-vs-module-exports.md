@@ -5,7 +5,7 @@ city: 南京
 tags: [tech]
 ---
 
-![Node.js](/images/tech/nodejs.jpg "Node.js")
+![Node.js](http://{{ site.cdn }}/images/tech/nodejs.jpg "Node.js")
 
 #Node.js中exports和module.exports有什么不同？
 

@@ -5,7 +5,7 @@ city: 南京
 tags: [tech]
 ---
 
-![Git](/images/tech/git.jpg "Git")
+![Git](http://{{ site.cdn }}/images/tech/git.jpg "Git")
 
 ###1.安装gitosis
 
