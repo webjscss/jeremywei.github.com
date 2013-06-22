@@ -10,5 +10,5 @@ tags: [poem]
 傘下青山外     
 舟行煙波裏     
 
-![八月西湖](images/poem/bayuexihu.jpg "八月西湖")
+![八月西湖](http://{{ site.cdn }}/images/poem/bayuexihu.jpg "八月西湖")
 
