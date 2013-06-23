@@ -7,7 +7,7 @@ tags: [tech]
 
 #CSS 2.1 选择器，第二部分
 
-这是介绍CSS2.1中可用选择器的三篇系列文章中的第二篇。第一篇更多的是关于基础的东西，比如类型选择器（type selectors），类选择器和id选择器，通配选择器（universal selector），和简单选择器。
+这是介绍CSS2.1中可用选择器的三篇系列文章中的第二篇。[第一篇](/css-21-selectors-part-1.html)更多的是关于基础的东西，比如类型选择器（type selectors），类选择器和id选择器，通配选择器（universal selector），和简单选择器。
 
 在这篇文章中我将会近距离的介绍并没有被所有的主流浏览器完全支持（译者注：目前主流浏览器对以下介绍的选择器已经都支持，详见[quirksmode](http://www.quirksmode.org/css/selectors/)）的更高级的选择器。这些支持正一步一步的变好，所以是值得花时间学习这篇中介绍的选择器的。
 
