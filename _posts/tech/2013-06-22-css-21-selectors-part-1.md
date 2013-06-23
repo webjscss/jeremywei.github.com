@@ -5,8 +5,6 @@ city: 南京
 tags: [tech]
 ---
 
-![Node.js](http://{{ site.cdn }}/images/tech/nodejs.jpg "Node.js")
-
 #CSS 2.1 选择器，第一部分
 
 当你开始使用CSS的时候，最先接触的东西是选择器。选择器显然是CSS的基础内容，但是很少有开发者能发挥其全部的潜力。当然你只使用类型（type）, ID, 类（class）就可以完成大量的工作，但是选择器还有更多的内容。
@@ -20,7 +18,7 @@ tags: [tech]
 因为有如此多的CSS选择器，用一篇文章来解释它们会变的非常的冗长。为了使信息更容易的被消化，我把它们分成了三个部分：
 
 * 第一部分，也就是这篇文章，解释选择器的基础加上通配（universal）, 类型（type）, id和类（class）选择器。
-* 第二部分是关于组合器（combinators），合并选择器（ combined selectors），分组（grouping），以及属性选择器。
+* 第二部分是关于组合因子（combinators），合并选择器（ combined selectors），分组（grouping），以及属性选择器。
 * 第三部分将会是关于伪类（pseudo-classes）和伪元素（pseudo-elements）。
 
 我将会在几周内发表这些文章，并且在它们发表的时候挨个更新其指向其他部分的链接。
@@ -224,7 +222,7 @@ ID选择器是以hash符号“#”来表示的，并且用`id`属性的值来定
 
 ##待续
 
-好了，以上就是这个系列文章的第一部分。在第二部分中我将要带你们看看组合（combinators）, 组合选择器，分组，和属性选择器，然后第三部分我将会近距离的看一下伪类和伪元素。
+好了，以上就是这个系列文章的第一部分。在第二部分中我将要带你们看看组合因子（combinators）, 组合选择器，分组，和属性选择器，然后第三部分我将会近距离的看一下伪类和伪元素。
 
 
 原文：[http://www.456bereastreet.com/archive/200509/css_21_selectors_part_1/](http://www.456bereastreet.com/archive/200509/css_21_selectors_part_1/)
