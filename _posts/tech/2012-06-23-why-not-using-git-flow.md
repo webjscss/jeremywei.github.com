@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 「翻译」为什么还不快使用git-flow？
+title: 为什么还不快使用git-flow？
 city: 南京
-tags: [tech]
+tags: [translate]
 ---
 
 

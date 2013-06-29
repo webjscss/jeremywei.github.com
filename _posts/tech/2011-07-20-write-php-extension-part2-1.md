@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 「翻译」PHP扩展编写第二步：参数，数组，以及ZVAL
+title: PHP扩展编写第二步：参数，数组，以及ZVAL
 city: 南京
-tags: [tech]
+tags: [translate]
 ---
 
 ###介绍

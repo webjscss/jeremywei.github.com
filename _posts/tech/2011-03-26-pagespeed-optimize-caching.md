@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 「翻译」Pagespeed优化准则之缓存优化
+title: Pagespeed优化准则之缓存优化
 city: 南京
-tags: [tech]
+tags: [translate]
 ---
 
 大多数网页中会包含很多资源，比如CSS，JavaScript，图片，这些资源一般很少有改动，所以可以缓存在浏览器。浏览器缓存可以减少HTTP的请求数量，减少请求的交互时间，减少响应的大小，减少带宽使用量。

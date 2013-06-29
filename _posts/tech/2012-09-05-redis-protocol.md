@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 「翻译」Redis协议
+title: Redis协议
 city: 南京
-tags: [tech]
+tags: [translate]
 ---
 
 ![Redis](http://{{ site.cdn }}/images/tech/redis.png "Redis")

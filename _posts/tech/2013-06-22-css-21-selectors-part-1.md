@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 「译」CSS 2.1选择器第一部分
+title: CSS 2.1选择器第一部分
 city: 南京
-tags: [tech]
+tags: [translate]
 ---
 
 #CSS 2.1 选择器，第一部分
