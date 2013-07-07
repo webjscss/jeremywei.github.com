@@ -59,11 +59,27 @@ table {
 	text-align: left;
 }
 
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+@media \0screen {
+  img { 
+	  width: auto; /* for ie 8 */
+  }
+}
+
 /*****************************************************************************/
 /*
 /* Home
 /*
 /*****************************************************************************/
+
+#home {
+	margin-left: 10px;
+	margin-right: 10px;	
+}	
 
 ul.posts {
 	list-style-type: none;
@@ -81,11 +97,19 @@ ul.posts span {
 	font-size: 80%;
 }
 
+.margin-for-mobile {
+	margin-left: 10px;
+	margin-right: 10px;	
+}
+
 /*****************************************************************************/
 /*
 /* Site
 /*
 /*****************************************************************************/
+
+.nav {
+}
 
 .site {
   font-size: 110%;
@@ -212,7 +236,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
 /*
 /*****************************************************************************/
 #post {
-
+	margin: 10px;
 }
 /* poem */
 .poem-post {
