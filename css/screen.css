@@ -319,7 +319,13 @@ only screen and (min-device-pixel-ratio : 1.5) {
 	top: 0; 	
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
+	.right-banner.first {
+		right: 0;
+		top: 0; 
+		width: 50px;	
+	}
+	
 	.right-banner.second {
 		left: 0;
 	}
@@ -328,6 +334,6 @@ only screen and (min-device-pixel-ratio : 1.5) {
 @media (min-width: 800px) {
 	.right-banner.second {
 		right: 0;
-		top: 150px; 	
+		top: 150px;
 	}	
 }
