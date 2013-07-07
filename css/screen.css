@@ -95,6 +95,32 @@ ul.posts span {
   line-height: 1.5em;
 }
 
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+	.site {
+		width: 320px;
+	}
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 320px) {
+	.site {
+		width: 320px;
+	}
+}
+
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+	.site {
+		width: 320px;
+	}
+}
+
 .title {
 	color: #0082FF;
 	font-weight: bold;
@@ -160,7 +186,8 @@ ul.posts span {
 	border-top: 1px double;
 	padding-bottom: .3em;
 	color:#bfbfbf;
-	line-height:120%
+	line-height:120%;
+	word-break: break-all;
 }
 
 .copyright a {
