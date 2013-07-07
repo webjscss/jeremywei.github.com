@@ -37,6 +37,7 @@ h1 {
 
 p {
 	margin: 1em 0;
+	word-break: break-all;
 }
 
 a {
@@ -71,6 +72,7 @@ ul.posts {
 
 ul.posts li {
 	line-height: 1.75em;
+	word-break: break-all;
 }
 
 ul.posts span {
@@ -214,6 +216,7 @@ ul.posts span {
 	border: 1px solid #ddd;
 	background-color: #eef;
 	padding: 0 .4em;
+	word-wrap: break-word;
 }
 
 #post ul, #post ol {
@@ -257,14 +260,23 @@ ul.posts span {
 
 .right-banner {
 	position: absolute;
-	right: 0; 
 	border: 0;
 }
 
 .right-banner.first {
+	right: 0;
 	top: 0; 	
 }
 
-.right-banner.second {
-	top: 150px; 	
+@media (max-width: 600px) {
+	.right-banner.second {
+		left: 0;
+	}
+}
+
+@media (min-width: 800px) {
+	.right-banner.second {
+		right: 0;
+		top: 150px; 	
+	}	
 }
