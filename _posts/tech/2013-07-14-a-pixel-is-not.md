@@ -5,6 +5,8 @@ city: 南京
 tags: [translate]
 ---
 
+原文：[http://www.quirksmode.org/blog/archives/2010/04/a_pixel_is_not.html](http://www.quirksmode.org/blog/archives/2010/04/a_pixel_is_not.html)
+
 译者：看标题晕菜了吧？哈哈。
 
 **昨天（译者：原文成于2010年4月）[John Gruber说了一下](http://daringfireball.net/2010/04/why_960_by_640)关于新iPhone提高像素密度的事情（以960x640替代480x320），并且分析了苹果为什么这么做。他也预测了这对于web开发者来说意味着是什么。**
@@ -115,5 +117,3 @@ tags: [translate]
 所以情况对于普通网站和那些使用`<meta>`标签的网站来说很清晰；对于使用媒体查询的网站来说没那么清晰。
 
 敬请期待。
-
-原文：[http://www.quirksmode.org/blog/archives/2010/04/a_pixel_is_not.html](http://www.quirksmode.org/blog/archives/2010/04/a_pixel_is_not.html)
