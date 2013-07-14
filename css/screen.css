@@ -343,4 +343,4 @@ only screen and (min-device-pixel-ratio : 1.5) {
 /*
 /*****************************************************************************/
 
-img[alt=csspixels_in] { float: right; }
+/*img[alt=csspixels_in] { float: right; }*/
