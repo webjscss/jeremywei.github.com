@@ -29,7 +29,6 @@ tags: [tech]
 我们现在Dropbox的目录中创建一个裸git仓库
 
 	$ cd ~/Dropbox
-	$ mkdir git
 	$ git init --bare project.git
 
 完成之后，我们clone这个仓库
