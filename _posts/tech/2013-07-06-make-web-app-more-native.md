@@ -1,17 +1,17 @@
 ---
 layout: post
-title: 把你的网站改造成一个IOS Web App
+title: 把你的网站改造成一个iOS Web App
 city: 南京
 tags: [tech]
 ---
 
 #前言
 
-IOS上的一个Web App（下图中的「念」）和Native App(原生应用)在外观上看起来基本上一样，但是其使用的技术是HTML，CSS，Javascript，而不是原生应用所使用的Objective-C。
+iOS上的一个Web App（下图中的「念」）和Native App(原生应用)在外观上看起来基本上一样，但是其使用的技术是HTML，CSS，Javascript，而不是原生应用所使用的Objective-C。
 
 ![01](http://{{ site.cdn }}/images/web-app/01.jpg "01")
 
-本文简单介绍一下如何把一个Web站点改造成IOS上的Web App，这里假设你的网站是响应式设计（responsive design）或者已经做过移动端的适配。
+本文简单介绍一下如何把一个Web站点改造成iOS上的Web App，这里假设你的网站是响应式设计（responsive design）或者已经做过移动端的适配。
 
 #viewport
 
@@ -29,12 +29,12 @@ IOS上的一个Web App（下图中的「念」）和Native App(原生应用)在�
 
 ![03](http://{{ site.cdn }}/images/web-app/03.jpg "03")
 
-IOS所用的icon是`png`格式的，其提供了`apple-touch-icon`和`apple-touch-icon-precomposed`两种icon，使用方式如下：
+iOS所用的icon是`png`格式的，其提供了`apple-touch-icon`和`apple-touch-icon-precomposed`两种icon，使用方式如下：
 
 	<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 	<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png"/>
 	
-以上你只能选其一，二者的区别在于如果使用`apple-touch-icon`，那么IOS会给icon加上一些NB的效果，包括圆角，阴影，反光。如果使用`apple-touch-icon-precomposed`则IOS不会加这个效果。
+以上你只能选其一，二者的区别在于如果使用`apple-touch-icon`，那么iOS会给icon加上一些NB的效果，包括圆角，阴影，反光。如果使用`apple-touch-icon-precomposed`则iOS不会加这个效果。
 
 如果你的网站也要可以在Ipad上访问，那么你还要针对不同的设备准备不同尺寸的icon，你可以通过`sizes`属性来指定icon的尺寸：
 
@@ -45,9 +45,9 @@ IOS所用的icon是`png`格式的，其提供了`apple-touch-icon`和`apple-touc
 	
 如果你不指定`size`属性，那么默认为`57x57`，我们可以看到`ipad`所需icon的尺寸是`72x72`，`retina屏幕的iphone`所需的尺寸是`114x114`，`retina屏幕的ipad`所需的尺寸是`144x144`。
 
-如果没有当前设备所需尺寸的icon，那么IOS将会选用icon中所有大于此设备所需尺寸的最小的一个。如果没有比设备所需尺寸大的icon，那么选用最大的那个icon。如果有多个符合条件的icon，那么IOS会选择有`precomposed`关键词的那个。
+如果没有当前设备所需尺寸的icon，那么iOS将会选用icon中所有大于此设备所需尺寸的最小的一个。如果没有比设备所需尺寸大的icon，那么选用最大的那个icon。如果有多个符合条件的icon，那么iOS会选择有`precomposed`关键词的那个。
 
-如果在HTML中没有指定icon，那么IOS会到WEB根目录下寻找对应的icon。假设设备需要`57x57`的icon，那么IOS将以下面的顺序进行访问：
+如果在HTML中没有指定icon，那么iOS会到WEB根目录下寻找对应的icon。假设设备需要`57x57`的icon，那么iOS将以下面的顺序进行访问：
 
 * apple-touch-icon-57x57-precomposed.png
 * apple-touch-icon-57x57.png

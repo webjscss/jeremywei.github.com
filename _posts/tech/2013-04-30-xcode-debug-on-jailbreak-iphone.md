@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 在越狱IPhone上进行Xcode调试
+title: 在越狱iPhone上进行Xcode调试
 city: 南京
 tags: [tech]
 ---
@@ -15,7 +15,7 @@ tags: [tech]
 
 *	XCode：Version 4.6.1 (4H512) 
 *	IOS SDK：6.1
-*	IPhone：IOS 6.1(Jail Break)
+*	iPhone：IOS 6.1(Jail Break)
 *	Mac OS X：10.8.3 Mountain Lion
 
 # 修改SDKSettings.plist
@@ -77,7 +77,7 @@ tags: [tech]
 
 # 安装Appsync
 
-首先确保你的IPhone已经越狱，打开`Cydia`：
+首先确保你的iPhone已经越狱，打开`Cydia`：
 
 ![10](http://{{ site.cdn }}/images/xcode/10.png "10")
 
