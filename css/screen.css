@@ -62,6 +62,9 @@ table {
 img {
 	max-width: 100%;
 	height: auto;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
 }
 
 @media \0screen {
@@ -117,6 +120,7 @@ ul.posts span {
   width: 40em;
   margin: 3em auto 2em auto;
   line-height: 1.5em;
+  word-break: break-all;
 }
 
 /* Smartphones (portrait and landscape) ----------- */
