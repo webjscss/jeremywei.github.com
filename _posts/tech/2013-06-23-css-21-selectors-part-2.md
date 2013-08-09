@@ -2,8 +2,10 @@
 layout: post
 title: CSS 2.1选择器第二部分
 city: 南京
-tags: [translate]
+tags: [translate,tech]
 ---
+
+原文：[http://www.456bereastreet.com/archive/200510/css_21_selectors_part_2/](http://www.456bereastreet.com/archive/200510/css_21_selectors_part_2/)
 
 #CSS 2.1 选择器，第二部分
 
@@ -138,5 +140,3 @@ tags: [translate]
 ##待续
 
 到了第二篇文章的结尾处了。在[第三篇](/css-21-selectors-part-3.html)文章中，即这个系列最后的部分，我将会介绍伪类和伪元素选择器。当你在等第三篇的时候，你可以重新看一下第一篇文章。复习对学习是有益的。
-
-原文：[http://www.456bereastreet.com/archive/200510/css_21_selectors_part_2/](http://www.456bereastreet.com/archive/200510/css_21_selectors_part_2/)

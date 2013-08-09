@@ -2,8 +2,10 @@
 layout: post
 title: Pagespeed优化准则之缓存优化
 city: 南京
-tags: [translate]
+tags: [translate,tech]
 ---
+
+原文：[http://code.google.com/speed/page-speed/docs/caching.html](http://code.google.com/speed/page-speed/docs/caching.html)
 
 大多数网页中会包含很多资源，比如CSS，JavaScript，图片，这些资源一般很少有改动，所以可以缓存在浏览器。浏览器缓存可以减少HTTP的请求数量，减少请求的交互时间，减少响应的大小，减少带宽使用量。
 
@@ -74,5 +76,3 @@ HTTP除了提供浏览器缓存，还提供了代理服务器缓存机制，静�
 3. 注意JS和CSS文件的代理缓存问题(Be aware of issues with proxy caching of JS and CSS files)
 
    一些代理服务器不能检测到响应头中的Content-Encoding，可能会把gzip压缩过的文件发送给不支持gzip解压的浏览器，有两种方式可以 解决这个问题： 给资源设置Cache-control: private头，这样资源不会被代理服务器缓存；给资源设置Vary: Accept-Encoding头，这样代理服务器会缓存两份资源，一份为压缩过的，一份为没有压缩的，代理服务器可以根据请求头的Accept- Encoding来判断是返回哪一个资源。
-
-原文：[http://code.google.com/speed/page-speed/docs/caching.html](http://code.google.com/speed/page-speed/docs/caching.html)

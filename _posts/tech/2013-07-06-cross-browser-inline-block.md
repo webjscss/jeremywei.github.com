@@ -2,8 +2,10 @@
 layout: post
 title: 跨浏览器的Inline-Block
 city: 南京
-tags: [translate]
+tags: [translate,tech]
 ---
+
+原文：[http://blog.mozilla.org/webdev/2009/02/20/cross-browser-inline-block/](http://blog.mozilla.org/webdev/2009/02/20/cross-browser-inline-block/)
 
 啊，inline-block，如此的让人难以琢磨，并且又有诱人的显示方式宣传，只是其承诺的很多，兑现的却如此少。我已经收到这样的PSD文件有很多次：
 
@@ -147,5 +149,3 @@ IE 6不支持`min-height`，但是很感谢（译者注：反讽）其对`height
 	            alt="lobster" width="75" height="75"/>
 	        </div>
 	</li>
-
-原文：[http://blog.mozilla.org/webdev/2009/02/20/cross-browser-inline-block/](http://blog.mozilla.org/webdev/2009/02/20/cross-browser-inline-block/)

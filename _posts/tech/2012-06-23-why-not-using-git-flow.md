@@ -2,9 +2,10 @@
 layout: post
 title: 为什么还不快使用git-flow？
 city: 南京
-tags: [translate]
+tags: [translate,tech]
 ---
 
+原文: [http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/][4]
 
 今年一月份的时候，[@nvie][1]发表了「[A successful Git branching model][2]」，在这篇文章里他介绍了如何保持自己的Git仓库优雅并且整洁。除此之外，他还放出了[git-flow][3]：一组Git扩展，可以异常容易地使用这个模型。
 
@@ -52,10 +53,6 @@ tags: [translate]
 最后一件使git-flow如此厉害的事情是其处理hotfixes的能力。你开始和完成一个hotfix分支就像处理其他分支一样，但是这个分支是基于_master_的，所以当生产环境上出现bug之后你可以迅速的修复它并且使用_finish_把分支合并回_master_和_develop_。
 
 Awesome, right? Now, what are you waiting for?
-
-英文原文: [http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/][4]
-
-
 
 [1]: http://twitter.com/nvie "@nvie"
 [2]: http://nvie.com/posts/a-successful-git-branching-model/ "model"

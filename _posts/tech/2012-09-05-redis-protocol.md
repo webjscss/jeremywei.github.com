@@ -2,10 +2,12 @@
 layout: post
 title: Redis协议
 city: 南京
-tags: [translate]
+tags: [translate,tech]
 ---
 
 ![Redis](http://{{ site.cdn }}/images/tech/redis.png "Redis")
+
+原文：[Protocol specification][2]
 
 Redis协议是从以下几个方面做的一个折中方案：
 
@@ -182,8 +184,6 @@ Bulk回复被服务器用来返回一个二进制安全的字符串。
 	"SET mykey 6\r\nfoobar\r\n"
 
 Redis有一个内部的列表，记录了什么命令是inline，什么命令是bulk，所以你需要参考这个来发送命令。强烈推荐使用新的统一请求协议来替代旧的协议。
-
-原文：[Protocol specification][2]
 
 [1]: http://redis.io/commands/blpop "BLPOP"
 [2]: http://redis.io/topics/protocol "Redis protocol"

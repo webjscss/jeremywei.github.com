@@ -2,8 +2,10 @@
 layout: post
 title: CSS 2.1选择器第一部分
 city: 南京
-tags: [translate]
+tags: [translate,tech]
 ---
+
+原文：[http://www.456bereastreet.com/archive/200509/css_21_selectors_part_1/](http://www.456bereastreet.com/archive/200509/css_21_selectors_part_1/)
 
 #CSS 2.1 选择器，第一部分
 
@@ -223,6 +225,3 @@ ID选择器是以hash符号“#”来表示的，并且用`id`属性的值来定
 ##待续
 
 好了，以上就是这个系列文章的第一部分。在[第二部分](/css-21-selectors-part-2.html)中我将要带你们看看组合因子（combinators）, 组合选择器，分组，和属性选择器，然后第三部分我将会近距离的看一下伪类和伪元素。
-
-
-原文：[http://www.456bereastreet.com/archive/200509/css_21_selectors_part_1/](http://www.456bereastreet.com/archive/200509/css_21_selectors_part_1/)

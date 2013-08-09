@@ -2,8 +2,10 @@
 layout: post
 title: CSS 2.1选择器第三部分
 city: 南京
-tags: [translate]
+tags: [translate,tech]
 ---
+
+原文：[http://www.456bereastreet.com/archive/200510/css_21_selectors_part_3/](http://www.456bereastreet.com/archive/200510/css_21_selectors_part_3/)
 
 #CSS 2.1 选择器，第三部分
 
@@ -144,5 +146,3 @@ tags: [translate]
 ##你已经有能量了 - 现在开始使用它
 
 这就是所有的内容了。现在你已经学了所有关于CSS2.1选择器的内容，你已经有了相当多的能量可以使用当你设计你的文档的时候。为了保持你的标记整洁，并且增加可访问性和可用性，请小心的使用。并且记得思考在那些不支持更高级CSS选择器的旧浏览器中将会发生什么。
-
-原文：[http://www.456bereastreet.com/archive/200510/css_21_selectors_part_3/](http://www.456bereastreet.com/archive/200510/css_21_selectors_part_3/)

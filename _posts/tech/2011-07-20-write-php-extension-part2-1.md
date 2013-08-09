@@ -2,8 +2,10 @@
 layout: post
 title: PHP扩展编写第二步：参数，数组，以及ZVAL
 city: 南京
-tags: [translate]
+tags: [translate,tech]
 ---
+
+原文：[http://devzone.zend.com/node/view/id/1022](http://devzone.zend.com/node/view/id/1022)
 
 ###介绍
 
@@ -637,5 +639,3 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 当你使用`ALLOC_INIT_ZVAL()`的时候，`refcount`会被设置为1，所以当你想要返回这个`zval`，或者把它加入到一个`HashTable`中的时候，不需要做任何事。在以上的代码中，你从一个`HashTable`中找到了一个`zval`，但是没有删除它，所以它的`refcount`的值符合它被引用的次数。为了在其他地方可以引用它，你需要增加它的引用计数。
 
 当在用户空间代码中调用`unset($a)`时候，`Zend Engine`会在那个变量上执行`zval_ptr_dtor()`。使用`zval_ptr_dtor()`的重要性你是看不见的，这个调用不需要销毁这个`zval`以及它的所有内容。它实际做的事情是减少它的`refcount`。如果，我说如果，`refcount`的值为0了，那么Zend Engine会销毁这个`zval`…
-
-原文：[http://devzone.zend.com/node/view/id/1022](http://devzone.zend.com/node/view/id/1022)

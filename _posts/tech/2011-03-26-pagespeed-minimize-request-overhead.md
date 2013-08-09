@@ -2,8 +2,10 @@
 layout: post
 title: Pagespeed优化准则之减少请求开销
 city: 南京
-tags: [translate]
+tags: [translate,tech]
 ---
+
+原文：[http://code.google.com/speed/page-speed/docs/request.html](http://code.google.com/speed/page-speed/docs/request.html)
 
 当客户端发送一个HTTP请求的时候，给这个域名和path设置的cookie也会随同一次发送。大多数用户的网络带宽是不对称的，上传和下载之间 的比例是1:4到1:20之间。这就是说发送一个500B的HTTP头和下载一个10KB的HTTP响应花费的时间是一样的。有的时候情况会更糟，因为 HTTP头是没有经过压缩的。在一个新的浏览器会话开始的时候，这个延迟会更大。为了避免网络拥堵，TCP会使用slow start的算法来创建新的连接。浏览器在发送新数据之前需要等待服务器返回对已经发送数据的ACK响应，这就限制了数据的发送量。如果需要发送的数据超过了一个连接一次能发送的最大量，那么数据就会分批发送，从而增加了浏览器和服务器之间交互的时间，即RTT。缩短请求时间的方法是减少请求的字节数，比如说HTTP头。
 
@@ -49,6 +51,3 @@ HTTP请求头包括：
 
 2. 不要用cookie无关的域名来传输外部JS (Don’t serve early loaded external JS files from the cookieless domain)
    在HTML文档头部引入并且页面渲染所需要的外部JavaScript文件，应该使用和页面一样的域名来传输，而不是使用cookie无关的新域名，因为 浏览器会阻塞JavaScript后面其他的资源下载，直到所有的JavaScript完成下载，解析，执行。所以如果使用cookie无关的域名则可能 会增加额外的DNS查询的时间。
-
-原文：[http://code.google.com/speed/page-speed/docs/request.html](http://code.google.com/speed/page-speed/docs/request.html)
-

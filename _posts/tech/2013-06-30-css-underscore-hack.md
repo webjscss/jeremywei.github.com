@@ -2,8 +2,10 @@
 layout: post
 title: The Underscore Hack
 city: 南京
-tags: [translate]
+tags: [translate,tech]
 ---
+
+原文：[http://wellstyled.com/css-underscore-hack.html](http://wellstyled.com/css-underscore-hack.html)
 
 译者注：**The Underscore Hack**是用来解决IE6，7下CSS　bug的一种方法。
 
@@ -40,6 +42,3 @@ tags: [translate]
 注意：这使用了WinIE的另一个bug，把`overflow:visible`当作`height:auto`来解决以上的问题。更多的细节，请看[The "min-height" Hack](http://wellstyled.com/css-minheight-hack.html)。
 
 我在Windows下的MSIE 5，5.5，6和Opera；Mac OSX下的MSIE 5，Safari，Camino；以及Mozilla和Firefox下进行了测试。（译者注：我没在现代浏览器上测试过。）
-
-   
-原文：[http://wellstyled.com/css-underscore-hack.html](http://wellstyled.com/css-underscore-hack.html)

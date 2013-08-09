@@ -2,7 +2,7 @@
 layout: post
 title: 两个viewport的故事（第一部分）
 city: 南京
-tags: [translate]
+tags: [translate,tech]
 ---
 
 原文：[http://www.quirksmode.org/mobile/viewports.html](http://www.quirksmode.org/mobile/viewports.html)

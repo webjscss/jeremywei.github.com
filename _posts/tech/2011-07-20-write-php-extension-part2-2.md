@@ -2,8 +2,10 @@
 layout: post
 title: PHP扩展编写第二步：参数，数组，以及ZVAL「续」
 city: 南京
-tags: [translate]
+tags: [translate,tech]
 ---
+
+原文：[http://devzone.zend.com/node/view/id/1023](http://devzone.zend.com/node/view/id/1023)
 
 ###拷贝 VS 引用
 
@@ -527,5 +529,3 @@ Gist:
 下一步是什么？
 
 在这个扩展编写系列教程的第二部分中，你学到了如何接收函数参数，你创建和使用了数组，然后，最重要的，你看了`zval`的内部工作过程。在第三部分，你将要看到`resource`数据类型，并且和更加复杂的数据结构打交道。
-
-原文：[http://devzone.zend.com/node/view/id/1023](http://devzone.zend.com/node/view/id/1023)

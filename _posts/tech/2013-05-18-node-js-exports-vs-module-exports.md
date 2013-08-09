@@ -2,10 +2,12 @@
 layout: post
 title: Node.js中exports与module.exports的区别
 city: 南京
-tags: [translate]
+tags: [translate,tech]
 ---
 
 ![Node.js](http://{{ site.cdn }}/images/tech/nodejs.jpg "Node.js")
+
+原文：[http://www.hacksparrow.com/node-js-exports-vs-module-exports.html](http://www.hacksparrow.com/node-js-exports-vs-module-exports.html)
 
 #Node.js中exports和module.exports有什么不同？
 
@@ -82,5 +84,3 @@ rocker模块完全忽略了`exports.name`，然后返回了一个字符串'ROCK 
 的对象类型从传统的`模块实例`（module instance）修改为其他的。
 
 我希望这篇文章能帮助你理解`exports`和`module.exports`之间的不同，并且能进一步的理解模块在`Node.js`中是怎么工作的。如果有任何问题，请在回复里边留言。
-
-原文：[http://www.hacksparrow.com/node-js-exports-vs-module-exports.html](http://www.hacksparrow.com/node-js-exports-vs-module-exports.html)
