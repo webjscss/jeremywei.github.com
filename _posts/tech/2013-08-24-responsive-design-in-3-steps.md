@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 响应式web设计(Responsive web design)三部曲
+title: 响应式web设计(Responsive web design)三步曲
 city: 南京
 tags: [translate,tech]
 ---
