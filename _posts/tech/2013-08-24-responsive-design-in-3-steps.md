@@ -49,6 +49,6 @@ Internet Explorer 8或者更老的浏览器不支持媒体查询。你可以使�
 
 #总结
 
-这个教程打算告诉你响应设计的基础知识。如果你想要看更深入的教程，看看我上一篇教程：[《利用媒体查询进行响应式设计》](http://webdesignerwall.com/tutorials/responsive-design-with-css3-media-queries)。
+这个教程打算告诉你响应设计的基础知识。如果你想要看更深入的教程，看看我上一篇教程：[《利用媒体查询进行响应式设计》](/responsive-design-with-css3-media-queries.html)。
 
 
