@@ -16,7 +16,7 @@ _译者：[CommonJS Modules/1.0](http://wiki.commonjs.org/wiki/Modules/1.0) 是�
 1. 在一个模块中，存在一个自由的变量"require"，它是一个函数。
 	1. 这个"require"函数接收一个模块标识符。
 	2. "require"返回外部模块所输出的API。
-	3. 如果出现依赖闭环(dependency cycle)，那么外部模块在被它的传递依赖（[transitive dependencies](http://en.wikipedia.org/wiki/Transitive_dependency)）所包含的时候可能并没有执行完成；在这种情况下，"require"返回的对象必须至少包含外部模块在调用会进入当前模块执行环境的require函数之前就已经准备完成的输出。（译者：如果难理解，看下面的[例子](#Module-Context)。）
+	3. 如果出现依赖闭环(dependency cycle)，那么外部模块在被它的传递依赖（[transitive dependencies](http://en.wikipedia.org/wiki/Transitive_dependency)）所require的时候可能并没有执行完成；在这种情况下，"require"返回的对象必须至少包含此外部模块在调用require函数（会进入当前模块执行环境）之前就已经准备完毕的输出。（译者：如果难理解，看下面的[例子](#Module-Context)。）
 	4. 如果请求的模块不能返回，那么"require"必须抛出一个错误。
 2. 在一个模块中，会存在一个名为"exports"的自由变量，它是一个对象，模块可以在执行的时候把自身的API加入到其中。
 3. 模块必须使用"exports"对象来做为输出的唯一表示。
@@ -96,7 +96,7 @@ main.js
 	var b = require('./b.js');
 	console.log('in main, a.done=%j, b.done=%j', a.done, b.done);
 	
-当main.js加载a.js的时候，a.js加载b.js，同时，b.js想要加载a.js，这时候就产生了依赖闭环的问题，为了避免无限循环，需要打破这个闭环。根据CommonJS Modules/1.0规范中的说明「在这种情况下，"require"返回的对象必须至少包含外部模块在调用会进入当前模块执行环境的require函数之前就已经准备完成的输出。」，有些绕，让我们从依赖闭环产生的地方跟踪，b.js需要require a.js，这里b.js做为当前模块，a.js相对于b.js来说是外部模块，那么a.js的输出应该是在其require b.js之前（即「进入当前模块执行环境」）就应该返回，执行过程如下：
+当main.js加载a.js的时候，a.js加载b.js，同时，b.js想要加载a.js，这时候就产生了依赖闭环的问题，为了避免无限循环，需要打破这个闭环。根据CommonJS Modules/1.0规范中的说明「在这种情况下，"require"返回的对象必须至少包含此外部模块在调用require函数（会进入当前模块执行环境）之前就已经准备完毕的输出。」，有些绕，让我们从依赖闭环产生的地方跟踪，b.js需要require a.js，这里b.js做为当前模块，a.js相对于b.js来说是外部模块，那么a.js的输出应该是在其require b.js之前（即「进入当前模块执行环境」）就应该返回，执行过程如下：
 
 a.js
 
