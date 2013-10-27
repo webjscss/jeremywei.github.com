@@ -6,7 +6,7 @@ tags: [tech]
 ---
 
 #前言
-JavaScript从做为浏览器上唯一的开发语言，到近期HTML5以及Node.js等后端技术的兴起，其发展势头已经不可限量，笔者刚开始接触JavaScript之时并未对其足够重视，眼前在使用Node.js的时候产生很多问题，查询资料后发现很多基础问题并未厘清，遂决定重学之，本文是笔者重学JavaScript的笔记之一。
+JavaScript从做为浏览器上唯一的开发语言，到近期HTML5以及Node.js等后端技术的兴起，其发展势头已经不可限量，本文主要介绍JavaScript中函数参数的传递方式，是[《JavaScript高级程序设计第三版》](http://book.douban.com/subject/10546125/)的读书笔记。
 
 #变量类型
 
