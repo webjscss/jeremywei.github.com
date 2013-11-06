@@ -10,7 +10,7 @@ JavaScript从做为浏览器上唯一的开发语言，到近期HTML5以及Node.
 
 #变量类型
 
-JavaScript中的变量有5个基本数据类型（Undefined, Null, Boolean, Number, String）和引用数据类型（Object，注：笔者这里把Function，Array等类型都暂时归于Object类型）。
+JavaScript中的变量有5个基本数据类型（Undefined, Null, Boolean, Number, String）和引用数据类型（Object，Function，Array等）。
 
 <table class="table_border">
     <caption>数据类型</caption>
