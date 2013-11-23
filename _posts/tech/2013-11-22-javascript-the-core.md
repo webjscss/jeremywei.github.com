@@ -5,6 +5,8 @@ city: 南京
 tags: [tech]
 ---
 
+原文：[http://dmitrysoshnikov.com/ecmascript/javascript-the-core/](http://dmitrysoshnikov.com/ecmascript/javascript-the-core/)
+
 1. [对象](#object)
 2. [原型链](#prototype-chain)
 3. [构造函数](#constructor)
@@ -402,7 +404,7 @@ ES6标准化了 ```__proto__```属性，并且可以在对象初始化的时候�
 <span id="closures"></span>
 #闭包
 
-在ECMAScript中，函数是_第一级_（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类参数」（"funargs"，是"functional arguments"的简称））。接收"funargs"的函数叫作_高阶函数_或者，贴近数学一些，叫作高阶_操作符_。同样函数也可以从其他函数中返回。返回其他函数的函数叫作_以函数为值_（function valued）的函数（或者叫作拥有_函数类值_的函数（functions with functional value））。
+在ECMAScript中，函数是_第一级_（first-class）对象。这个术语意味着函数可以做为参数传递给其他函数（在那种情况下，这些参数叫作「函数类型参数」（funargs，是"functional arguments"的简称））。接收「函数类型参数」的函数叫作_高阶函数_或者，贴近数学一些，叫作高阶_操作符_。同样函数也可以从其他函数中返回。返回其他函数的函数叫作_以函数为值_（function valued）的函数（或者叫作拥有_函数类值_的函数（functions with functional value））。
 
 这有两个在概念上与「函数类型参数（funargs）」和「函数类型值（functional　values）」相关的问题。并且这两个子问题在_"Funarg problem"_（或者叫作"functional argument"问题）中很普遍。为了解决_整个"funarg problem"_，_闭包_（closure）的概念被创造了出来。我们详细的描述一下这两个子问题（我们将会看到这两个问题在ECMAScript中都是使用图中所提到的函数的```[[Scope]]```属性来解决的）。
 
