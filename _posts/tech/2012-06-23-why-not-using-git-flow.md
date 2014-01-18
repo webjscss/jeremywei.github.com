@@ -2,7 +2,7 @@
 layout: post
 title: 为什么还不快使用git-flow？
 city: 南京
-tags: [translate,tech]
+tags: [translate]
 ---
 
 原文: [http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/][4]

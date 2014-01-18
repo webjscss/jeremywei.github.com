@@ -2,7 +2,7 @@
 layout: post
 title: 跨浏览器的Inline-Block
 city: 南京
-tags: [translate,tech]
+tags: [translate]
 ---
 
 原文：[http://blog.mozilla.org/webdev/2009/02/20/cross-browser-inline-block/](http://blog.mozilla.org/webdev/2009/02/20/cross-browser-inline-block/)

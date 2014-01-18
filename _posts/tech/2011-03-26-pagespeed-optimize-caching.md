@@ -2,7 +2,7 @@
 layout: post
 title: Pagespeed优化准则之缓存优化
 city: 南京
-tags: [translate,tech]
+tags: [translate]
 ---
 
 原文：[http://code.google.com/speed/page-speed/docs/caching.html](http://code.google.com/speed/page-speed/docs/caching.html)

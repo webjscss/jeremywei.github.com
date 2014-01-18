@@ -2,7 +2,7 @@
 layout: post
 title: 理解Node.js
 city: 南京
-tags: [tech]
+tags: [translate]
 ---
 
 原文：[http://debuggable.com/posts/understanding-node-js:4bd98440-45e4-4a9a-8ef7-0f7ecbdd56cb](http://debuggable.com/posts/understanding-node-js:4bd98440-45e4-4a9a-8ef7-0f7ecbdd56cb)

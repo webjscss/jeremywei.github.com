@@ -2,7 +2,7 @@
 layout: post
 title: 利用媒体查询进行响应式设计
 city: 南京
-tags: [translate,tech]
+tags: [translate]
 ---
 
 原文：[http://webdesignerwall.com/tutorials/responsive-design-with-css3-media-queries](http://webdesignerwall.com/tutorials/responsive-design-with-css3-media-queries)

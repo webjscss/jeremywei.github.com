@@ -2,7 +2,7 @@
 layout: post
 title: CommonJS Modules/1.0 规范
 city: 南京
-tags: [translate,tech]
+tags: [translate]
 ---
 
 _译者：[CommonJS Modules/1.0](http://wiki.commonjs.org/wiki/Modules/1.0) 是目前JavaScript模块化的事实标准，虽然其已经被 [CommonJS Modules/1.1](http://wiki.commonjs.org/wiki/Modules/1.1) 所替代，但是1.0的适用范围非常广，支持者也很多，其中包括Flusspferd, GLUEscript, GPSEE, JSBuild, Narwhal (0.1), Persevere, RingoJS, SproutCore 1.1/Tiki, [node.js][1], TeaJS (formerly v8cgi), [CouchDB][2], Smart Platform, Yabble, Wakanda, XULJet等，所以翻译此规范还是很有必要的，以下为正文。_

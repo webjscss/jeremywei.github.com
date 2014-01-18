@@ -2,7 +2,7 @@
 layout: post
 title: JavaScript核心
 city: 南京
-tags: [tech]
+tags: [translate]
 ---
 
 原文：[http://dmitrysoshnikov.com/ecmascript/javascript-the-core/](http://dmitrysoshnikov.com/ecmascript/javascript-the-core/)

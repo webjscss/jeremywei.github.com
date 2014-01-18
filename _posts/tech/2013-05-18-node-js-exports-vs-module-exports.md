@@ -2,7 +2,7 @@
 layout: post
 title: Node.js中exports与module.exports的区别
 city: 南京
-tags: [translate,tech]
+tags: [translate]
 ---
 
 ![Node.js](http://{{ site.cdn }}/images/tech/nodejs.jpg "Node.js")

@@ -2,7 +2,7 @@
 layout: post
 title: 「深入ECMA-262-3」第一章、执行上下文
 city: 南京
-tags: [tech]
+tags: [translate]
 ---
 
 原文：[http://dmitrysoshnikov.com/ecmascript/chapter-1-execution-contexts/](http://dmitrysoshnikov.com/ecmascript/chapter-1-execution-contexts/)

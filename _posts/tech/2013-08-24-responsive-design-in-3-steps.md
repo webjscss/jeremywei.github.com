@@ -2,7 +2,7 @@
 layout: post
 title: 响应式web设计(Responsive web design)三步曲
 city: 南京
-tags: [translate,tech]
+tags: [translate]
 ---
 
 原文：[http://webdesignerwall.com/tutorials/responsive-design-in-3-steps](http://webdesignerwall.com/tutorials/responsive-design-in-3-steps)
