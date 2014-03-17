@@ -484,3 +484,4 @@ tags: [translate]
 * 11.2.2 – [The new operator](http://bclary.com/2004/11/07/#a-11.2.2);
 * 11.2.3 – [Function calls](http://bclary.com/2004/11/07/#a-11.2.3).
 
+
