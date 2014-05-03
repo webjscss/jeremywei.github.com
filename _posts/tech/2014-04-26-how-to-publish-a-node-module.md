@@ -4,6 +4,8 @@ title: 如何发布Node模块到NPM社区
 tags: [tech]
 ---
 
+![Node.js](http://{{ site.cdn }}/images/tech/nodejs.jpg "Node.js")
+
 "学骑自行车最快的方式就是先骑上去"
 
 #安装node和npm
