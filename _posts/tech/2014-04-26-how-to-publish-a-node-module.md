@@ -88,7 +88,6 @@ tags: [tech]
 	  }
 	}
 
-
 	Is this ok? (yes) 
 
 ```npm init```创建的```package.json```文件只包含了基本的信息，我们还需要加入对其他module的依赖关系：
@@ -117,7 +116,15 @@ tags: [tech]
 	├── package.json
 	├── README.md
 	
-其中```lib```目录下存放业务逻辑文件，```test```目录下存放单元测试用例，```.npmignore```记录哪些文件不需要被发布到npmjs.org，```.travis.yml```是持续集成服务[travis](https://travis-ci.org/)的描述文件，```index.js```是入口文件，```makefile```是为了方便我们用```make test```进行测试，```README.md```是此module的描述和使用方法，
+这些文件的作用是：
+
+* lib目录下存放业务逻辑文件
+* test目录下存放单元测试用例
+* .npmignore记录哪些文件不需要被发布到npmjs.org
+* .travis.yml是持续集成服务[travis](https://travis-ci.org/)的描述文件
+* index.js是入口文件
+* makefile方便我们用```make test```进行测试
+* ```README.md```是此module的描述和使用方法
 
 #持续集成
 
@@ -189,7 +196,7 @@ Have fun :)
 * [https://github.com/npm/npm](https://github.com/npm/npm)
 * [https://www.npmjs.org/doc/api/npm-publish.html](https://www.npmjs.org/doc/api/npm-publish.html)
 * [https://www.npmjs.org/doc/cli/npm-adduser.html](https://www.npmjs.org/doc/cli/npm-adduser.html)
-* [http://docs.travis-ci.com/user/database-setup/](http://docs.travis-ci.com/user/languages/javascript-with-nodejs/)
+* [http://docs.travis-ci.com/user/languages/javascript-with-nodejs/](http://docs.travis-ci.com/user/languages/javascript-with-nodejs/)
 * [http://docs.travis-ci.com/user/database-setup/](http://docs.travis-ci.com/user/database-setup/)
 * [http://semver.org/](http://semver.org/)
 
