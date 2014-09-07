@@ -10,19 +10,7 @@ tags: [tech]
 
 采用Node.js开发私有或者商业项目的时候，我们需要创建一些内部使用的module供多个项目之间共用，这些module显然你不想发布到社区，默认情况下```npm publish```和```npm install```都是对[registry.npmjs.org](https://registry.npmjs.org/)进行操作，而我们需要的是这样一种仓库：对于一个module，首先操作私有仓库，如果私有仓库中不存在此module，则操作官方的仓库，架构大致如下：
 
-	                          +--+
-	+------------+            |p |
-	| client     |   'foo'?   |r |          +------------+
-	|            |  --------> |o |  'foo'?  |            |
-	|            |            |x |  ------> | private    |
-	|            |            |y | <------  | registry   |
-	|            |            |  |    404   +------------+
-	|            |            |  |
-	|            |            |  |          'foo'?     +---------------+
-	|            |            |  |  -----------------> |               |
-	|            |            |  | <-----------------  |  public       |
-	|            | <--------  |  |         'foo'       |  registry     |
-	+------------+    'foo'   +--+                     +---------------+
+![kappa-proxy](http://{{ site.cdn }}/images/tech/kappa-proxy.png "kappa-proxy")
 
 本文采用eBay开源的[kappa](https://github.com/krakenjs/kappa)代理和[NPM官方registry](https://github.com/npm/npm-registry-couchapp)来实现以上架构。
 
