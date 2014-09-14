@@ -2,7 +2,7 @@
 layout: post
 title: Pagespeed优化准则之减少请求开销
 city: 南京
-tags: [translate]
+tags: [tech, translate]
 ---
 
 原文：[http://code.google.com/speed/page-speed/docs/request.html](http://code.google.com/speed/page-speed/docs/request.html)

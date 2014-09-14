@@ -2,7 +2,7 @@
 layout: post
 title: PHP扩展编写第一步：PHP和Zend介绍
 city: 南京
-tags: [translate]
+tags: [tech, translate]
 ---
 
 ###介绍

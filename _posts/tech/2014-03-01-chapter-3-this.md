@@ -2,7 +2,7 @@
 layout: post
 title: 「深入ECMA-262-3」第三章、This
 city: 南京
-tags: [translate]
+tags: [tech, translate]
 ---
 
 原文：[http://dmitrysoshnikov.com/ecmascript/chapter-3-this/](http://dmitrysoshnikov.com/ecmascript/chapter-3-this/)

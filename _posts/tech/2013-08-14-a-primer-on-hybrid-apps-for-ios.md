@@ -2,7 +2,7 @@
 layout: post
 title: iOS混合应用开发入门
 city: 南京
-tags: [translate]
+tags: [tech, translate]
 ---
 
 原文：[https://www.cocoacontrols.com/posts/a-primer-on-hybrid-apps-for-ios](https://www.cocoacontrols.com/posts/a-primer-on-hybrid-apps-for-ios)

@@ -2,7 +2,7 @@
 layout: post
 title: 不是像素的像素不是像素
 city: 南京
-tags: [translate]
+tags: [tech, translate]
 ---
 
 原文：[http://www.quirksmode.org/blog/archives/2010/04/a_pixel_is_not.html](http://www.quirksmode.org/blog/archives/2010/04/a_pixel_is_not.html)

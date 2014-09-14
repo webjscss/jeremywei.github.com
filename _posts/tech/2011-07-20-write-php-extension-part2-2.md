@@ -2,7 +2,7 @@
 layout: post
 title: PHP扩展编写第二步：参数，数组，以及ZVAL「续」
 city: 南京
-tags: [translate]
+tags: [tech, translate]
 ---
 
 原文：[http://devzone.zend.com/node/view/id/1023](http://devzone.zend.com/node/view/id/1023)

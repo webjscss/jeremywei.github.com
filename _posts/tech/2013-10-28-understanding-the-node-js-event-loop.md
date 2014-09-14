@@ -2,7 +2,7 @@
 layout: post
 title: 理解Node.js中的Event Loop
 city: 南京
-tags: [translate]
+tags: [tech, translate]
 ---
 
 原文：[http://blog.mixu.net/2011/02/01/understanding-the-node-js-event-loop/](http://blog.mixu.net/2011/02/01/understanding-the-node-js-event-loop/)

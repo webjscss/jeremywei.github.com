@@ -2,7 +2,7 @@
 layout: post
 title: 「深入ECMA-262-3」第二章、变量对象
 city: 南京
-tags: [translate]
+tags: [tech, translate]
 ---
 
 原文：[http://dmitrysoshnikov.com/ecmascript/chapter-2-variable-object/](http://dmitrysoshnikov.com/ecmascript/chapter-2-variable-object/)

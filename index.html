@@ -1,10 +1,10 @@
 ---
 layout: default
-title: 念
+title: 水木情书
 ---
 
 <div id="home">
-  <h1>文</h1>
+  <h1>编程</h1>
   <ul class="posts">
 	{% for post in site.tags.tech limit:10 %} 
 		<li><span>{{ post.date | date: "%Y年%m月%d日" }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
@@ -12,15 +12,15 @@ title: 念
 	<a href="/tech.html">更多</a>
   </ul>
   
-  <h1>譯</h1>
+  <h1>设计</h1>
   <ul class="posts">
-      {% for post in site.tags.translate limit:10 %}
+      {% for post in site.tags.design limit:10 %}
 	  	<li><span>{{ post.date | date: "%Y年%m月%d日" }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
       {% endfor %}
-	  <a href="/translate.html">更多</a>
+	  <a href="/design.html">更多</a>
   </ul>
   
-  <h1>詩</h1>
+  <h1>诗词</h1>
   <ul class="posts">
     {% for post in site.tags.poem limit:10 %}
 		<li><span>{{ post.date | date: "%Y年%m月%d日" }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
@@ -29,7 +29,7 @@ title: 念
   </ul>
   
   {% if site.tags.history %}
-  <h1>史</h1>
+  <h1>历史</h1>
   <ul class="posts">
       {% for post in site.tags.history limit:10 %}
   		<li><span>{{ post.date | date: "%Y年%m月%d日" }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>

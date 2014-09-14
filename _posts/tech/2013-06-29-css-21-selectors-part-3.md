@@ -2,7 +2,7 @@
 layout: post
 title: CSS 2.1选择器第三部分
 city: 南京
-tags: [translate]
+tags: [tech, translate]
 ---
 
 原文：[http://www.456bereastreet.com/archive/200510/css_21_selectors_part_3/](http://www.456bereastreet.com/archive/200510/css_21_selectors_part_3/)

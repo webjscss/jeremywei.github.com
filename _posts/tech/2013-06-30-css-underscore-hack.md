@@ -2,7 +2,7 @@
 layout: post
 title: The Underscore Hack
 city: 南京
-tags: [translate]
+tags: [tech, translate]
 ---
 
 原文：[http://wellstyled.com/css-underscore-hack.html](http://wellstyled.com/css-underscore-hack.html)
