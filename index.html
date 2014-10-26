@@ -12,12 +12,12 @@ title: 水木情书
 	<a href="/tech.html">更多</a>
   </ul>
   
-  <h1>设计</h1>
+  <h1>Startup</h1>
   <ul class="posts">
-      {% for post in site.tags.design limit:10 %}
-	  	<li><span>{{ post.date | date: "%Y年%m月%d日" }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-      {% endfor %}
-	  <a href="/design.html">更多</a>
+    {% for post in site.tags.startup limit:10 %}
+		<li><span>{{ post.date | date: "%Y年%m月%d日" }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+	<a href="/startup.html">更多</a>
   </ul>
   
   <h1>诗词</h1>
@@ -28,6 +28,14 @@ title: 水木情书
 	<a href="/poem.html">更多</a>
   </ul>
   
+  <h1>设计</h1>
+  <ul class="posts">
+      {% for post in site.tags.design limit:10 %}
+	  	<li><span>{{ post.date | date: "%Y年%m月%d日" }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% endfor %}
+	  <a href="/design.html">更多</a>
+  </ul>
+	
   {% if site.tags.history %}
   <h1>历史</h1>
   <ul class="posts">
