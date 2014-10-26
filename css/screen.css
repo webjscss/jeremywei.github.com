@@ -38,6 +38,10 @@ h1 {
 	margin-bottom: 1em;
 }
 
+pre.nav.margin-for-mobile {
+	white-space: normal;	
+}
+
 h2 {
 	font-size: 28px;
 	font-weight: 700;
