@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Product Hunt是如何获得最初的2000名用户
-tags: [startup]
+tags: [tech, startup]
 ---
 
 ![product-hunt](/images/product-hunt/product-hunt-logo.jpg "product-hunt")
@@ -91,7 +91,7 @@ Growth很诱人，但实际上，获取用户并不是我们主要的目标。�
 
 尽管Product Hunt前期的增长很成功，但是未来仍然模糊不清。一些睿智和持怀疑态度的企业家问我们：
 
-* 用户会有粘性吗？ 
+* 用户会有粘性吗？
 * 随着社区人数越来越多，你们如何保证内容和讨论的质量？
 * Product Hunt是不是只是一个小众的技术社区？它能成为主流大众社区吗？
 

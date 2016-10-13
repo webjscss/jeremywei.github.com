@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 基础颜色理论（一）
-tags: [design]
+tags: [tech, design]
 ---
 
 ![basic-color-theory](http://{{ site.cdn }}/images/design/basic-color-theory/basic-color-theory.png "basic-color-theory")
