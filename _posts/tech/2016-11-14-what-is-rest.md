@@ -103,3 +103,4 @@ client-server约束的原则是把用户端和服务端的关注点进行分离�
 
 * [https://en.wikipedia.org/wiki/Representational_state_transfer](https://en.wikipedia.org/wiki/Representational_state_transfer)
 * [http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
+* [REST 架构该怎么生动地理解？](https://www.zhihu.com/question/27785028)
