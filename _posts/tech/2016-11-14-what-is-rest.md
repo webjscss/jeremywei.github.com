@@ -21,7 +21,7 @@ DELETE /gists/:id/star
 Representational State Transfer (REST）这个概念是2000年Roy Fielding在他的博士论文[《Architectural Styles and the Design of Network-based Software Architectures》](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)中提出的。
 他在提出REST架构风格的同时也在进行HTTP/1.1的设计，Roy Fielding在社区中[介绍过REST的来历](https://web.archive.org/web/20091111012314/http://tech.groups.yahoo.com/group/rest-discuss/message/6757)：
 
-> Throughout the HTTP standardization process, I was called on to defend the design choices of the Web.That is an extremely difficult > thing to do within a process that accepts proposals from anyone on a topic that was rapidly becoming the center of an entire industry. I had comments from well over 500 developers, many of whom were distinguished engineers with decades of experience, and I had to explain everything from the most abstract notions of Web interaction to the finest details of HTTP syntax.That process honed my model down to a core set of principles, properties, and constraints that are now called REST.
+> Throughout the HTTP standardization process, I was called on to defend the design choices of the Web.That is an extremely difficult  thing to do within a process that accepts proposals from anyone on a topic that was rapidly becoming the center of an entire industry. I had comments from well over 500 developers, many of whom were distinguished engineers with decades of experience, and I had to explain everything from the most abstract notions of Web interaction to the finest details of HTTP syntax.That process honed my model down to a core set of principles, properties, and constraints that are now called REST.
 
 可以这么说REST是Roy Fielding在设计HTTP/1.1过程中产生的感悟以及对Web的思考，然后他就把它写进了自己的博士论文。Roy Fielding除了是REST和HTTP的主要作者，还是大名鼎鼎的[Apache HTTP 服务器](https://en.wikipedia.org/wiki/Apache_HTTP_Server)的共同创始人。
 
@@ -41,7 +41,7 @@ DELETE /persons/1024 （删除资源）
 理解了REST的基本理念之后，我们来看看Representational state transfer这个词的具体含义，还是以上面的例子来说明：        
 
 * 首先，这个资源的state是：{name: "foo"，age: 33}（可能以数据库或者缓存等形式存在于服务端）
-* 其次，客户端请求这个资源之后，服务端会把资源的状态以一种表现形式（representation）生成出来，比如`JSON、XML、HTML等等`。
+* 之后，客户端请求这个资源之后，服务端会把资源的状态以一种表现形式（representation）生成出来，比如`JSON、XML、HTML等等`。
 
 ```
 {
@@ -81,25 +81,22 @@ client-server约束的原则是把用户端和服务端的关注点进行分离�
 服务端通过传输可执行的代码可以扩展或者定制客户端的行为。可以采用Java applets或者JavaScript等技术。
 
 * 统一接口
-
 统一接口的约束是设计REST服务的基础。统一接口简化并且解耦了整个架构，这样整个架构的每个部分可以独立进化。统一接口的四个约束分别是：
+    * 资源识别
 
-* 资源识别
+      资源在请求过程中要可以识别，比如在基于web的REST系统中使用[URI](https://en.wikipedia.org/wiki/Uniform_resource_identifier)。资源本身在概念上是和返回给客户端的表示形式（representation）是分离的。比如，服务器可以把数据库中的资源以HTML、XML或者JSON等表现形式发送到客户端，但是这三个都不是资源在服务端内部的形式。
 
-资源在请求过程中要可以识别，比如在基于web的REST系统中使用[URI](https://en.wikipedia.org/wiki/Uniform_resource_identifier)。资源本身在概念上是和返回给客户端的表示形式（representation）是分离的。比如，服务器可以把数据库中的资源以HTML、XML或者JSON等表现形式发送到客户端，但是这三个都不是资源在服务端内部的形式。
+    * 通过资源的表现形式来修改资源
 
+      当一个客户端得到一个资源的表现形式，其中也包含了很多元数据，客户端就有足够的信息可以来修改或者删除资源。
 
-* 通过资源的表现形式来修改资源
+    * 自描述消息
 
-当一个客户端得到一个资源的表现形式，其中也包含了很多元数据，客户端就有足够的信息可以来修改或者删除资源。
+      每个消息都包含足够的信息用来描述如何处理整个消息。比如，可以使用Internet media type（MIME类型）来指定用什么解释器来解析消息。
 
-* 自描述消息
+    * 超媒体作为应用状态的引擎 (Hypermedia as the engine of application state，HATEOAS)
 
-每个消息都包含足够的信息用来描述如何处理整个消息。比如，可以使用Internet media type（MIME类型）来指定用什么解释器来解析消息。
-
-* 超媒体作为应用状态的引擎 (Hypermedia as the engine of application state，HATEOAS)
-
-在访问了一个REST应用的初始URI（就像人类用户访问了一个网站的首页）之后，REST客户端应该可以使用服务端动态提供的链接来发现所有可用的操作和资源。当访问继续，服务端会返回包括超链接的文本，这些超链接指向当前可用的其他操作。客户端没有必要把REST服务的结构或者动态行为硬编码。
+      在访问了一个REST应用的初始URI（就像人类用户访问了一个网站的首页）之后，REST客户端应该可以使用服务端动态提供的链接来发现所有可用的操作和资源。当访问继续，服务端会返回包括超链接的文本，这些超链接指向当前可用的其他操作。客户端没有必要把REST服务的结构或者动态行为硬编码。
 
 
 ##参考

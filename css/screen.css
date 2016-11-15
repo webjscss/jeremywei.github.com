@@ -39,7 +39,7 @@ h1 {
 }
 
 pre.nav.margin-for-mobile {
-	white-space: normal;	
+	white-space: normal;
 }
 
 h2 {
@@ -54,7 +54,7 @@ h3 {
 
 p {
 	margin: 1em 0;
-	word-break: break-all;
+	word-break: normal;
 }
 
 a {
@@ -77,20 +77,20 @@ table {
 	text-align: left;
 }
 
-.table_border{  
-    border: solid 1px #B4B4B4;  
+.table_border{
+    border: solid 1px #B4B4B4;
     border-collapse: collapse;
-}  
-.table_border tr th{  
-    padding-left:4px;  
-    height:27px;  
-    border: solid 1px #B4B4B4;  
-}  
-.table_border tr td{  
-    height:25px;  
-    padding:4px;  
-    border: solid 1px #B4B4B4;  
-} 
+}
+.table_border tr th{
+    padding-left:4px;
+    height:27px;
+    border: solid 1px #B4B4B4;
+}
+.table_border tr td{
+    height:25px;
+    padding:4px;
+    border: solid 1px #B4B4B4;
+}
 
 img {
 	max-width: 100%;
@@ -102,7 +102,7 @@ img {
 }
 
 @media \0screen {
-  img { 
+  img {
 	  width: auto; /* for ie 8 */
   }
 }
@@ -115,8 +115,8 @@ img {
 
 #home {
 	margin-left: 10px;
-	margin-right: 10px;	
-}	
+	margin-right: 10px;
+}
 
 ul {
 	margin: 1em 0;
@@ -128,7 +128,7 @@ ul.posts {
 
 ul.posts li {
 	line-height: 1.75em;
-	word-break: break-all;
+	word-break: normal;
 }
 
 ul.posts span {
@@ -139,7 +139,15 @@ ul.posts span {
 
 .margin-for-mobile {
 	margin-left: 10px;
-	margin-right: 10px;	
+	margin-right: 10px;
+}
+
+blockquote {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 50px;
+  padding-left: 15px;
+  border-left: 3px solid #ccc;
 }
 
 /*****************************************************************************/
@@ -157,12 +165,12 @@ ul.posts span {
   width: 960px;
   margin: 3em auto 2em auto;
   line-height: 1.5em;
-  word-break: break-all;
+  word-break: normal;
 }
 
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen 
-and (min-device-width : 320px) 
+@media only screen
+and (min-device-width : 320px)
 and (max-device-width : 480px) {
 	.site {
 		width: 320px;
@@ -235,7 +243,7 @@ and (max-device-width : 480px) {
 	padding-bottom: .3em;
 	color:#bfbfbf;
 	line-height:120%;
-	word-break: break-all;
+	word-break: normal;
 }
 
 .copyright a {
@@ -336,16 +344,16 @@ and (max-device-width : 480px) {
 
 .right-banner.first {
 	right: 0;
-	top: 0; 	
+	top: 0;
 }
 
 @media (max-width: 480px) {
 	.right-banner.first {
 		right: 0;
-		top: 0; 
-		width: 50px;	
+		top: 0;
+		width: 50px;
 	}
-	
+
 	.right-banner.second {
 		left: 0;
 	}
@@ -355,7 +363,7 @@ and (max-device-width : 480px) {
 	.right-banner.second {
 		right: 0;
 		top: 150px;
-	}	
+	}
 }
 /*****************************************************************************/
 /*
