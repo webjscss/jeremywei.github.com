@@ -7,18 +7,18 @@ tags: [tech]
 
 ![Xcode](http://{{ site.cdn }}/images/tech/xcode.jpg "Xcode")
 
-# 说明
+##说明
 
 [苹果开发者认证](https://developer.apple.com/programs/ios/)每年`$99`，对于一个初学者和票友来说暂时没必要买，但是又想在真机上进行调试，那么只能hack了，网上相关中文资料很多，但是都有些过时，版本太老，遂总结一篇。
 
 本文在以下环境下测试通过：
 
-*	XCode：Version 4.6.1 (4H512) 
-*	IOS SDK：6.1
-*	iPhone：IOS 6.1(Jail Break)
-*	Mac OS X：10.8.3 Mountain Lion
+* XCode：Version 4.6.1 (4H512)
+* IOS SDK：6.1
+* iPhone：IOS 6.1(Jail Break)
+* Mac OS X：10.8.3 Mountain Lion
 
-# 修改SDKSettings.plist
+##修改SDKSettings.plist
 
 首先进入以下目录
 
@@ -31,7 +31,7 @@ tags: [tech]
 修改`CODE_SIGNING_REQUIRED`和`ENTITLEMENTS_REQUIRED`这两个配置的值从`YES`修改为`NO`。
 
 
-# 创建签名证书
+##创建签名证书
 
 首先打开`钥匙串访问`应用，然后打开`钥匙串访问->证书助理->创建证书`开始创建证书，
 注意要保证证书名称为`iPhone Developer`：
@@ -56,7 +56,7 @@ tags: [tech]
 
 然后一路点击「继续」就可以了。
 
-# Xcode
+##Xcode
 打开`Xcode`，选择`TARGETS`中的`Build Settings`选项卡，然后在`Code Signing`中选择我们刚创建的证书`iPhone Developer`：
 
 ![06](http://{{ site.cdn }}/images/xcode/06.png "06")
@@ -75,7 +75,7 @@ tags: [tech]
 
 重启`Xcode`
 
-# 安装Appsync
+##安装Appsync
 
 首先确保你的iPhone已经越狱，打开`Cydia`：
 
@@ -93,7 +93,7 @@ tags: [tech]
 
 ![13](http://{{ site.cdn }}/images/xcode/13.png "13")
 
-# 调试
+##调试
 
 选择`IOS Device`进行调试：
 
@@ -101,10 +101,7 @@ tags: [tech]
 
 然后你就可以在自己的真机上调试了，Enjoy Coding　：）
 
-# 参考
+##参考
 
-[http://stackoverflow.com/questions/15354719/code-sign-error-with-xcode4-6-on-jailbroken-device](http://stackoverflow.com/questions/15354719/code-sign-error-with-xcode4-6-on-jailbroken-device)
-
-[http://stackoverflow.com/questions/10842595/developing-with-jailbroken-iphone-xcode](http://stackoverflow.com/questions/10842595/developing-with-jailbroken-iphone-xcode)
-
- 
+* [http://stackoverflow.com/questions/15354719/code-sign-error-with-xcode4-6-on-jailbroken-device](http://stackoverflow.com/questions/15354719/code-sign-error-with-xcode4-6-on-jailbroken-device)
+* [http://stackoverflow.com/questions/10842595/developing-with-jailbroken-iphone-xcode](http://stackoverflow.com/questions/10842595/developing-with-jailbroken-iphone-xcode)

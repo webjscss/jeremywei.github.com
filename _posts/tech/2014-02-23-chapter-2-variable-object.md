@@ -21,33 +21,33 @@ tags: [tech, translate]
 8. [额外资料](#additional-literature)
 
 <span id="introduction"></span>
-#介绍
+##介绍
 
 我们一直会在程序中声明函数和变量，之后用它们来成功地构建我们的系统。但解释器是如何、并且是去哪里找到我们的数据（函数、变量）的呢？当我们引用所需对象的时候，到底发生了什么？
 
 许多ECMAScript程序员知道变量是与[执行上下文](/chapter-1-execution-contexts.html)紧密相关的：
 
 	var a = 10; // variable of the global context
- 
+
 	(function () {
 	  var b = 20; // local variable of the function context
 	})();
-  
+
 	alert(a); // 10
 	alert(b); // "b" is not defined
-	
+
 同时，许多程序员也知道在当前版本的规范中只能通过「函数」执行上下文才能创建相互隔离的作用域。也就是说，与C/C++相比，ECMAScript中的for循环块结构不会创建一个局部作用域：
 
 	for (var k in {a: 1, b: 2}) {
 	  alert(k);
 	}
-  
+
 	alert(k); // variable "k" still in scope even the loop is finished
-	
+
 让我们看看更多细节，关于我们声明数据的时候到底发生了什么。
 
 <span id="data-declaration"></span>
-#数据声明
+##数据声明
 
 如果变量是和执行上下文相关联的，那么它应该知道它的数据存在了什么地方并且如何获取到它们。这个机制叫做变量对象(variable object)。
 
@@ -72,7 +72,7 @@ tags: [tech, translate]
 	    // context data (var, FD, function arguments)
 	  }
 	};
-	
+
 只有全局上下文（全局对象本身就是变量对象）的变量对象才能间接地引用变量（通过VO中的属性名）。对于其他上下文，直接引用VO是不可能的，这是纯实现机制。
 
 当我们声明一个变量或一个函数的时候，除了在VO中以我们变量的名字和值创建新的属性之外，无它。
@@ -80,13 +80,13 @@ tags: [tech, translate]
 例子：
 
 	var a = 10;
- 
+
 	function test(x) {
 	  var b = 20;
 	};
- 
+
 	test(30);
-	
+
 对应的变量对象是：
 
 	// Variable object of the global context
@@ -94,17 +94,17 @@ tags: [tech, translate]
 	  a: 10,
 	  test: <reference to function>
 	};
-  
+
 	// Variable object of the "test" function context
 	VO(test functionContext) = {
 	  x: 30,
 	  b: 20
 	};
-	
+
 但是在实现层面（以及规范），变量对象是一个抽象的精髓。实际上，在具体的执行上下文中，VO的叫法是不同的，并且拥有不同的初始数据结构。
 
 <span id="variable-object-in-different-execution-contexts"></span>
-#不同执行环境中的变量对象
+##不同执行环境中的变量对象
 
 变量对象的一些操作（比如变量实例化）和行为对所有类型的执行上下文是一样的。从这个角度来看用一个抽象的基础事物来表述变量对象是很便捷的。函数上下文也可以定义与变量对象有关的额外细节。
 
@@ -116,11 +116,11 @@ tags: [tech, translate]
 	║
 	╚══> FunctionContextVO
 	       (VO === AO, <arguments> object and <formal parameters> are added)
-		   
+
 让我们看看细节。
 
 <span id="variable-object-in-global-context"></span>
-##全局上下文中的变量对象
+###全局上下文中的变量对象
 
 那么，首先很有必要给出全局对象的定义。
 
@@ -139,7 +139,7 @@ tags: [tech, translate]
 当引用全局对象属性的时候，前缀通常是省略的，因为全局对象是不能直接通过名字来访问的。但是，通过[全局上下文中的this值](http://dmitrysoshnikov.com/ecmascript/chapter-3-this/#this-value-in-the-global-code)可以访问到它，通过对自己的递归引用也可以实现，比如BOM中的```window```，因此简单写为：
 
 	String(10); // means global.String(10);
- 
+
 	// with prefixes
 	window.a = 10; // === global.window.a = 10 === global.a = 10;
 	this.b = 20; // global.b = 20;
@@ -151,24 +151,24 @@ tags: [tech, translate]
 由于这个原因，在全局上下文中声明的变量可以通过全局对象的属性间接引用（比如当变量名提前无法得知的时候），准确无误的理解它是很有必要的：
 
 	var a = new String('test');
- 
+
 	alert(a); // directly, is found in VO(globalContext): "test"
- 
+
 	alert(window['a']); // indirectly via global === VO(globalContext): "test"
 	alert(a === this.a); // true
-  
+
 	var aKey = 'a';
 	alert(window[aKey]); // indirectly, with dynamic property name: "test"
 
 
 <span id="variable-object-in-function-context"></span>
-##函数上下文中的变量对象
+###函数上下文中的变量对象
 
 关于函数执行上下文－VO无法直接访问，并且它扮演的角色被叫作活动对象（activation object，缩写－AO）。
 
 	VO(functionContext) === AO;
-	
-	
+
+
 	活动对象在进入函数上下文的时候被创建，并且被arguments属性所初始化，此属性的值为参数对象。
 
 
@@ -185,47 +185,47 @@ tags: [tech, translate]
 例子:
 
 	function foo(x, y, z) {
-  
+
 	  // quantity of defined function arguments (x, y, z)
 	  alert(foo.length); // 3
- 
+
 	  // quantity of really passed arguments (only x, y)
 	  alert(arguments.length); // 2
- 
+
 	  // reference of a function to itself
 	  alert(arguments.callee === foo); // true
-  
+
 	  // parameters sharing
- 
+
 	  alert(x === arguments[0]); // true
 	  alert(x); // 10
-  
+
 	  arguments[0] = 20;
 	  alert(x); // 20
-  
+
 	  x = 30;
 	  alert(arguments[0]); // 30
-  
+
 	  // however, for not passed argument z,
 	  // related index-property of the arguments
 	  // object is not shared
-  
+
 	  z = 40;
 	  alert(arguments[2]); // undefined
-  
+
 	  arguments[2] = 50;
 	  alert(z); // 40
-  
+
 	}
-  
+
 	foo(10, 20);
 
 关于最后一个情况，在Google Chrome老的版本中存在一个bug－在那里```z```和```arguments[2]```也是共享的。
-	
+
 在<abbr title="ECMA-262-5">ES5</abbr>中，活动对象的概念也被[词法环境](http://dmitrysoshnikov.com/ecmascript/es5-chapter-3-2-lexical-environments-ecmascript-implementation/)的通用和单独模型（common and single model of lexical environments）所替代。
 
 <span id="phases-of-processing-the-context-code"></span>
-#处理上下文代码的各种阶段
+##处理上下文代码的各种阶段
 
 现在我们到了本文最关键的地方。处理执行上下文代码分为两个基本阶段：
 
@@ -237,7 +237,7 @@ tags: [tech, translate]
 注意，这两个阶段的处理过程是通用行为并且独立于上下文类型（也就是说，对于全局和函数上下文是公平的）。
 
 <span id="entering-the-execution-context"></span>
-##进入执行上下文
+###进入执行上下文
 
 在进入执行上下文（但是代码执行之前），VO被如下属性（它们在篇头介绍过）所填充：
 
@@ -248,16 +248,18 @@ tags: [tech, translate]
 
 让我们通过例子看一下：
 
+```
 	function test(a, b) {
 	  var c = 10;
 	  function d() {}
 	  var e = function _e() {};
 	  (function x() {});
 	}
-  
+
 	test(10); // call
-	
-在以传递的参数```10```进入```test```函数上下文的时候，AO如下：
+```
+
+在以传递的参数`10`进入`test`函数上下文的时候，AO如下：
 
 	AO(test) = {
 	  a: 10,
@@ -266,57 +268,59 @@ tags: [tech, translate]
 	  d: <reference to FunctionDeclaration "d">
 	  e: undefined
 	};
-	
-注意，AO没有包含函数```x```。这是因为```x```不是一个函数声明而是函数表达式（FunctionExpression，缩写FE），它不会影响到VO。
 
-当然，函数```_e```也是一个函数表达式，但是就像我们下面即将看到的，因为把它赋给了变量```e```，它通过```e```这个名字是可以访问到的。```函数声明```和```函数表达式```之间的不同在[第五章 函数](http://dmitrysoshnikov.com/ecmascript/chapter-5-functions/)中详细讨论。
+注意，AO没有包含函数`x`。这是因为`x`不是一个函数声明而是函数表达式（FunctionExpression，缩写FE），它不会影响到VO。
+
+当然，函数`_e`也是一个函数表达式，但是就像我们下面即将看到的，因为把它赋给了变量`e`，它通过`e`这个名字是可以访问到的。`函数声明`和`函数表达式`之间的不同在[第五章 函数](http://dmitrysoshnikov.com/ecmascript/chapter-5-functions/)中详细讨论。
 
 这个之后，接下来是上下文代码处理过程的第二个阶段－代码执行阶段。
 
 <span id="code-execution"></span>
-##代码执行
+###代码执行
 
 此时，AO/VO已经被各种属性所填充（尽管，不是所有的属性都有真实的值，大部分属性的值仍然只是初始的```undefined```）。
 
 考虑到所有类似的例子，代码解释阶段的AO/VO被修改为以下这样：
 
-	AO['c'] = 10;
-	AO['e'] = <reference to FunctionExpression "_e">;
+```
+AO['c'] = 10;
+AO['e'] = <reference to FunctionExpression "_e">;
+```
 
-我又一次发现函数表达式```_e```仍然只是存在于内存中，原因是因为它存储在了声明的变量```e```中。但是函数表达式```x```并没有存在于AO/VO之中。如果我们在定义之前，甚至是定义之后调用```x```函数，我们将会得到一个错误：```"x" is not defined```。没有存储到变量之中的函数表达式只能在其定义的时候（原地）被调用或者递归调用。
+我又一次发现函数表达式`_e`仍然只是存在于内存中，原因是因为它存储在了声明的变量`e`中。但是函数表达式`x`并没有存在于AO/VO之中。如果我们在定义之前，甚至是定义之后调用`x`函数，我们将会得到一个错误：`"x" is not defined`。没有存储到变量之中的函数表达式只能在其定义的时候（原地）被调用或者递归调用。
 
 再看一个（经典）例子：
 
 	alert(x); // function
- 
+
 	var x = 10;
 	alert(x); // 10
- 
+
 	x = 20;
- 
+
 	function x() {}
- 
+
 	alert(x); // 20
-	
-为什么第一个alert ```x```的输出结果是function并且在声明之前可以访问到？为什么不是```10```或者```20```。因为，根据规则－在进入上下文的时候，VO被函数声明所填充。同时，在相同的阶段，进入上下文的时候，那里存在一个变量```x```的声明，但是像我们上面所提到的，变量声明的步骤在语义上是位于函数和行参声明后面的，并且在这个阶段并不会覆盖已经声明的同名函数或者行参。因此，当进入上下文的时候，VO被填充为如下内容：
+
+为什么第一个alert `x`的输出结果是function并且在声明之前可以访问到？为什么不是```10```或者```20```。因为，根据规则－在进入上下文的时候，VO被函数声明所填充。同时，在相同的阶段，进入上下文的时候，那里存在一个变量```x```的声明，但是像我们上面所提到的，变量声明的步骤在语义上是位于函数和行参声明后面的，并且在这个阶段并不会覆盖已经声明的同名函数或者行参。因此，当进入上下文的时候，VO被填充为如下内容：
 
 	VO = {};
-  
+
 	VO['x'] = <reference to FunctionDeclaration "x">
-  
+
 	// found var x = 10;
-	// if function "x" would not be already defined 
+	// if function "x" would not be already defined
 	// then "x" be undefined, but in our case
 	// variable declaration does not disturb
 	// the value of the function with the same name
-  
+
 	VO['x'] = <the value is not disturbed, still function>
 
 然后在代码执行阶段，VO被修改成如下所示：
 
 	VO['x'] = 10;
 	VO['x'] = 20;
-	
+
 这是我们在第二个和第三个alert中看到的。
 
 在下面的例子中，我们又看到在进入上下文的阶段，变量被放入了VO之中（```else```区块永远不会执行，但是尽管如此，变量```b```是存在于VO之中）：
@@ -326,12 +330,12 @@ tags: [tech, translate]
 	} else {
 	  var b = 2;
 	}
- 
+
 	alert(a); // 1
 	alert(b); // undefined, but not "b is not defined"
 
 <span id="about-variables"></span>
-#关于变量
+##关于变量
 
 经常有一些文章甚至一些JavaScript图书声称：「使用var关键字（在全局上下文）和不使用var关键词（在任何地方）都可以声明全局变量」。事实并非如此。记住：
 
@@ -347,10 +351,10 @@ tags: [tech, translate]
 
 	alert(a); // undefined
 	alert(b); // "b" is not defined
- 
+
 	b = 10;
 	var a = 20;
-	
+
 这又是基于VO和其内容修改阶段（进入上下文阶段和代码执行阶段）：
 
 进入上下文：
@@ -358,16 +362,16 @@ tags: [tech, translate]
 	VO = {
 	  a: undefined
 	};
-	
+
 我们看到在这个阶段没有任何```b```存在，因为它根本不是一个变量，```b```只会在代码执行阶段出现（但是在我们这个例子中不会发生，因为那有一个错误）。
 
 让我们修改一下代码：
 
 	alert(a); // undefined, we know why
- 
+
 	b = 10;
 	alert(b); // 10, created at code execution
- 
+
 	var a = 20;
 	alert(a); // 20, modified at code execution
 
@@ -375,16 +379,16 @@ tags: [tech, translate]
 
 	a = 10;
 	alert(window.a); // 10
- 
+
 	alert(delete a); // true
- 
+
 	alert(window.a); // undefined
- 
+
 	var b = 20;
 	alert(window.b); // 20
- 
+
 	alert(delete b); // false
- 
+
 	alert(window.b); // still 20
 
 注意，在ES5中```{DontDelete}```被重命名为```[[Configurable]]```并且可以通过```Object.defineProperty```方法来进行手动管理。
@@ -393,15 +397,15 @@ tags: [tech, translate]
 
 	eval('var a = 10;');
 	alert(window.a); // 10
- 
+
 	alert(delete a); // true
- 
+
 	alert(window.a); // undefined
 
 对于在一些debug工具（比如Firebug）的终端上测试这些例子的同学：注意，Firebug也是使用```eval```来执行你从终端中输入的代码。所以那些变量也不会有{DontDelete}，并且可以被删除。
 
 <span id="feature-of-implementations-property-__parent__"></span>
-#实现带来的特性：\__parent__属性
+##实现带来的特性：\__parent__属性
 
 就像已经被提到过的，按照标准的话，直接访问活动对象是不可能的。	但是，在一些实现中，换句话说在SpiderMonkey和Rhino中，函数拥有一个特殊的属性```__parent__```，这个属性是对创建这些函数的活动对象（或者全局变量对象）的引用。
 
@@ -409,16 +413,16 @@ tags: [tech, translate]
 
 	var global = this;
 	var a = 10;
-  
+
 	function foo() {}
-  
+
 	alert(foo.__parent__); // global
-  
+
 	var VO = foo.__parent__;
-  
+
 	alert(VO.a); // 10
 	alert(VO === global); // true
-	
+
 在以上的例子中，我们看见函数foo是在全局上下文中所创建的，相应地，它的```__parent__```属性被设置为全局上下文的变量对象，也就是全局对象。
 
 但是，在SpiderMonkey中以相同的方法获取活动对象是不可能的：基于不同的版本，内部函数的```__parent__```属性会返回null或者全局对象。
@@ -429,35 +433,35 @@ tags: [tech, translate]
 
 	var global = this;
 	var x = 10;
-  
+
 	(function foo() {
-  
+
 	  var y = 20;
-  
+
 	  // the activation object of the "foo" context
 	  var AO = (function () {}).__parent__;
-  
+
 	  print(AO.y); // 20
-  
+
 	  // __parent__ of the current activation
 	  // object is already the global object,
 	  // i.e. the special chain of variable objects is formed,
 	  // so-called, a scope chain
 	  print(AO.__parent__ === global); // true
-  
+
 	  print(AO.__parent__.x); // 10
-  
+
 	})();
 
 <span id="conclusion"></span>
-#总结
+##总结
 
 通过这篇文章，我们在学习ECMAScript中与执行上下文相关的对象方面，迈了一步。我希望这些资料有用处，并可以明晰一些特性和你之前遇到的模棱两可的地方。按照计划，接下来的章节将会是[作用域链](http://dmitrysoshnikov.com/ecmascript/chapter-4-scope-chain/)，[标识符方案](http://dmitrysoshnikov.com/ecmascript/chapter-4-scope-chain/#function-activation)，以及作为结论的[闭包](http://dmitrysoshnikov.com/ecmascript/chapter-6-closures/)。
 
 如果你有问题，欢迎留言。
 
 <span id="additional-literature"></span>
-#额外资料
+##额外资料
 * 10.1.3 – [Variable Instantiation](http://bclary.com/2004/11/07/#a-10.1.3);
 * 10.1.5 – [Global Object](http://bclary.com/2004/11/07/#a-10.1.5);
 * 10.1.6 – [Activation Object](http://bclary.com/2004/11/07/#a-10.1.6);

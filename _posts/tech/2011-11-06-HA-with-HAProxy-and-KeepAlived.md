@@ -5,17 +5,17 @@ city: 南京
 tags: [tech]
 ---
 
-###前言
+##前言
 
 对于访问量较大的网站来说，随着流量的增加单台服务器已经无法处理所有的请求，这时候需要多台服务器对大量的请求进行分流处理，即负载均衡。而如果实现负载均衡，必须在网站的入口部署服务器（不只是一台）对这些请求进行分发，这台服务器即反向代理。由于反向代理服务器是网站的入口，其负载压力大且易遭到攻击，存在单点故障的风险，所以我们需要一个高可用的方案来实现当一台反向代理服务器宕机的时候，另一台服务器会自动接管服务。基于以上要求，我们使用HAProxy，KeepAlived来构建高可用的反向代理系统。
 
-###介绍
+##介绍
 
 [HAProxy][1]是高性能的代理服务器，其可以提供7层和4层代理，具有healthcheck，负载均衡等多种特性，性能卓越，包括Twitter，Reddit，StackOverflow，GitHub在内的多家知名互联网公司在[使用][2]。
 
 [KeepAlived][3]是一个高可用方案，通过VIP(即虚拟IP)和心跳检测来实现高可用。其原理是存在一组（两台）服务器，分别赋予Master,Backup两个角色，默认情况下Master会绑定VIP到自己的网卡上，对外提供服务。Master,Backup会在一定的时间间隔向对方发送心跳数据包来检测对方的状态，这个时间间隔一般为2秒钟，如果Backup发现Master宕机，那么Backup会发送ARP包到网关，把VIP绑定到自己的网卡，此时Backup对外提供服务，实现自动化的故障转移，当Master恢复的时候会重新接管服务。
 
-###环境
+##环境
 
 OS: CentOS Linux release 6.0 (Final) 2.6.32-71.29.1.el6.x86_64    
 HAProxy: 1.4.18   
@@ -24,7 +24,7 @@ VIP: 192.168.1.99
 M: 192.168.1.222   
 S: 192.168.1.189   
 
-###架构
+##架构
 
 	                    192.168.1.99
 	             +-----------VIP----------+   
@@ -38,7 +38,7 @@ S: 192.168.1.189
 	        +----------+             +----------+
 				 |  
 	             v  
-	    +--------+---------+ 
+	    +--------+---------+
 	    |        |         |
 	    |        |         |
 	    v        v         v
@@ -46,7 +46,7 @@ S: 192.168.1.189
 	| WEB1 |  | WEB2 |  | WEB3 |
 	+------+  +------+  +------+
 
-###安装HAProxy
+##安装HAProxy
 
 安装pcre
 
@@ -60,47 +60,48 @@ TARGET是指自己系统的内核版本 ARCH指定系统是32位还是64位
 CPU=native: use the build machine's specific processor optimizations    
 更多编译参数内容见源码中的README    
 	$ make TARGET=linux26 ARCH=x86_64 USE_PCRE=1 CPU=native
-	$ make install 
+	$ make install
 
 配置文件 /etc/haproxy.cfg
 
-	global
-	    log 127.0.0.1   local3
-	    maxconn 20000   
-	    uid 535  #uid和gid按照实际情况进行配置
-	    gid 520  
-	    chroot /var/chroot/haproxy
-	    daemon 
-	    nbproc 1 
+```
+global
+    log 127.0.0.1   local3
+    maxconn 20000   
+    uid 535  #uid和gid按照实际情况进行配置
+    gid 520  
+    chroot /var/chroot/haproxy
+    daemon
+    nbproc 1
 
-	defaults
-	   log     127.0.0.1       local3
-	   mode    http            
-	   option  httplog
-	   option  httpclose
-	   option  dontlognull
-	   option  forwardfor
-	   retries 2
-	   balance roundrobin 
-	   stats   uri     /haproxy-stats
-	   contimeout      5000
-	   clitimeout      50000
-	   srvtimeout      50000
+defaults
+   log     127.0.0.1       local3
+   mode    http            
+   option  httplog
+   option  httpclose
+   option  dontlognull
+   option  forwardfor
+   retries 2
+   balance roundrobin
+   stats   uri     /haproxy-stats
+   contimeout      5000
+   clitimeout      50000
+   srvtimeout      50000
 
-	frontend http-in
-	        bind *:80 
-	        default_backend pool1
+frontend http-in
+        bind *:80
+        default_backend pool1
 
-	backend pool1
-	        option httpchk HEAD / HTTP/1.0
-	        stats refresh 2
-	        server WEB1 192.168.1.189:81 weight 3 maxconn 10000 check 
-	        server WEB2 192.168.1.222:81 weight 3 maxconn 10000 check
-
+backend pool1
+        option httpchk HEAD / HTTP/1.0
+        stats refresh 2
+        server WEB1 192.168.1.189:81 weight 3 maxconn 10000 check
+        server WEB2 192.168.1.222:81 weight 3 maxconn 10000 check
+```
 
 查看HAProxy的状态：http://192.168.1.99/haproxy-stats，这个页面会显示HAProxy本身以及后端服务器的状态。
 
-###日志
+##日志
 
 haproxy会把日志记录发送到syslog server(CentOS6下是rsyslogd，UDP514端口)， 编辑/etc/rsyslog.conf文件，添加如下内容：
 
@@ -132,16 +133,16 @@ haproxy会把日志记录发送到syslog server(CentOS6下是rsyslogd，UDP514�
 
 启动脚本
 
-	$ wget -O haproxy https://raw.github.com/gist/3665034/4125bd5b81977a72e5eec30650fb21f3034782a0/haproxy-init.d 
+	$ wget -O haproxy https://raw.github.com/gist/3665034/4125bd5b81977a72e5eec30650fb21f3034782a0/haproxy-init.d
 	$ cp haproxy /etc/init.d/haproxy
 	$ chmod +x /etc/init.d/haproxy
 	#使用方式
 	$ /etc/init.d/haproxy start|stop|restart
 
-###安装KeepAlived
+##安装KeepAlived
 
 安装依赖库
-	
+
 	$ yum install popt popt-devel
 
 安装KeepAlived
@@ -156,7 +157,7 @@ haproxy会把日志记录发送到syslog server(CentOS6下是rsyslogd，UDP514�
 	$ cp /usr/local/keepalived/sbin/keepalived /usr/sbin/
 	$ cp /usr/local/keepalived/etc/sysconfig/keepalived /etc/sysconfig/
 	$ mkdir -p /etc/keepalived/
-	$ cp /usr/local/keepalived/etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf 
+	$ cp /usr/local/keepalived/etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf
 	$ chmod +x /etc/init.d/keepalived
 
 使用方式
@@ -255,10 +256,10 @@ chk_haproxy.sh内容
 	#!/bin/bash
 	#
 	# author: weizhifeng
-	# description: 
+	# description:
 	# 定时查看haproxy是否存在，如果不存在则启动haproxy，
 	# 如果启动失败，则停止keepalived
-	# 
+	#
 	status=$(ps aux|grep haproxy | grep -v grep | grep -v bash | wc -l)
 	if [ "${status}" = "0" ]; then
         /etc/init.d/haproxy start
@@ -270,14 +271,14 @@ chk_haproxy.sh内容
         fi
 	fi
 
-###高可用测试
+##高可用测试
 
 1. 在Master上停止keepalived，查看系统日志，发现MASTER释放了VIP
 
 		$ /etc/init.d/keepalived stop
 		$ tail -f /var/log/message
-		Keepalived: Terminating on signal Keepalived: Stopping Keepalived v1.2.2 (11/03,2011) 
-		Keepalived_vrrp: Terminating VRRP child process on signal 
+		Keepalived: Terminating on signal Keepalived: Stopping Keepalived v1.2.2 (11/03,2011)
+		Keepalived_vrrp: Terminating VRRP child process on signal
 		Keepalived_vrrp: VRRP_Instance(VI_1) removing protocol VIPs.
 
 2. 在Backup上查看系统日志，发现Backup已经进入MASTER角色，并且绑定了VIP 192.168.1.99
@@ -306,7 +307,7 @@ chk_haproxy.sh内容
 		Keepalived_vrrp: VRRP_Instance(VI_1) removing protocol VIPs.
 
 
-###并发测试
+##并发测试
 
 我们使用webbench来对HAProxy进行并发测试
 
@@ -314,7 +315,7 @@ chk_haproxy.sh内容
 	$ wget http://home.tiscali.cz/~cz210552/distfiles/webbench-1.5.tar.gz
 	$ tar -zxvf webbench-1.5.tar.gz
 	$ cd webbench-1.5
-	$ make 
+	$ make
 	$ mkdir -p /usr/local/man && make install
 
 
@@ -335,10 +336,10 @@ Mem：2G
 
 并发访问txt文件，HAProxy的session数量为10000左右，这说明HAProxy能够hold住10000个并发连接；并发访问php文件，HAProxy的session峰值为200左右，接近于后端PHP的并发处理能力(100x2)。
 
-参考：
+##参考
 
-[http://haproxy.1wt.eu/download/1.4/doc/configuration.txt](http://haproxy.1wt.eu/download/1.4/doc/configuration.txt)
-[http://kevin.vanzonneveld.net/techblog/article/haproxy_logging/](http://kevin.vanzonneveld.net/techblog/article/haproxy_logging/)
+* [http://haproxy.1wt.eu/download/1.4/doc/configuration.txt](http://haproxy.1wt.eu/download/1.4/doc/configuration.txt)
+* [http://kevin.vanzonneveld.net/techblog/article/haproxy_logging/](http://kevin.vanzonneveld.net/techblog/article/haproxy_logging/)
 
 
 [1]: http://haproxy.1wt.eu/ "HAProxy"

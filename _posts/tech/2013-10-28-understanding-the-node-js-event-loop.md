@@ -9,7 +9,7 @@ tags: [tech, translate]
 
 node.js中的第一个基本论点是I/O是昂贵的：
 
-![io-cost](http://{{ site.cdn }}/images/tech/io-cost.png "io-cost") 
+![io-cost](http://{{ site.cdn }}/images/tech/io-cost.png "io-cost")
 
 所以当前编程技术中最大的浪费是等待I/O的完成。这里有几种用来处理这个性能影响的方法（来自Sam Rushing）：
 
@@ -24,17 +24,17 @@ node.js中的第一个基本论点是I/O是昂贵的：
 Apache是多线程的：它的一个请求产生一个[线程](http://httpd.apache.org/docs/2.0/mod/worker.html)（或者[进程](http://httpd.apache.org/docs/2.0/mod/prefork.html)，取决于配置文件）。随着并发连接数的增加以及为了服务更多的并发客户端而对更多线程的需求，你可以看见系统统开销是如何吃掉内存的。Nginx和Node.js不是多线程，因为多个线程和多个进程会需要大量的内存。它们都是单线程的，但是是事件驱动。通过在一个线程中处理多个连接，这消除了由上千个线程/进程所产生的系统消耗。
 
 
-#Node.js为你的代码保持一个独立的线程...
+##Node.js为你的代码保持一个独立的线程...
 
 它真的是以一个独立线程在运行：你不能做任何并行的代码执行；举个「休眠」的例子，这将会阻塞服务器1秒钟：
 
 	while(new Date().getTime() < now + 1000) {
 	   // do nothing
 	}
-	
+
 所以当代码运行的时候，node.js将不会对任何来自客户端的其他请求进行响应，因为它只有一个线程用来执行你的代码。或者如果你有一些耗CPU的代码，比如说，图片缩放，那将会仍然阻塞所有其他请求。
 
-#…一切都是并行的除了你的代码
+##…一切都是并行的除了你的代码
 
 没有办法在一个单独的请求中让代码以并行的方式运行。因为所有的I/O是事件驱动和异步的，所以如下代码不会阻塞服务器：
 
@@ -49,11 +49,10 @@ Apache是多线程的：它的一个请求产生一个[线程](http://httpd.apac
 	     c.end();
 	    }
 	);
-	
+
 如果你在一个请求中执行它，其他请求可以被很好的处理，而与此同时数据库在执行它的休眠操作。
 
-
-#为什么这很棒？我们什么时候从同步转换到异步/并行执行。
+##为什么这很棒？我们什么时候从同步转换到异步/并行执行。
 
 同步执行是好的，因为它简化了写代码的过程（对比线程，并发问题已经有变成WTF的趋势）。
 
@@ -69,11 +68,11 @@ event loop指的是「一个用来处理外部事件并且把它们转换成对�
 
 除了I/O调用之外，Node.js期望所有请求都快速返回；比如[CPU密集的工作应该被分开给另一个进程](http://stackoverflow.com/questions/3491811/node-js-and-cpu-intensive-requests)，你可以通过事件与这个进程进行交互，或者使用一个抽象层次比如[WebWorkers](http://blog.std.in/2010/07/08/nodejs-webworker-design/)。这（显然）意味着你不能使你的代码并行化除非你在后台使用另一个线程，你通过事件和这个线程交互。基本上，所有发出事件（比如EventEmitter的实例）的对象都支持异步的基于事件的交互，并且你可以通过这个方式来和阻塞代码进行交互，比如使用的文件，套接字或者子进程等在Node.js中是EventEmitter实例的对象。[多核心](http://developer.yahoo.com/blogs/ydn/posts/2010/07/multicore_http_server_with_nodejs/)可以通过这个方案来实现；看一下：node-http-proxy。
 
-#内部实现
+##内部实现
 
 node.js的内部实现依赖[libev](http://software.schmorp.de/pkg/libev.html)来提供event loop，并用[libeio](http://software.schmorp.de/pkg/libeio.html)来补libev的不足，用线程池来提供异步I/O。想了解更多，可以看一下[libev](http://pod.tst.eu/http://cvs.schmorp.de/libev/ev.pod)文档。（注：joyent现在把libev和libeio已经合并成为[libuv](https://github.com/joyent/libuv)，现在node使用的是libuv）
 
-#我们在Node.js该如何使用异步编程
+##我们在Node.js该如何使用异步编程
 
 Tim Caswell在他优秀的[PPT](http://creationix.com/jsconf.pdf)中描述了这个模式：
 
@@ -86,6 +85,3 @@ Tim Caswell在他优秀的[PPT](http://creationix.com/jsconf.pdf)中描述了这
 *  Event loop。像之前提到的，你可以把阻塞代码包装到一个基于事件的抽象（evented abstraction）之中。比如，运行一个子进程并且在它执行完成的时候返回数据。
 
 它真的如此简单！
-
-
-

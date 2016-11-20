@@ -5,11 +5,11 @@ city: 南京
 tags: [tech]
 ---
 
-###前言
+##前言
 
-$\_REQUEST数组是PHP中比较常用的数组，一般从其中取出POST，GET，COOKIE等参数，在这里写明一下$_REQUEST数组的填充方式，防止出现一些意想不到的问题。
+$\_REQUEST数组是PHP中比较常用的数组，一般从其中取出POST，GET，COOKIE等参数，在这里写明一下$\_REQUEST数组的填充方式，防止出现一些意想不到的问题。
 
-###说明
+##说明
 
 在`php.ini`中有如下的配置：
 
@@ -24,7 +24,7 @@ $\_REQUEST数组是PHP中比较常用的数组，一般从其中取出POST，GET
 	; Development Value: "GP"
 	; Production Value: "GP"
 	; http://php.net/request-order
-	
+
 	request_order = "GP"
 
 
@@ -49,12 +49,12 @@ $\_REQUEST数组是PHP中比较常用的数组，一般从其中取出POST，GET
 如果`variables_order`被设置为SP，那么PHP会创建`$_SERVER`和`$_POST`，而不会创建`$_ENV`，`$_GET`，`$_COOKIE`等变量，
 如果被设置为空，那么PHP不会创建任何超级全局变量。
 
-###注意
+##注意
 
 有时候从`$_REQUEST`中取出的值不是想要的，考虑这样一个场景：
 如果在`php.ini`中设置`request_order = “GPCES”`，在HTTP请求中GET或者POST参数的name恰好与COOKIE的name相同，假如为foo。
 那么在程序中通过`$_REQUEST[‘foo’]`来获取到的值是名为foo的一个cookie的值，而不是GET或者POST请求的值。
 
-###结语
+##结语
 
 尽量不要使用`$_REQUEST`，应该从`$_GET`，`$_POST`，`$COOKIE`，`$_ENV`，`$_SERVER`等变量中取出需要的值。

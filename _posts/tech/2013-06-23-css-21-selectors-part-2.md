@@ -7,8 +7,6 @@ tags: [tech, translate]
 
 原文：[http://www.456bereastreet.com/archive/200510/css_21_selectors_part_2/](http://www.456bereastreet.com/archive/200510/css_21_selectors_part_2/)
 
-#CSS 2.1 选择器，第二部分
-
 这是介绍CSS2.1中可用选择器的三篇系列文章中的第二篇。[第一篇](/css-21-selectors-part-1.html)更多的是关于基础的东西，比如类型选择器（type selectors），类选择器和id选择器，通配选择器（universal selector），和简单选择器。
 
 在这篇文章中我将会近距离的介绍并没有被所有的主流浏览器完全支持（译者注：目前主流浏览器对以下介绍的选择器已经都支持，详见[quirksmode](http://www.quirksmode.org/css/selectors/)）的更高级的选择器。这些支持正一步一步的变好，所以是值得花时间学习这篇中介绍的选择器的。
@@ -34,7 +32,7 @@ tags: [tech, translate]
 	<li><a href="#">Link 2</a></li>
 	<li><a href="#">Link 3</a></li>
 	</ul>
-	
+
 为了只定位导航列表中的列表项目和链接，你可能使用以下CSS：
 
 	#nav li { display:inline; }
@@ -105,16 +103,13 @@ tags: [tech, translate]
 
 属性选择器是基于属性存在与否或者属性的值来进行元素匹配的。一个属性选择器有四种方法进行匹配：
 
-[att]
+* [att]
 匹配拥有一个`att`属性的元素，不管属性值是什么。
-
-[att=val]
+* [att=val]
 匹配拥有一个值为“val”的`att`属性的元素。
-
-[att~=val]
+* [att~=val]
 匹配其`att`属性值是一个以空格分隔的列表，并且列表中包含“val”值的元素。在这个情况下“val”不能包含空格。
-
-[att|=val]
+* [att|=val]
 匹配`att`属性值是一个以“val”开始的以中划线（-）分隔的列表的元素。这个选择器主要用来匹配`lang`属性（XHTML中的xml:lang）指定的语言子码，比如“en”，“en-us”，“en-gb”，等等。
 
 看一些例子。下面规则中的选择器匹配了所有拥有`title`属性的`p`元素，而不管属性值是什么：
@@ -128,7 +123,7 @@ tags: [tech, translate]
 为了匹配所有`headers`属性值包含“col1”的`td`元素，下面的选择器可以被使用：
 
 	td[headers~=col1] { color:#f00; }
-	
+
 最后，下面例子中的选择器会匹配所有`lang`属性以`en`开始的`p`元素：
 
 	p[lang|=en] { color:#f00; }

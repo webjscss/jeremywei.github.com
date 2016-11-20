@@ -7,11 +7,11 @@ tags: [tech, translate]
 
 原文：[http://www.quirksmode.org/mobile/viewports.html](http://www.quirksmode.org/mobile/viewports.html)
 
-**在这个迷你系列的文章里边我将会解释viewport，以及许多重要元素的宽度是如何工作的，比如`<html>`元素，也包括窗口和屏幕。**
+> 在这个迷你系列的文章里边我将会解释viewport，以及许多重要元素的宽度是如何工作的，比如`<html>`元素，也包括窗口和屏幕。
 
 这篇文章是关于桌面浏览器的，其唯一的目的就是为移动浏览器中相似的讨论做个铺垫。大部分开发者凭直觉已经明白了大部分桌面浏览器中的概念。在移动端我们将会接触到相同的概念，但是会更加复杂，所以对大家已经知道的术语做个提前的讨论将会对你理解移动浏览器产生巨大的帮助。
 
-#概念：设备像素和CSS像素
+##概念：设备像素和CSS像素
 
 你需要明白的第一个概念是CSS像素，以及它和设备像素的区别。
 
@@ -41,7 +41,7 @@ tags: [tech, translate]
 
 设备像素对你（译者：指的是开发者）来说基本上没用。但是对于用户不一样；用户将会放大或者缩小页面直到他能舒服的阅读为止。无论怎样，缩放比例对你不会产生影响。浏览器将会自动的使你的CSS布局被拉伸或者被压缩。
 
-#100%缩放
+##100%缩放
 
 我是以假设缩放比例为100%来开始这个例子的。是时候需要更加严格的来定义一下这个100%了：
 
@@ -49,10 +49,10 @@ tags: [tech, translate]
 
 100%缩放的概念在接下来的解释中会非常有用，但是在你的日常工作中你不用过分的担心它。在桌面环境上你将会在100%缩放比例的情况下测试你的站点，但即使用户放大或者缩小，CSS像素的魔力将会保证你的布局保持相同的比率。
 
-#屏幕尺寸
+##屏幕尺寸
 
 _screen.width/height_
-	
+
 * _意义：用户屏幕的整体大小。_
 * _度量单位：设备像素。_
 * _浏览器错误：IE8以CSS像素对其进行度量，IE7和IE8模式下都有这个问题。_
@@ -65,7 +65,7 @@ Fun! 但是这些信息跟对我们有什么用呢？
 
 基本上没用。用户的显示器尺寸对于我们来说不重要－好吧，除非你想度量它来丰富你的web统计数据库。
 
-#窗口尺寸
+##窗口尺寸
 
 _window.innerWidth/Height_
 
@@ -84,7 +84,7 @@ _window.innerWidth/Height_
 
 注意度量的宽度和高度是包括滚动条的。它们也被视为内部窗口的一部分。（这大部分是因为历史原因造成的。）
 
-#滚动距离
+##滚动距离
 
 _window.pageX/YOffset_
 
@@ -102,7 +102,7 @@ _window.pageX/YOffset_
 
 ![desktop_page_zoomed](http://{{ site.cdn }}/images/viewport/desktop_page_zoomed.jpg)
 
-#概念：viewport
+##概念：viewport
 
 在我们继续介绍更多的JavaScript属性之前，我们必须介绍另一个概念：viewport。
 
@@ -111,16 +111,16 @@ viewport的功能是用来约束你网站中最顶级包含块元素（containin
 这听起来有一点模糊，所以看一个实际的例子。假设你有一个流式布局，并且你众多边栏中的一个具有`width: 10%`属性。现在这个边栏会随着浏览器窗口大小的调整而恰好的放大和收缩。但是这到底是如何工作的呢？
 
 从技术上来说，发生的事情是边栏获取了它父元素宽度的10%。比方说是`<body>`元素（并且你还没有给它设置过`宽度`）。所以问题就变成了`<body>`的宽度是哪个？
-	
+
 普通情况下，所有块级元素使用它们父元素宽度的100%（这儿有一些例外，但是让我们现在先忽略它）。所以`<body>`元素和它的父元素`<html>`一样宽。
-	
+
 那么`<html>`元素的宽度是多少？它的宽度和浏览器窗口宽度一样。这就是为什么你的那个拥有`width: 10%`属性的侧边栏会占据整个浏览器窗口的10%。所有web开发者都很直观的知道并且在使用它。
 
 你可能不知道的是这个行为在理论上是如何工作的。理论上，`<html>`元素的宽度是被viewport的宽度所限制的。`<html>`元素使用viewport宽度的100%。
 
 viewport，接着，实际上等于浏览器窗口：它就是那么定义的。viewport不是一个HTML结构，所以你不能用CSS来改变它。它在桌面环境下只是拥有浏览器窗口的宽度和高度。在移动环境下它会有一些复杂。
 
-#后果　Consequences
+##后果
 
 这个状况会有产生一些异样的后果。你可以在这个站点看到这些后果中的一个。滚动到顶部，然后放大两次或者三次，之后这个站点的内容就从浏览器窗口溢出了。
 
@@ -136,7 +136,7 @@ viewport，接着，实际上等于浏览器窗口：它就是那么定义的。
 
 ![desktop_100percent](http://{{ site.cdn }}/images/viewport/desktop_100percent.jpg)
 
-#文档宽度？
+##文档宽度？
 
 我真正需要知道的是页面中全部内容的宽度是多少，包括那些「伸出」的部分。据我所知得到这个值是不可能的（好吧，除非你去计算页面上所有元素的宽度和边距，但是委婉的说，这是容易出错的）。
 
@@ -148,7 +148,7 @@ viewport，接着，实际上等于浏览器窗口：它就是那么定义的。
 
 浏览器厂商们，你们怎么认为的？
 
-#度量viewport
+##度量viewport
 
 _document.documentElement.clientWidth/Height_
 
@@ -168,7 +168,7 @@ _document.documentElement.clientWidth/Height_
 
 所以`document.documentElement.clientWidth`和`-Height`一直代表的是viewport的尺寸，不管`<html>`元素的尺寸是多少。
 
-#两个属性对
+##两个属性对
 
 但是难道viewport宽度的尺寸也可以通过`window.innerWidth/Height`来提供吗？怎么说呢，模棱两可。
 
@@ -178,7 +178,7 @@ _document.documentElement.clientWidth/Height_
 
 在桌面环境上拥有两个属性对是有一些累赘的　－　但是就像我们将要看到的，在移动端这将会得到祝福。
 
-#度量\<html\>元素
+##度量\<html\>元素
 
 _document.documentElement.offsetWidth/Height_
 
@@ -194,8 +194,7 @@ _document.documentElement.offsetWidth/Height_
 
 ![desktop_offset_smallpage](http://{{ site.cdn }}/images/viewport/desktop_offset_smallpage.jpg)
 
-
-#事件中的坐标
+##事件中的坐标
 
 _pageX/Y, clientX/Y, screenX/Y_
 
@@ -217,10 +216,9 @@ _pageX/Y, clientX/Y, screenX/Y_
 
 ![desktop_screenXY](http://{{ site.cdn }}/images/viewport/desktop_screenXY.jpg)
 
-
 90%的时间你将会使用`pageX/Y`；通常情况下你想知道的是相对于文档的事件坐标。其他的10%时间你将会使用`clientX/Y`。你永远不需要知道事件相对于屏幕的坐标。
 
-#媒体查询
+##媒体查询
 
 _媒体查询_
 
@@ -243,7 +241,7 @@ _媒体查询_
 		}
 
 	}
-	
+
 当前sidebar是300px宽，除了当宽度小于400px的时候，在那种情况下sidebar变得100px宽。
 
 问题很显然：我们这儿度量的是哪个宽度？
@@ -260,13 +258,6 @@ _媒体查询_
 
 所以在桌面环境下去使用`width`而去忘记`device-width`吧。我们即将看到这个情况在移动端会更加麻烦。
 
-#总结
+##总结
 
 本文总结了我们对桌面浏览器行为的探寻。[这个系列的第二部分](http://weizhifeng.net/viewports2.html)把这些概念指向了移动端，并显示的指出了与桌面环境上的一些重要区别。
-
-
-
-
-
-
-

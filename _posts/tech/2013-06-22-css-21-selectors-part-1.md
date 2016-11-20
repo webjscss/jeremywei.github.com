@@ -7,8 +7,6 @@ tags: [tech, translate]
 
 原文：[http://www.456bereastreet.com/archive/200509/css_21_selectors_part_1/](http://www.456bereastreet.com/archive/200509/css_21_selectors_part_1/)
 
-#CSS 2.1 选择器，第一部分
-
 当你开始使用CSS的时候，最先接触的东西是选择器。选择器显然是CSS的基础内容，但是很少有开发者能发挥其全部的潜力。当然你只使用类型（type）, ID, 类（class）就可以完成大量的工作，但是选择器还有更多的内容。
 
 学习如何正确使用CSS 2.1中所有可用的选择器能够真正的帮助你保持你的HTML更加整洁。它将最小化不必要的class属性以及额外添加到标记中的div和span元素。听起来不错，是吧？
@@ -34,111 +32,33 @@ tags: [tech, translate]
 	p { color:#f00; }
 
 选择器是CSS规则中大括号开始之前（"{"）的部分。这儿的选择器是`p`，其将会匹配文档中的所有`p`元素，并且使其包含的所有文本变成红色。非常基础。
-	
+
 ##选择器概览
 
 好了，刚才是一个非常简单的例子。接下来我将会描述其他的选择器，事情显然将会变得有些复杂。在开始之前，看下CSS 2.1所有选择器语法的一个概览（基于CSS 2.1, 5.1 Pattern matching中的表格内容）：
 
-<table>
-    <caption>CSS 2.1选择器语法概览</caption>
-    <thead>
-        <tr>
-            <th scope="col">选择器类型</th>
-            <th scope="col">模式</th>
-            <th scope="col">描述</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>通用（Universal）</td>
-            <td>*</td>
-            <td>匹配任何元素。</td>
-        </tr>
-        <tr>
-            <td>类型（Type）</td>
-            <td>E</td>
-            <td>匹配任意E元素。</td>
-        </tr>
-        <tr>
-            <td>类（Class）</td>
-            <td>.info</td>
-			<td>匹配任何<code>class</code>属性中包含<code>info</code>值的元素。</td>
-        </tr>
-        <tr>
-            <td>ID</td>
-            <td>#footer</td>
-            <td>匹配任何 <code>id</code>等于<code>footer</code>的元素。</td>
-        </tr>
-        <tr>
-            <td>后代（Descendant）</td>
-            <td>E F</td>
-            <td>匹配任何是E元素后代的F元素。</td>
-        </tr>
-        <tr>
-            <td>孩子（Child）</td>
-            <td>E &gt; F</td>
-            <td>匹配任何是E元素孩子的F元素。</td>
-        </tr>
-        <tr>
-            <td>邻居（Adjacent）</td>
-            <td>E + F</td>
-            <td>匹配任何前面是兄弟元素E的F元素。</td>
-        </tr>
-        <tr>
-            <td>属性（Attribute）</td>
-            <td>E[att]</td>
-			<td>匹配任何拥有<code>att</code>属性的E元素，无论属性的值是什么。</td>
-        </tr>
-        <tr>
-            <td>属性（Attribute）</td>
-            <td>E[att=val]</td>
-            <td>匹配任何<code>att</code>属性值等于<code>val</code>的E元素。</td>
-        </tr>
-        <tr>
-            <td>属性（Attribute）</td>
-            <td>E[att~=val]</td> <td>匹配任何E元素，其<code>att</code>属性值是一个以空格分割的列表，其中之一的值等于<code>val</code>。</td>
-        </tr>
-        <tr>
-            <td>属性（Attribute）</td>
-            <td>E[att|=val]</td> <td>匹配任何E元素，其<code>att</code>属性值是以连字符（"-"）分割的列表，其中的值以<code>val</code>开头。</td>
-        </tr>
-        <tr>
-            <td>:first-child伪类</td>
-            <td>E:first-child</td>
-            <td>匹配任何E元素，当E是其父元素的第一个孩子元素。</td>
-        </tr>
-        <tr>
-            <td>链接（link）伪类</td>
-            <td>E:link<br>E:visited</td>
-            <td>匹配没有访问过（:link）的或者已经访问过（:visited）的链接。</td>
-        </tr>
-        <tr>
-            <td>动态伪类</td>
-            <td>E:active<br>E:hover<br>E:focus </td>
-            <td>匹配特定用户行为的E元素。</td>
-        </tr>
-        <tr>
-            <td>:language伪类</td>
-            <td>E:lang(c)</td>
-            <td>匹配使用语言c的E元素。</td>
-        </tr>
-        <tr>
-            <td>:first-line伪元素</td>
-            <td>E:first-line</td>
-            <td>匹配E元素第一行的内容。</td>
-        </tr>
-        <tr>
-            <td>:first-letter伪元素</td>
-            <td>E:first-letter</td>
-            <td>匹配E元素的第一个字母。</td>
-        </tr>
-        <tr>
-            <td>:before和:after伪元素</td>
-            <td>E:before<br>E:after</td>
-            <td>用来向元素内容前面或者后面插入创建的内容。</td>
-        </tr>
-    </tbody>
-</table>
+CSS 2.1选择器语法概览
+
+| 选择器类型 | 模式 | 描述 |
+| ------| ------ | ------ |
+|通用（Universal）	|*	                        |匹配任何元素。|
+|类型（Type）	    |E	                        |匹配任意E元素。|
+|类（Class）	     |.info	                     |匹配任何class属性中包含info值的元素。|
+|ID	               |#footer	                   |匹配任何 id等于footer的元素。|
+|后代（Descendant）	|E F	                    |匹配任何是E元素后代的F元素。|
+|孩子（Child）	    |E > F	                    |匹配任何是E元素孩子的F元素。|
+|邻居（Adjacent）	|E + F	                    |匹配任何前面是兄弟元素E的F元素。|
+|属性（Attribute）	|E[att]                    |匹配任何拥有att属性的E元素，无论属性的值是什么。|
+|属性（Attribute）	|E[att=val]	                |匹配任何att属性值等于val的E元素。|
+|属性（Attribute）	|E[att~=val]	            |匹配任何E元素，其att属性值是一个以空格分割的列表，其中之一的值等于val。|
+|属性（Attribute）	|E[att\|=val]	            |匹配任何E元素，其att属性值是以连字符（"-"）分割的列表，其中的值以val开头。|
+|:first-child伪类	 |E:first-child	             |匹配任何E元素，当E是其父元素的第一个孩子元素。|
+|链接（link）伪类	   |E:link、E:visited          |匹配没有访问过（:link）的或者已经访问过（:visited）的链接。|
+|动态伪类	        |E:active、E:hover、E:focus  |匹配特定用户行为的E元素。|
+|:language伪类	  |E:lang(c)	              |匹配使用语言c的E元素。|
+|:first-line伪元素	 |E:first-line	              |匹配E元素第一行的内容。|
+|:first-letter伪元素	|E:first-letter	          |匹配E元素的第一个字母。|
+|:before和:after伪元素	|E:before、E:after       |用来向元素内容前面或者后面插入创建的内容。|
 
 我将会在这两部分文章中更加详细的介绍这些选择器类型的每一个，所以请继续阅读。表格中和这篇文章之后使用的一些术语可能需要一些说明：
 
@@ -157,19 +77,18 @@ tags: [tech, translate]
 ####兄弟
 拥有同样父亲元素的元素。
 
-
 ##简单选择器和组合选择器（Simple and combined selectors）
 
 选择器有两个基本的分类：简单（simple）和组合（combined）。
 
 一个简单选择器（simple selector）由一个类型选择器（type selector）或者通配选择器（universal selector）开头，后面跟着零个或多个属性选择器（attribute selectors），ID选择器（ID selectors），或者伪类（pseudo-classes）。下面的规则包含一个简单选择器的例子：
-	
+
 	p.info { background:#ff0; }
 
 一个组合选择器（combined selector，有时候叫上下文选择器）由两个或者多个以连接符分割的简单选择器构成。这是一个非常简单的组合选择器的例子：
 
 	div p { font-weight:bold; }
-	
+
 以上规则将会对应用到所有是div元素的后代的p元素上。
 
 一个伪元素可以加在一个选择器后面。在一个组合选择器中，一个伪元素只能加在最后一个简单选择器后面。
@@ -191,9 +110,9 @@ tags: [tech, translate]
 ##类型选择器
 
 一个类型选择器会匹配特定元素类型的所有实例。下面的规则会匹配文档中所有的段落元素并且设置它们的字体大小为`2em`：
-	
+
 	p { font-size:2em; }
-	
+
 ##类选择器
 
 类选择器是以一个句号“.”来表示的，并且用`class`属性来定位目标元素。下面的规则将会应用到所有拥有“info”类名的`p`元素：
@@ -203,19 +122,19 @@ tags: [tech, translate]
 你可以把多个类名赋给一个元素 - `class`属性可以拥有以空格分割的类名列表。类选择器可以用来定位只拥有多个类名的元素。下面的规则将会匹配其类名列表中同时包含“info”和“error”的`p`元素：
 
 	p.info.error { color:#900; font-weight:bold; }
-	
+
 **注意**：多类选择器在当前版本的IE浏览器（译者注：IE6及以下版本）中不工作，但是在IE7中会被支持。
 
 元素类型没有必要必须指定。如果留空，那么其效果和使用通配选择器来代替类型选择器是一样的。下面的规则将会匹配任何拥有“info”类名的元素，不管它们的类型：
-	
+
 	.info { background:#ff0; }
 
 ##ID选择器
 
 ID选择器是以hash符号“#”来表示的，并且用`id`属性的值来定位目标元素。下面的规则将会应用到一个`id`为“info”的元素，不管它们的类型是什么：
-	
+
 	#info { background:#ff0; }
-	
+
 如果你同时指定了一个元素类型，这个规则将会只应用到那个类型的元素上：
 
 	p#info { background:#ff0; }

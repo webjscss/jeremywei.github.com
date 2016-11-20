@@ -6,20 +6,22 @@ tags: [tech]
 
 ![Mongodb](http://{{ site.cdn }}/images/tech/mongodb.png "Mongodb")
 
-#写在前面
+##写在前面
 
 本文已经假设你已经安装好了Mongodb(2.4)，并且已经开启了[auth](http://docs.mongodb.org/v2.4/reference/configuration-options/#auth)。
 
-#用户
+##用户
 首先我们添加备份和恢复数据所需的用户，这个用户需要有[readWrite](http://docs.mongodb.org/v2.4/reference/user-privileges/#readWrite)和[userAdmin](http://docs.mongodb.org/v2.4/reference/user-privileges/#userAdmin)权限
 
+```
 	$ mongo
 	$ use admin
 	$ db.auth("admin", "youradminpasswd");
 	$ use backupdb
 	$ db.addUser({ user: "backup", pwd: "passwd", roles: [ "readWrite", "userAdmin" ] })
+```
 
-#备份
+##备份
 
 我们使用[mongodump](http://docs.mongodb.org/v2.4/reference/program/mongodump/#bin.mongodump)来进行数据的备份（注意：mongodump不会备份local数据库中内容）。
 
@@ -34,19 +36,23 @@ mongodump可以通过以下两种方式来进行数据的备份：
 
 先看第一种方式：
 
+```
 	$ mongodump --host mongodb.example.net --port 27017 --db test --collection some --username backup --password passwd
+```
 
 以上会使mongodump连接到mongodb.example.net:27017上的mongod，并且把db```test```中的```some```collection备份到dump目录下。
 
 再看第二种方式：
 
+```
 	$ mongodump --dbpath /data/db --out /data/backup --db test --username backup --password passwd
-	
-在这种方式下不需要运行mongod实例，如果已经运行了，必须要停掉。``` --dbpath```指定了数据库文件的位置。 mongodump会直接读取数据库文件，在读取过程中会lock数据文件夹，以防其他Mongodb实例写入而导致数据不一致。```--out```指定了备份存放的文件夹。
+```
 
-注意：从Mongodb```2.2```版本开始，mongodump使用的数据格式与旧版本的mongod实例不兼容。所以不要使用新版本（>=2.2）的mongodump去备份旧数据。
+在这种方式下不需要运行mongod实例，如果已经运行了，必须要停掉。`--dbpath`指定了数据库文件的位置。 mongodump会直接读取数据库文件，在读取过程中会lock数据文件夹，以防其他Mongodb实例写入而导致数据不一致。`--out`指定了备份存放的文件夹。
 
-#恢复
+注意：从Mongodb`2.2`版本开始，mongodump使用的数据格式与旧版本的mongod实例不兼容。所以不要使用新版本（>=2.2）的mongodump去备份旧数据。
+
+##恢复
 使用mongodump备份的数据，需要使用[mongorestore](http://docs.mongodb.org/v2.4/reference/program/mongorestore/#bin.mongorestore)来恢复。
 
 mongorestore恢复数据的方式与mongodump相对应，也是分为两种：
@@ -74,8 +80,7 @@ mongorestore既可以恢复整个备份也可以恢复一部分。
 
 以上可以在mongod没有运行的情况下把数据恢复到```/data/db```。```--journal```option可以确保mongorestore在日志中记录所有的操作，这可以防止恢复操作异常中断（断电、磁盘故障）而引起的数据损坏。
 
-#参考
-
+##参考
 * [http://docs.mongodb.org/v2.4/tutorial/backup-with-mongodump/](http://docs.mongodb.org/v2.4/tutorial/backup-with-mongodump/)
 * [http://docs.mongodb.org/v2.4/reference/program/mongorestore/](http://docs.mongodb.org/v2.4/reference/program/mongorestore/)
 * [http://docs.mongodb.org/v2.4/reference/program/mongodump/](http://docs.mongodb.org/v2.4/reference/program/mongodump/#bin.mongodump)

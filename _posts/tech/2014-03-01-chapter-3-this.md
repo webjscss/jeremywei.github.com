@@ -20,7 +20,7 @@ tags: [tech, translate]
 5. [额外资料](#-additional-literature)
 
 <span id="introduction"></span>
-#介绍
+##介绍
 
 在这篇文章中我们将会再次讨论和[执行上下文](/chapter-1-execution-contexts.html)直接相关的细节。讨论的主题是```this```关键字。
 
@@ -31,9 +31,9 @@ tags: [tech, translate]
 让我们详细看下ECMAScript中的this值到底为何物。
 
 <span id="definitions"></span>
-#声明
+##声明
 
-```this```的值是执行上下文中的一个属性：
+`this`的值是执行上下文中的一个属性：
 
 	activeExecutionContext = {
 	  VO: {...},
@@ -42,25 +42,25 @@ tags: [tech, translate]
 
 其中VO是我们在之前章节中讨论过的[变量对象](/chapter-2-variable-object/)。
 
-```this```是和上下文中的[可执行代码类型](/chapter-1-execution-contexts.html#types-of-executable-code)紧密相关的。它的值在进入上下文的时候被决定，并且当代码在上下文中运行的时候是不可变的。
+`this`是和上下文中的[可执行代码类型](/chapter-1-execution-contexts.html#types-of-executable-code)紧密相关的。它的值在进入上下文的时候被决定，并且当代码在上下文中运行的时候是不可变的。
 
 让我们更加详细地看下这些情况。
 
 <span id="this-value-in-the-global-code"></span>
-#全局代码中的this值
+##全局代码中的this值
 
-事情非常简单。在全局代码中，```this```的值一直是全局对象本身。因此，可以间接的引用它：
+事情非常简单。在全局代码中，`this`的值一直是全局对象本身。因此，可以间接的引用它：
 
 	// explicit property definition of
 	// the global object
 	this.a = 10; // global.a = 10
 	alert(a); // 10
- 
+
 	// implicit definition via assigning
 	// to unqualified identifier
 	b = 20;
 	alert(this.b); // 20
- 
+
 	// also implicit via variable declaration
 	// because variable object of the global context
 	// is the global object itself
@@ -68,7 +68,7 @@ tags: [tech, translate]
 	alert(this.c); // 30
 
 <span id="this-value-in-the-function-code"></span>
-#函数代码中的this值
+##函数代码中的this值
 
 当在函数代码中使用```this```的时候，事情变得更加有趣。这个情况是最难的，并且会引起很多问题。
 
@@ -79,35 +79,35 @@ tags: [tech, translate]
 同时，在代码运行时```this```的值是不能更改的，换句话说，不能对它进行赋值，因为它不是变量（与Python编程语言相比，它显示的定义了```self```对象，并且可以在运行时多次进行修改）：
 
 	var foo = {x: 10};
- 
+
 	var bar = {
 	  x: 20,
 	  test: function () {
- 
+
 	    alert(this === bar); // true
 	    alert(this.x); // 20
-     
+
 	    this = foo; // error, can't change this value
-  
+
 	    alert(this.x); // if there wasn't an error, then would be 10, not 20
- 
+
 	  }
- 
+
 	};
- 
+
 	// on entering the context this value is
 	// determined as "bar" object; why so - will
 	// be discussed below in detail
- 
+
 	bar.test(); // true, 20
- 
+
 	foo.test = bar.test;
- 
+
 	// however here this value will now refer
 	// to "foo" – even though we're calling the same function
- 
+
 	foo.test(); // false, 10
-	
+
 那么是什么引起了函数代码中```this```值的变化？这有几个方面的原因。
 
 首先，在普通的函数调用中，```this```的值是由激活了上下文中代码的调用者所提供，也就是调用这个函数的父作用域。```this```的值是由调用表达式（call expression ）的形式（换句话说是函数调用的语法形式）所决定的。
@@ -119,14 +119,14 @@ tags: [tech, translate]
 	function foo() {
 	  alert(this);
 	}
- 
+
 	foo(); // global
- 
+
 	alert(foo === foo.prototype.constructor); // true
- 
+
 	// but with another form of the call expression
 	// of the same function, this value is different
- 
+
 	foo.prototype.constructor(); // foo.prototype
 
 类似地，我们可以调用某个对象的方法，但是```this```的值不会被设置为这个对象：
@@ -137,22 +137,22 @@ tags: [tech, translate]
 	    alert(this === foo);
 	  }
 	};
- 
+
 	foo.bar(); // foo, true
- 
+
 	var exampleFunc = foo.bar;
- 
+
 	alert(exampleFunc === foo.bar); // true
- 
+
 	// again with another form of the call expression
 	// of the same function, we have different this value
- 
-	exampleFunc(); // global, false	
-	
+
+	exampleFunc(); // global, false
+
 那么调用表达式的形式是如何影响```this```值的？为了能够全面理解```this```值的确定过程，那么必须详细的了解内部类型之一－```引用```(Reference)类型。
 
 <span id="-reference-type"></span>
-##引用类型
+###引用类型
 
 如果使用伪代码，那么引用类型的值可以表示为一个对象，此对象拥有两个属性：base（也就是属性的所有者）以及这个base中的属性名称（propertyName）：
 
@@ -162,7 +162,7 @@ tags: [tech, translate]
 	};
 
 
-```引用```类型的值只在两种情况下会存在：
+`引用`类型的值只在两种情况下会存在：
 
 1. 当我们处理标识符；
 2. 或者属性访问器（property accessor）的时候。
@@ -180,35 +180,35 @@ tags: [tech, translate]
 	  base: global,
 	  propertyName: 'foo'
 	};
- 
+
 	var barReference = {
 	  base: global,
 	  propertyName: 'bar'
 	};
-	
+
 为了能够从```引用```类型的值中获取一个对象真实的值，所以存在一个名为```GetValue```的方法，其用伪代码描述如下：
 
 	function GetValue(value) {
- 
+
 	  if (Type(value) != Reference) {
 	    return value;
 	  }
- 
+
 	  var base = GetBase(value);
- 
+
 	  if (base === null) {
 	    throw new ReferenceError;
 	  }
- 
+
 	  return base.[[Get]](GetPropertyName(value));
- 
+
 	}
 
 这个名为```[[Get]]```的内部方法会返回对象属性真实的值，也会解析从原型链（prototype chain）中继承的属性：
 
 	GetValue(fooReference); // 10
 	GetValue(barReference); // function object "bar"
-	
+
 属性访问器也是；这里有两种形式：点标记法（当属性名是正确的标识符，并且是可提前预知的时候使用），或者括号标记法：
 
 	foo.bar();
@@ -220,7 +220,7 @@ tags: [tech, translate]
 	  base: foo,
 	  propertyName: 'bar'
 	};
- 
+
 	GetValue(fooBarReference); // function object "bar"
 
 那么，```引用```类型的值和函数上下文的```this```值是如何联系到一起的？－从最重要的意义上来说。下面是本文的核心。在函数上下文中确定```this```值的基本规则听起来是这样的：
@@ -236,11 +236,11 @@ tags: [tech, translate]
 	function foo() {
 	  return this;
 	}
- 
+
 	foo(); // global
-	
+
 我们看到调用圆括号左侧是一个```引用```类型值（因为foo是一个标识符）：
-	
+
 	var fooReference = {
 	  base: global,
 	  propertyName: 'foo'
@@ -255,16 +255,16 @@ tags: [tech, translate]
 	    return this;
 	  }
 	};
- 
+
 	foo.bar(); // foo
 
 我们又得到了```引用```类型的值，其base的值是```foo```对象并且作为函数```bar```的```this```的值：
-	
+
 	var fooBarReference = {
 	  base: foo,
 	  propertyName: 'bar'
 	};
-	
+
 但是，用另一种形式的调用表达式来调用同样的函数，那么```this```将会是其他值：
 
 	var test = foo.bar;
@@ -276,7 +276,7 @@ tags: [tech, translate]
 	  base: global,
 	  propertyName: 'test'
 	};
-	
+
 注意，在ES5的[严格模式](http://dmitrysoshnikov.com/ecmascript/es5-chapter-2-strict-mode/)中```this```的值不会被[强制为](http://dmitrysoshnikov.com/ecmascript/es5-chapter-2-strict-mode/#codethiscode-value-restrictions)全局对象，而是被设置为```undefined```。
 
 现在我们可以准确的说，为什么相同的函数通过不同形式的调用表达式进行调用，```this```值会不同－答案是因为它们位于不同的引用类型中间值：
@@ -284,43 +284,43 @@ tags: [tech, translate]
 	function foo() {
 	  alert(this);
 	}
- 
+
 	foo(); // global, because
- 
+
 	var fooReference = {
 	  base: global,
 	  propertyName: 'foo'
 	};
- 
+
 	alert(foo === foo.prototype.constructor); // true
- 
+
 	// another form of the call expression
- 
+
 	foo.prototype.constructor(); // foo.prototype, because
- 
+
 	var fooPrototypeConstructorReference = {
 	  base: foo.prototype,
 	  propertyName: 'constructor'
 	};
-	
+
 通过调用表达式的形式来动态确定```this```值的另一个（经典）例子：
 
 	function foo() {
 	  alert(this.bar);
 	}
- 
+
 	var x = {bar: 10};
 	var y = {bar: 20};
- 
+
 	x.test = foo;
 	y.test = foo;
- 
+
 	x.test(); // 10
 	y.test(); // 20
-	
+
 
 <span id="function-call-and-non-reference-type"></span>
-##函数调用和非引用类型
+###函数调用和非引用类型
 
 那么，就像我们提到过的，当调用括号左侧的值不是```引用```类型而是其他任意类型的话，```this```的值会自动地设置为```null```并且会成为全局对象。
 
@@ -339,14 +339,14 @@ tags: [tech, translate]
 	    alert(this);
 	  }
 	};
- 
+
 	foo.bar(); // Reference, OK => foo
 	(foo.bar)(); // Reference, OK => foo
- 
+
 	(foo.bar = foo.bar)(); // global?
 	(false || foo.bar)(); // global?
 	(foo.bar, foo.bar)(); // global?
-	
+
 那么，为什么中间结果应该为```引用```类型值的属性选择器，在某些调用中我们得到的```this```的值不是base对象（也就是```foo```）而是全局对象？
 
 问题在于最后三个调用，在执行了某些操作之后，调用括号左侧的值已经不是引用类型了。
@@ -360,7 +360,7 @@ tags: [tech, translate]
 第四个和第五个例子也是类似－逗号操作符和逻辑或表达式调用了```GetValue```方法，相应地我们失去了引用类型的值而得到了函数类型的值；并且```this```的值又被设置成了全局对象。
 
 <span id="-reference-type-and-null-this-value"></span>
-##引用类型和this的null值
+###引用类型和this的null值
 
 有一种情况是当调用表达式确定调用括号的左侧是引用类型的值，但是```this```的值却被设置为了null，也就是全局对象。这个情况发生在当```引用```类型值的base对象是[活动对象(activation object)](http://dmitrysoshnikov.com/ecmascript/chapter-2-variable-object/#variable-object-in-function-context)的时候。
 
@@ -372,35 +372,38 @@ tags: [tech, translate]
 	  }
 	  bar(); // the same as AO.bar()
 	}
-	
+
 活动对象一直返回```this```的值－```null```（也就是说，用伪代码来说，```AO.bar()```等于```null.bar()```）。我们回过头再看下上面描述过的例子，这次```this```的值又被设置为了全局对象。
 
 如果with对象包含一个函数名属性，那么在```with```语句块中进行函数调用的时候会出现例外的情况。with语句会把它的对象添加到[作用域链](http://dmitrysoshnikov.com/ecmascript/chapter-4-scope-chain/#affecting-on-scope-chain-during-code-execution)前面，也就是位于活动对象之前。相应地，获取```引用```类型的值（通过标识符或者属性访问器），我们得到的base对象不是活动对象而是```with```语句的对象。顺便说一下，它不只是与内部函数有关，也与全局函数有关，因为```with```对象是作用域链中优先级较高的对象（比全局对象或者活动对象）：
 
-	var x = 10;
+```
+var x = 10;
 
-	with ({
+with ({
 
-	  foo: function () {
-	    alert(this.x);
-	  },
-	  x: 20
+  foo: function () {
+    alert(this.x);
+  },
+  x: 20
 
-	}) {
+}) {
 
-	  foo(); // 20
+  foo(); // 20
 
-	}
+}
 
-	// because
+// because
 
-	var  fooReference = {
-	  base: __withObject,
-	  propertyName: 'foo'
-	};
-	
-相似的情况是调用扮演```catch```从句实参的函数：在这种情况下```catch```对象也被添加到作用域链前面，也就是位于活动对象或者全局对象之前。但是，这个给定的行为被认为是ECMA-262-3的一个bug，并且在新的标准－ECMA-262-5中被修复了，换句话说，这个活动中的```this```值应该是全局对象，而不是```catch```对象：
+var  fooReference = {
+  base: __withObject,
+  propertyName: 'foo'
+};
+```
 
+相似的情况是调用扮演`catch`从句实参的函数：在这种情况下`catch`对象也被添加到作用域链前面，也就是位于活动对象或者全局对象之前。但是，这个给定的行为被认为是ECMA-262-3的一个bug，并且在新的标准－ECMA-262-5中被修复了，换句话说，这个活动中的`this`值应该是全局对象，而不是`catch`对象：
+
+```
 	try {
 	  throw function () {
 	    alert(this);
@@ -424,7 +427,8 @@ tags: [tech, translate]
 	  base: global,
 	  propertyName: 'e'
 	};
-	
+```
+
 相同的情况是递归调用[命名函数表达式](http://dmitrysoshnikov.com/ecmascript/chapter-5-functions/#feature-of-named-function-expression-nfe)（关于函数更多的细节请看[第五章、函数](http://dmitrysoshnikov.com/ecmascript/chapter-5-functions/)）。在函数第一次调用时候，base对象是父活动对象（或者全局对象），在递归调用的时候－base对象应该是特殊的对象，其中存储着函数表达式可有可无的名字。在这种情况下```this```的值也一直被设置为全局对象：
 
 	(function foo(bar) {
@@ -436,7 +440,7 @@ tags: [tech, translate]
 	})(); // global
 
 <span id="this-value-in-function-called-as-the-constructor"></span>
-##构造函数中this的值
+###构造函数中this的值
 
 函数上下文中```this```值的变化还有一种情况－就是以构造函数的方式来调用函数：
 
@@ -444,14 +448,14 @@ tags: [tech, translate]
 	  alert(this); // newly created object, below - "a" object
 	  this.x = 10;
 	}
- 
+
 	var a = new A();
 	alert(a.x); // 10
-	
+
 在这种情况下，[new](http://bclary.com/2004/11/07/#a-11.2.2)操作符会调用函数```A```内部的[[[Construct]]](http://bclary.com/2004/11/07/#a-13.2.2)方法，接下来在对象创建完成之后，调用函数```A```内部的[[[Call]]](http://bclary.com/2004/11/07/#a-13.2.1)方法，并把新创建的对象作为```this```的值。
 
 <span id="manual-setting-of-this-value-for-a-function-call"></span>
-##调用函数时手动设置this值
+###调用函数时手动设置this值
 
 在```Function.prototype```中定义了两个方法（因此它们可以被所有的函数访问到），通过它们可以手动制定函数调用时```this```的值。它们是```apply```和```call```方法。
 
@@ -460,28 +464,26 @@ tags: [tech, translate]
 例子:
 
 	var b = 10;
- 
+
 	function a(c) {
 	  alert(this.b);
 	  alert(c);
 	}
- 
+
 	a(20); // this === global, this.b == 10, c == 20
- 
+
 	a.call({b: 20}, 30); // this === {b: 20}, this.b == 20, c == 30
 	a.apply({b: 30}, [40]) // this === {b: 30}, this.b == 30, c == 40
 
 <span id="conclusion"></span>
-#总结
+##总结
 
 在这篇文章里我们讨论了ECMAScript中```this```关键字的一些特性（与C++或Java相比来说，它们的确是特性）。我希望这篇文章可以对理解ECMAScript中```this```关键字如何工作有所帮助。还是和平时一样，欢迎留言，我很乐意回答你的问题。
 
 <span id="-additional-literature"></span>
-#额外资料
+##额外资料
 
 * 10.1.7 – [This](http://bclary.com/2004/11/07/#a-10.1.7);
 * 11.1.1 – [The this keyword](http://bclary.com/2004/11/07/#a-11.1.1);
 * 11.2.2 – [The new operator](http://bclary.com/2004/11/07/#a-11.2.2);
 * 11.2.3 – [Function calls](http://bclary.com/2004/11/07/#a-11.2.3).
-
-

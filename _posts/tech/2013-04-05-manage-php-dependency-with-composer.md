@@ -7,11 +7,11 @@ tags: [tech]
 
 ![Composer](http://{{ site.cdn }}/images/tech/composer.png "Composer")
 
-# 介绍
+##介绍
 
 Composer是PHP中的一个依赖管理工具. 它可以让你声明自己项目所依赖的库，然后它将会在项目中为你安装这些库。
 
-## 依赖管理
+###依赖管理
 
 Composer不是包管理器。是的，它实际上和"包"或者库打交道，但是它是以项目为单位进行管理，把它们安装到你项目中的一个目录（例如`vendor`）。默认情况下它不会以全局的方式安装任何东西。因此，它是一个依赖管理器。
 
@@ -19,27 +19,26 @@ Composer不是包管理器。是的，它实际上和"包"或者库打交道，�
 
 Composer解决的问题是：
 
-a) 你有一个依赖N多库的项目。
+* a) 你有一个依赖N多库的项目。
+* b) 这些库中一些又依赖于其他的库。
+* c) 你声明你所依赖的库。
+* d) Composer找出哪些包的哪个版本将会被安装，然后安装它们（也就是把它们下载到你的项目中）。
 
-b) 这些库中一些又依赖于其他的库。
-
-c) 你声明你所依赖的库。
-
-d) Composer找出哪些包的哪个版本将会被安装，然后安装它们（也就是把它们下载到你的项目中）。
-
-## 声明依赖关系
+###声明依赖关系
 
 假设你正在创建一个项目，然后你需要一个日志操作的库。你决定使用[monolog](https://github.com/Seldaek/monolog)。为了把它加入到你的项目中，你需要做的就是创建一个名为`composer.json`的文件，其描述这个项目的依赖关系。
 
-    {
-        "require": {
-            "monolog/monolog": "1.2.*"
-        }
+```
+{
+    "require": {
+        "monolog/monolog": "1.2.*"
     }
+}
+```
 
 我们简单的描述说我们的项目依赖某个`monolog/monolog`包，版本只要是以`1.2`开头的就行。
 
-## 系统要求
+###系统要求
 
 Composer需要PHP 5.3.2+才能运行。一些灵敏的PHP设置和编译选项也是必须的，不过安装程序（installer）会警告你任何不兼容的地方。
 
@@ -47,11 +46,9 @@ Composer需要PHP 5.3.2+才能运行。一些灵敏的PHP设置和编译选项�
 
 Composer是兼容多平台的，并且我们力争使其在Windows，Linux和OSX上的运行无差异。
 
-## 安装 - *nix
+###安装 - \*nix
 
-### 下载Composer可执行程序
-
-#### 局部安装
+* 局部安装
 
 为了获取Composer，我们需要做两件事。第一个是安装Composer（前面说过了，这意味下载它到你的项目中）：
 
@@ -64,7 +61,7 @@ archive)，PHP的归档格式，也可以像其他命令一样在命令行上运
 
     $ curl -sS https://getcomposer.org/installer | php -- --install-dir=bin
 
-#### 全局安装
+* 全局安装
 
 你可以把这个文件放到任何你想放的地方。如果你把它放到你的`PATH`中，你就可以全局访问它了。在类unix系统中你甚至可以使它可执行，并且调用的时候不需要`php`。
 
@@ -75,33 +72,39 @@ archive)，PHP的归档格式，也可以像其他命令一样在命令行上运
 
 然后，只需要执行`composer`命令来运行Composer，而不是`php composer.phar`。
 
-## 安装 - Windows
+### 安装 - Windows
 
-### 使用安装程序
+* 使用安装程序
 
 这是在你的机器上安装Composer最简单的方法。
 
 下载并运行[Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe)，它将会安装最新的Composer版本并且设置好PATH，然后你就可以在命令中的任何目录下调用`composer`了。
 
-### 手动安装
+* 手动安装
 
 切换到一个存在于`PATH`环境变量中的目录，然后执行安装代码片段来下载composer.phar：
 
-    C:\Users\username>cd C:\bin
-    C:\bin>php -r "eval('?>'.file_get_contents('https://getcomposer.org/installer'));"
+```
+C:\Users\username>cd C:\bin
+C:\bin>php -r "eval('?>'.file_get_contents('https://getcomposer.org/installer'));"
+```
 
 创建一个新的以`.bat`结尾的composer文件:
 
+```
     C:\bin>echo @php "%~dp0composer.phar" %*>composer.bat
+```
 
 关闭你当前的终端。打开一个新的终端测试一下：
 
+```
     C:\Users\username>composer -V
     Composer version 27d8904
 
     C:\Users\username>
+```
 
-## 使用Composer
+###使用Composer
 
 我们接下来要使用Composer来安装项目的依赖。如果你在当前目录下没有一个叫作`composer.json`的文件，请跳到[基本使用][1]章节。
 
@@ -115,7 +118,7 @@ archive)，PHP的归档格式，也可以像其他命令一样在命令行上运
 
 如果是[上面的例子](#declaring-dependencies)，这个操作将会下载monolog到`vendor/monolog/monolog`目录。
 
-## 自动加载
+### 自动加载
 
 除了下载库之外，Composer也会创建一个自动加载文件，这个文件能够自动加载Composer下载的库中所有的类。如果想使用它，只需要在你代码启动的地方加上如下代码：
 
@@ -124,9 +127,9 @@ archive)，PHP的归档格式，也可以像其他命令一样在命令行上运
 哇哦！现在开始使用monolog吧! 如果想进一步学习Composer，继续阅读「基本使用」章节。
 如果想要找需要的package，到[Packagist][2]。
 
-## 参考
+###参考
 
-* 英文原文：[http://getcomposer.org/doc/00-intro.md](http://getcomposer.org/doc/00-intro.md)
+* [http://getcomposer.org/doc/00-intro.md](http://getcomposer.org/doc/00-intro.md)
 
 [1]: http://getcomposer.org/doc/01-basic-usage.md
 [2]: https://packagist.org/

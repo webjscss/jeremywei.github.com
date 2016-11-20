@@ -5,7 +5,7 @@ layout: default
 	<h1>{{ page.title }}</h1>
 	<div class="copyright">
 	作者: JeremyWei | 可以转载, 但必须以超链接形式标明文章原始出处和作者信息及版权声明<br />
-	网址: http://weizhifeng.net{{page.url}}
+    日期：{{ page.date | date: "%Y年%m月%d日" }}
 	</div>
 
 	{{ content }}

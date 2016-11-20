@@ -7,11 +7,11 @@ tags: [tech, translate]
 
 原文：[http://devzone.zend.com/node/view/id/1022](http://devzone.zend.com/node/view/id/1022)
 
-###介绍
+##介绍
 
 在这个系列教程的第一部分，你已经了解了一个PHP扩展的基本框架结构。你声明了一个简单的函数，这个函数向调用它的脚本返回静态和动态的值，定义了INI配置项，以及声明了内部的值（全局变量）。在这个教程中，你将会知道如何接收传递到你函数中的参数，并且认识到**PHP**和**Zend Engine**在内部是如何管理变量的。
 
-###接收参数
+##接收参数
 
 不像在用户空间的代码那样，一个内部函数的参数实际上不会声明在函数的头部。相反，参数列表的引用会传递到每个函数中 – 不管参数传递了没有 – 接下来函数就可以让Zend Engine把这些参数变成可以使用的变量。
 
@@ -31,19 +31,20 @@ tags: [tech, translate]
 
 在靠近hello.c文件结尾处，其他函数的后面：
 
-	PHP_FUNCTION(hello_greetme)
-	{
-	    char *name;
-	    int name_len;
+```
+PHP_FUNCTION(hello_greetme)
+{
+    char *name;
+    int name_len;
 
-	    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &name, &name_len) == FAILURE) {
-	        RETURN_NULL();
-	    }
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &name, &name_len) == FAILURE) {
+        RETURN_NULL();
+    }
 
-	    php_printf("Hello %s ", name);
-	    RETURN_TRUE;
-	}
-
+    php_printf("Hello %s ", name);
+    RETURN_TRUE;
+}
+```
 
 `zend_parse_parameters()`函数大部分的代码看起来几乎都一样。`ZEND_NUM_ARGS()`向Zend Engine提供关于接收到的参数数量，`TSRMLS_CC`被用来保证线程安全，最后函数会返回SUCCESS或者FAILURE。在普通情况下`zend_parse_parameters()`将会返回`SUCCESS`；如果一个调用脚本传递的参数数量超过了函数定义的参数数量，或者传递的参数不能转换成合适的数据类型，Zend将会自动的输出一个错误信息，然后函数会优雅地把控制权返回给调用脚本。
 
@@ -114,10 +115,11 @@ Table 1 给出了各种数据类型，以及可以在`zend_parse_parameters()`�
 
 你可能注意到了<em>Table 1</em>中最后四个类型都返回了相同的数据类型 – 一个`zval*`。一个`zval`，就像你将要看到的那样，是用来存储PHP中所有用户空间变量的真实数据类型。三个“复杂”的数据类型，Resource, Array和Object，当他们的数据类型字母标示在`zend_parse_parameters()`中被使用的时候，Zend Engine会对其进行类型检查，但是它们在C语言中没有相对应的数据类型，所以不会有任何转换会被实际执行。
 
-###ZVAL
+##ZVAL
 
 `zval`和普通的PHP用户空间变量，将会是最难理解，绞尽你脑汁的概念。它们也将会是最重要的概念。开始之前，让我们看看一个`zval`的结构：
 
+```
 	struct {
 	    union {
 	        long lval;
@@ -137,6 +139,7 @@ Table 1 给出了各种数据类型，以及可以在`zend_parse_parameters()`�
 	    zend_uchar is_ref;
 
 	} zval;
+```
 
 就像你看见的，每个`zval`通常有三个基本的元素：`type`，`is_ref`，`refcount`。`is_ref`和`refcount`将会在这个教程的后面介绍；现在先让我们关注一下`type`。
 
@@ -144,10 +147,11 @@ Table 1 给出了各种数据类型，以及可以在`zend_parse_parameters()`�
 
 `type`决定了`zval``value`联合体的中那一部分被使用。下面的代码片段演示了一个简单版本的`var_dump()`：
 
+```
 	PHP_FUNCTION(hello_dump)
 	{
 	    zval *uservar;
-	
+
 	    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", uservar) == FAILURE) {
 
 	        RETURN_NULL();
@@ -197,6 +201,7 @@ Table 1 给出了各种数据类型，以及可以在`zend_parse_parameters()`�
 
 	    RETURN_TRUE;
 	}
+```
 
 就像你所看到的，`Boolean`数据类型使用了和`long`数据类型一样的内部宏。就像你在这个系列教程的第一部分中使用的`RETURN_BOOL()`那样，`FALSE`用0来代表，`TRUE`用1来代表。
 
@@ -204,31 +209,34 @@ Table 1 给出了各种数据类型，以及可以在`zend_parse_parameters()`�
 
 对你之前实现的函数`hello_greetme()`进行修改，把其分成几个小片段：
 
-	PHP_FUNCTION(hello_greetme)
-	{
-	    zval *zname;
+```
+PHP_FUNCTION(hello_greetme)
+{
+    zval *zname;
 
-	    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &zname) == FAILURE) {
-	        RETURN_NULL();
-	    }
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &zname) == FAILURE) {
+        RETURN_NULL();
+    }
 
-	    convert_to_string(zname);
-	    php_printf("Hello ");
-	    PHPWRITE(Z_STRVAL_P(zname), Z_STRLEN_P(zname));
-	    php_printf(" ");
+    convert_to_string(zname);
+    php_printf("Hello ");
+    PHPWRITE(Z_STRVAL_P(zname), Z_STRLEN_P(zname));
+    php_printf(" ");
 
-	    RETURN_TRUE;
-	}
+    RETURN_TRUE;
+}
+```
 
 这一次，`zend_parse_parameters()`简单的接收一个不定数据类型的PHP变量（`zval`），然后这个函数明确的把这个变量转换成字符串类型(类似于`$zname = (string)$zname; `)，然后使用Z_STRVAL_P宏得到`zname`的值，并输出。就像你可能猜到的，和其他数据类型`bool`，`long`和`double`相对应的`convert_to_*()`函数也是存在的。
 
-###创建ZVAL
+##创建ZVAL
 
 到现在为止，你所使用的zval都是由Zend Engine来分配和释放的。但是无论如何，有时候，自己创建zval是很必要的。看一下如下的代码块：
 
+```
 	{
 	    zval *temp;
-	
+
 	    ALLOC_INIT_ZVAL(temp);
 
 	    Z_TYPE_P(temp) = IS_LONG;
@@ -236,6 +244,7 @@ Table 1 给出了各种数据类型，以及可以在`zend_parse_parameters()`�
 
 	    zval_ptr_dtor(&temp);
 	}
+```
 
 ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配内存，然后初始化为一个新的变量。当这个过程一旦完成，`Z_*_P()`宏就可以被用来设置变量的数据类型和值。`zval_ptr_dtor()`被用来做一脏活：清理分配给变量的内存。
 
@@ -243,6 +252,7 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 
 对于其他数据类型，类似的宏也是存在的，并且它们有相同的语法格式，就像你在这个系列教程第一部分所见的`RETURN_*()`宏。事实上`RETURN_*()`宏就是对`RETVAL_*()`宏进行了简单的包装，`ZVAL_*()`宏也是一样的道理。下面的五个版本是等同的：
 
+```
 	RETURN_LONG(42);
 
 	RETVAL_LONG(42);
@@ -258,12 +268,13 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 	return_value->type = IS_LONG;
 	return_value->value.lval = 42;
 	return;
+```
 
 如果你足够机警，那么你会考虑这些宏是怎么定义的，就像它们在`hello_long()`函数中被使用的那样。“`return_value`是从哪来的，为什么它没有通过 ALLOC_INIT_ZVAL()来进行分配？”，你可能想知道。
 
 在你一天又一天的扩展编写过程中`return_value`被隐藏了起来，其实它是在每个`PHP_FUNCTION()`原型中定义的一个函数参数。Zend Engine会为它分配内存，然后初始化为`NULL`，所以即使你的函数没有实际的去设置这个变量，其也有了一个可以被调用程序所用的值。当你的内部函数执行完之后，Zend Engine会把这个变量的值传递给调用程序，或者如果调用程序被告知忽略这个变量，则释放掉它。
 
-###数组
+##数组
 
 既然你在过去使用过PHP，那么你已经认识到一个数组变量的作用就是包含其他各种变量。它内部是通过一个大家都熟悉的数据结构`HashTable`来实现的。当要创建数组，并且把这些数组返回给PHP，最简单的方法就是使用Table 2中所列函数中的一个。
 
@@ -301,6 +312,7 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 
 把你刚才已经学到的东西展示一下，创建如下的一个函数，其返回一个数组的值给调用程序。确定在**php_hello.h**和`hello_functions[]`中加入适当的函数实体来声明这个函数。
 
+```
 	PHP_FUNCTION(hello_array)
 	{
 	    char *mystr;
@@ -313,7 +325,7 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 
 	    mystr = estrdup("Forty Five");
 	    add_next_index_string(return_value, mystr, 0);
-	
+
 		add_assoc_double(return_value, "pi", 3.1415926535);
 
 	    ALLOC_INIT_ZVAL(mysubarray);
@@ -321,9 +333,11 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 	    add_next_index_string(mysubarray, "hello", 1);
 	    add_assoc_zval(return_value, "subarray", mysubarray);
 	}
+```
 
 构建这个扩展，然后给出`var_dump(hello_array())`的结果：
 
+```
 	array(6) {
 	  [42]=>
 	  int(123)
@@ -346,9 +360,11 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 	    string(5) "hello"
 	  }
 	}
+```
 
 读取数组中的值意味着使用`ZENDAPI`中的`zend_hash`一类的函数把`HashTable`中的内容抽出然后转换成`zval**`。让我们以一个接收数组参数的简单函数开始：
 
+```
 	function hello_array_strings($arr) {
 	    if (!is_array($arr)) return NULL;
 	    printf("The array passed contains %d elements ", count($arr));
@@ -357,9 +373,11 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 	        if (is_string($data)) echo "$data ";
 	    }
 	}
+```
 
 或者，用C语言：
 
+```
 	PHP_FUNCTION(hello_array_strings)
 	{
 	    zval *arr, **data;
@@ -387,6 +405,7 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 
 	    RETURN_TRUE;
 	}
+```
 
 为了保持这个函数的简洁，在这个函数中只有`string`类型的数组元素被输出了。你可能想知道为什么我们不用`convert_to_string()`就像我们在之前的`hello_greetme()`函数中做的那样。让我们改一下看看；把上面的for循环代码用以下的代码替换掉：
 
@@ -400,6 +419,7 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 
 注意这个原始的数组已经被更改了！记住，`convert_to_*()`函数的作用和调用`set_type()`是一样的。由于你在和传递进来的数组一起工作，修改它的类型将会改变原始变量。为了避免这个，你需要首选复制一份zval。为了这么做，再修改一下for循环代码如下：
 
+```
 	for(zend_hash_internal_pointer_reset_ex(arr_hash, &pointer); zend_hash_get_current_data_ex(arr_hash, (void**) &data, &pointer) == SUCCESS; zend_hash_move_forward_ex(arr_hash, &pointer)) {
 	        zval temp;
 	        temp = **data;
@@ -409,7 +429,7 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 	        php_printf(" ");
 	        zval_dtor(&temp);
 	}
-	
+```
 
 这个版本中最明显的部分 – `temp = **data` – 就是拷贝原始`zval`中的`data`成员，但是因为一个`zval`可能会包含附加的资源比如像`char*` 字符串，或者`HashTable*` 数组，那么这些依赖的资源需要通过`zval_copy_ctor()`来复制一份。到目前为止只有一个简单的转换，输出，最后的那个`zval_dtor()`用来释放掉`zval_copy_ctor()`拷贝的资源。
 
@@ -417,6 +437,7 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 
 现在你已经看到了数组的值，让我们再修改一下代码让我们也可以看到数组的key：
 
+```
 	for(zend_hash_internal_pointer_reset_ex(arr_hash, &pointer); zend_hash_get_current_data_ex(arr_hash, (void**) &data, &pointer) == SUCCESS; zend_hash_move_forward_ex(arr_hash, &pointer)) {
 
 	    zval temp;
@@ -431,7 +452,7 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 	    }
 
 	    php_printf(" => ");
-	
+
 	    temp = **data;
 	    zval_copy_ctor(&temp);
 	    convert_to_string(&temp);
@@ -439,11 +460,13 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 	    php_printf(" ");
 	    zval_dtor(&temp);
 	}
+```
 
 记住数组可以有数字索引，关联字符串key，或者二者都有。调用`zend_hash_get_current_key_ex()`可以从数组当前位置来获得数组key的类型，然后用返回值来决定key的类型，可能是`HASH_KEY_IS_STRING`，`HASH_KEY_IS_LONG`，或者`HASH_KEY_NON_EXISTANT`。既然`zend_hash_get_current_data_ex()`可以返回一个`zval**`，你可以安全的假设`HASH_KEY_NON_EXISTANT`是不会被返回的，所以只有IS_STRING和IS_LONG需要被检查。
 
 这儿有另一个迭代HashTable的方法。Zend Engine公开了三个非常相似的函数来协助这个工作：`zend_hash_apply()`，`zend_hash_apply_with_argument()`，和`zend_hash_apply_with_arguments()`。第一个就是循环一个`HashTable`，第二个允许传递一个单独的`void*`参数给它，与此同时第三个允许通过一个可变参数列表来传递数量不限的参数。hello_array_walk()显示了每个函数的使用方法：
 
+```
 	static int php_hello_array_walk(zval **element TSRMLS_DC)
 	{
 	    zval temp;
@@ -453,7 +476,7 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 	    PHPWRITE(Z_STRVAL(temp), Z_STRLEN(temp));
 	    php_printf(" ");
 	    zval_dtor(&temp);
-	
+
 	    return ZEND_HASH_APPLY_KEEP;
 	}
 
@@ -493,6 +516,7 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 
 	    RETURN_TRUE;
 	}
+```
 
 到现在为止你应该对与上面大部分代码相关联的函数使用很熟悉了。传递给`hello_array_walk()`的数组被循环了三次，一次没有任何参数，一次跟着一个参数，第三次跟着两个参数。在这个设计中，`walk_arg()`和`walk_args()`函数实际上依赖于没有参数的`walk()`函数，这个函数的工作是类型转换，并输出zval，显然这个工作对于这三个函数来说都是共同的。
 
@@ -502,6 +526,7 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 
 用foreach这种形式的方法来迭代一个数组是很常见的任务，但是你经常会用一个数字key或者关联key在数组中查找一个特定的值。下一个函数将会根据key从一个数组中返回一个值，其中这个函数的第一个参数是这个数组，第二个参数是所需要的key。
 
+```
 	PHP_FUNCTION(hello_array_value)
 	{
 	    zval *zarray, *zoffset, **zvalue;
@@ -558,6 +583,7 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 	    *return_value = **zvalue;
 	    zval_copy_ctor(return_value);
 	}
+```
 
 这个函数以一个`switch`块开始，主要是处理类型转换，方法和`Zend Engine`很像。`NULL`被当做0，`Boolean`类型被适当的转换为0或者1，`double`类型被转换成`long`(在处理过程中会被截断)，然后`resource`类型被转换成数字值。对`resource`类型的处理方式是从PHP3留下来的，当`resource`只是查询数组时候所需要的一个数字key而不是一个唯一的类型。
 
@@ -565,12 +591,13 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 
 如果函数正在寻找一个关联key，那么key就必须是非`NULL`，可以使用这个key的值来决定是使用关联查询还是数字索引查询。如果查询失败了，那是因为key不存在，然后函数会返回`NULL`来表明查询失败。否则`zval`会被拷贝到`return_value`中。
 
-###符号表作为数组
+##符号表作为数组
 
 如果你之前使用过`$GLOBALS`数组，你应该知道自己在PHP脚本的全局空间中声明的变量也会出现在这个数组中。回想一下，一个数组的内部实现是一个`HashTable`，一个问题出现了：“GLOBALS数组能否在一个特殊的地方被找到呢？”回答是“YES”。它存在于一个叫做`EG(symbol_table)`的Executor Globals 结构体中，`EG(symbol_table)`是一个`HashTable`（不是`HashTable*`，提醒一下你，就是`HashTable`）。
 
 你已经知道如何在一个数组中找到关联key所对应的元素，那么现在你知道该去哪里找全局符号表，那么在扩展代码中查找变量应该是一个很容易的事情：
 
+```
 	PHP_FUNCTION(hello_get_global_var)
 	{
 	    char *varname;
@@ -589,6 +616,7 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 	    *return_value = **varvalue;
 	    zval_copy_ctor(return_value);
 	}
+```
 
 现在你应该对这个很熟悉了。这个函数接收一个字符串参数，并用它在全局空间中寻找一个变量，然后返回它。
 
@@ -596,6 +624,7 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 
 除了全局符号表之外，Zend Engine也保留了一个局部符号表的引用。因为内部函数没有他们自己的符号表（它们为什么要有？），所以局部符号表实际上就是用来保存内部函数变量的。让我们看个简单的函数，这个函数在局部作用域设置一个变量：
 
+```
 	PHP_FUNCTION(hello_set_local_var)
 	{
 	    zval *newvar;
@@ -614,10 +643,11 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 
 	    RETURN_TRUE;
 	}
+```
 
 很明显这没有什么新的东西。继续，然后把你现在手上的代码编译一下，并运行一些测试脚本。确保编译过程无误。
 
-###引用计数
+##引用计数
 
 到现在为止，我们添加到`HashTable`中的`zval`不是新创建的就是新拷贝过来的。这些`zval`是独立的，拥有自己的资源，只存在于`HashTable`之中。作为一个语言设计的概念而言，这种创建，拷贝变量的方案是“足够好”的，但是我知道你很熟悉用C来编程，所以你知道如果拷贝一大块数据的话是非常耗费内存和CPU时间的，除非你遇到特殊情况不得不这么做。考虑一下这个用户空间代码块：
 
@@ -625,14 +655,15 @@ ALLOC_INIT_ZVAL()，就像它名字所表明的那样，为一个`zval*`分配�
 
 幸运的是，`Zend Engine`比以上的做法要聪明一些。当`$a`首次被创建的时候，一个隐含的string类型的zval会被创建，内容是log文件。通过调用`zend_hash_add()`来把那个`zval`分配给`$a`。当`$a`被拷贝到`$b`中的时候，可想而知，Zend Engine会做类似下面的事情：
 
-	{
-	    zval **value;
-	    zend_hash_find(EG(active_symbol_table), "a", sizeof("a"), (void**)&value);
+```
+{
+    zval **value;
+    zend_hash_find(EG(active_symbol_table), "a", sizeof("a"), (void**)&value);
 
-	    ZVAL_ADDREF(*value);
-	    zend_hash_add(EG(active_symbol_table), "b", sizeof("b"), value, sizeof(zval*));
-	}
-
+    ZVAL_ADDREF(*value);
+    zend_hash_add(EG(active_symbol_table), "b", sizeof("b"), value, sizeof(zval*));
+}
+```
 
 当然，实际代码会更复杂，但是重点关注的地方是`ZVAL_ADDREF()`。记得在一个zval中有四个标准的元素。你已经看过`type`和`value`了；这次看下`refcount`。就像它的名字表示的那样，refcount指的是一个特定的`zval`在一个符号表，数组或者其他地方被引用的次数。
 

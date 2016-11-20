@@ -22,7 +22,7 @@ tags: [tech, design]
 ![color-wheel-02](http://{{ site.cdn }}/images/design/basic-color-theory/color-wheel-02.jpeg "color-wheel-02")
 
 ##颜色关系
-<p></p>
+
 ###单一（Monochrome）
 
 要想弄清什么是单一色（Monochrome color），我们首先要先介绍几个概念
@@ -66,7 +66,6 @@ tags: [tech, design]
 ![warm-and-cool](http://{{ site.cdn }}/images/design/basic-color-theory/warm-and-cool.png "warm-and-cool")
 
 ##参考
-
 * [http://www.rocket-design.fr/color-template/](http://www.rocket-design.fr/color-template/)
 * [http://www.colormatters.com/color-and-design/basic-color-theory](http://www.colormatters.com/color-and-design/basic-color-theory)
 * [http://en.wikipedia.org/wiki/Tints_and_shades](http://en.wikipedia.org/wiki/Tints_and_shades)

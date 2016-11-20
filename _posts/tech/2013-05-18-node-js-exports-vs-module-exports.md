@@ -9,8 +9,6 @@ tags: [tech, translate]
 
 原文：[http://www.hacksparrow.com/node-js-exports-vs-module-exports.html](http://www.hacksparrow.com/node-js-exports-vs-module-exports.html)
 
-#Node.js中exports和module.exports有什么不同？
-
 你肯定对`Node.js`模块中用来创建函数的`exports`对象很熟悉（假设一个名为`rocker.js`的文件）：
 
 	exports.name = function() {
@@ -21,7 +19,7 @@ tags: [tech, translate]
 
 	var rocker = require('./rocker.js');
 	rocker.name(); // 'My name is Lemmy Kilmister'
-	
+
 但是`module.exports`到底是个什么玩意儿? 它合法吗？
 
 令人吃惊的是-`module.exports`是真实存在的东西。`exports`只是`module.exports`的辅助方法。你的模块最终返回`module.exports`给调用者，而不是`exports`。`exports`所做的事情是收集属性，如果`module.exports`当前没有任何属性的话，`exports`会把这些属性赋予`module.exports`。如果`module.exports`已经存在一些属性的话，那么`exports`中所用的东西都会被忽略。
@@ -50,7 +48,7 @@ rocker模块完全忽略了`exports.name`，然后返回了一个字符串'ROCK 
 	        console.log(this.name +' is '+ this.age +' years old');
 	    };
 	};
-	
+
 然后你应该这样使用它：
 
 	var Rocker = require('./rocker.js');
