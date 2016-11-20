@@ -9,20 +9,19 @@ layout: default
 	</div>
 
 	{{ content }}
-	(完)
-
+    （全文完）
 	<div class="post-info">
-		{{ page.date | date_to_string }}  
-	
-		{% if city %} 
-			于 {{ city }} 
+		{{ page.date | date_to_string }}
+
+		{% if city %}
+			于 {{ city }}
 		{% endif %}
-	
+
 		{% if more %}
 			| {{ more }}
 		{% endif %}
 	</div>
-	
+
 	<!-- disqus start -->
 	<div id="disqus_thread"></div>
 	<script type="text/javascript">
