@@ -22,7 +22,8 @@ body {
 	font-size: 16px;
 	*font-size: small;
 	text-align: center;
-	color: #6e6e6e;
+	/*color: #6e6e6e;*/
+    color: #3e3e3e;
 	background: #fff;
 }
 
@@ -50,7 +51,7 @@ h3 {
 }
 
 p {
-	margin: 0.7em 0;
+	margin: 1.2em 0;
 }
 
 a {
@@ -76,21 +77,20 @@ li {
 table {
 	font-size: inherit;
 	font: 100%;
+    width: 100%;
 	text-align: left;
-}
-
-.table_border{
-    border: solid 1px #B4B4B4;
     border-collapse: collapse;
 }
-.table_border tr th{
-    padding-left:4px;
-    height:27px;
+
+tr th{
+    padding-left: 1em;
+    height: 2em;
     border: solid 1px #B4B4B4;
 }
-.table_border tr td{
-    height:25px;
-    padding:4px;
+
+tr td{
+    height: 2em;
+    padding-left: 1em;
     border: solid 1px #B4B4B4;
 }
 
@@ -164,14 +164,13 @@ blockquote {
 .site {
   font-size: 100%;
   text-align: justify;
-  width: 960px;
   margin: 3em auto 2em auto;
   line-height: 1.5em;
   word-break: break-word;
 }
 
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen
+/* media query */
+@media screen
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
 	.site {
@@ -179,33 +178,10 @@ and (max-device-width : 480px) {
 	}
 }
 
-.title {
-	color: #0082FF;
-	font-weight: bold;
-	margin-bottom: 2em;
-}
-
-.site .title a {
-	color: #0082FF;
-	text-decoration: none;
-}
-
-.site .title a:hover {
-	color: black;
-}
-
-.site .title a.extra {
-	color: #0082FF;
-	text-decoration: none;
-	margin-left: 1em;
-}
-
-.site .title a.extra:hover {
-	color: black;
-}
-
-.site .meta {
-	color: #aaa;
+@media screen and (min-width: 1024px) {
+    .site {
+        width: 700px;
+    }
 }
 
 .header a {
@@ -225,33 +201,14 @@ and (max-device-width : 480px) {
 	overflow: hidden;
 }
 
-.site .footer .contact {
-	float: left;
-	margin-right: 3em;
-}
-
-.site .footer .contact a {
-	color: #8085C1;
-}
-
-.site .footer .rss {
-	margin-top: 1.1em;
-	margin-right: .2em;
-	float: right;
-}
-
-.site .footer .rss img {
-	border: 0;
-}
-
 .copyright {
 	margin-top: .25em;
-	padding-top: 2px;
+	padding-top: .3em;
+    padding-bottom: .3em;
+    border-top: 1px solid #e7e7eb;
 	font-weight: normal;
-	font-size:80%;
+	font-size:85%;
 	display: block;
-	border-top: 1px double;
-	padding-bottom: .3em;
 	color:#bfbfbf;
 	line-height:120%;
 	word-break: normal;

@@ -8,11 +8,11 @@ tags: [tech]
 
 REST是Representational state transfer的简称，中文直译过来是『可视化状态转移』或者『具象状态传输』，一眼看上起一头雾水，什么鬼？虽然这个概念很晦涩，但是几乎所有的程序员都用过REST风格的API，比如Github的[REST API](https://developer.github.com/v3/gists/)。
 
-```
+{% highlight ruby  %}
 GET /users/:username/gists
 POST /gists
 DELETE /gists/:id/star
-```
+{% endhighlight %}
 
 一提到REST或者实现一个RESTful API，大家可能都会通过HTTP来实现，以至于很多人把REST等同于HTTP。这个困惑可能很多人都存在，而且REST和HTTP之间也是有着不可割舍的关系，因为这二者的作者（或共同作者）是同一个人：[Roy Fielding](https://en.wikipedia.org/wiki/Roy_Fielding)。
 

@@ -101,16 +101,16 @@ PHP_FUNCTION(hello_greetme)
 
 Table 1 给出了各种数据类型，以及可以在`zend_parse_parameters()`中使用，与这些类型相对应的字母和C语言数据类型：
 
-	Table 1: Types and letter codes used in zend_parse_parameters()
-	Type	Code	Variable Type
-	Boolean	 b       zend_bool
-	Long	 l       long
-	Double	 d       double
-	String	 s       char*, int
-	Resource r       zval*
-	Array	a        zval*
-	Object	o        zval*
-	zval	z        zval*
+|Type	 | Code	  |Variable Type|
+| ------ | ------ | ------      |
+|Boolean |	 b    |   zend_bool |
+|Long	 |   l    |   long      |
+|Double	 |   d    |   double    |
+|String	 |   s    |   char*, int|
+|Resource|   r    |   zval*     |
+|Array	 |   a    |    zval*    |
+|Object	 |   o    |    zval*    |
+|zval	 |   z    |    zval*    |
 
 
 你可能注意到了<em>Table 1</em>中最后四个类型都返回了相同的数据类型 – 一个`zval*`。一个`zval`，就像你将要看到的那样，是用来存储PHP中所有用户空间变量的真实数据类型。三个“复杂”的数据类型，Resource, Array和Object，当他们的数据类型字母标示在`zend_parse_parameters()`中被使用的时候，Zend Engine会对其进行类型检查，但是它们在C语言中没有相对应的数据类型，所以不会有任何转换会被实际执行。

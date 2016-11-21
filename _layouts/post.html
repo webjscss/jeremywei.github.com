@@ -4,23 +4,11 @@ layout: default
 <div id="post">
 	<h1>{{ page.title }}</h1>
 	<div class="copyright">
-	作者: JeremyWei | 可以转载, 但必须以超链接形式标明文章原始出处和作者信息及版权声明<br />
-    日期：{{ page.date | date: "%Y年%m月%d日" }}
+    {{ page.date | date: "%Y年%m月%d日" }} JeremyWei
 	</div>
 
 	{{ content }}
     （全文完）
-	<div class="post-info">
-		{{ page.date | date_to_string }}
-
-		{% if city %}
-			于 {{ city }}
-		{% endif %}
-
-		{% if more %}
-			| {{ more }}
-		{% endif %}
-	</div>
 
 	<!-- disqus start -->
 	<div id="disqus_thread"></div>
