@@ -68,7 +68,7 @@ iOS中处理不同PPI显示的方法很简单：首先规定在多高的PPI下1D
 ![ios-03](http://{{ site.cdn }}/images/dpi/ios-03.png "ios-03")
 
 在iOS中，同一个应用在非Retina屏幕和Retina屏幕显示的资源是不同的，其规则是：
-```name.png```为非Retina资源，```name@2x.png```为Retina资源，所以对于设计人员来说，在你设计的时候需要考虑到Retina屏幕和非Retina屏幕，看下面这个例子：
+`name.png`为非Retina资源，`name@2x.png`为Retina资源，所以对于设计人员来说，在你设计的时候需要考虑到Retina屏幕和非Retina屏幕，看下面这个例子：
 
 ![ios-04](http://{{ site.cdn }}/images/dpi/ios-04.png "ios-04")
 

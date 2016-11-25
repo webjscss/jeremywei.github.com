@@ -6,7 +6,7 @@ tags: [tech]
 
 ![Git](http://{{ site.cdn }}/images/tech/git.jpg "Git")
 
-```git rebase```是个非常强大灵活的命令，它可以让你对commit进行修改、调整顺序、合并等操作、并能以线性的方式进行分支的合并与嫁接等。
+`git rebase`是个非常强大灵活的命令，它可以让你对commit进行修改、调整顺序、合并等操作、并能以线性的方式进行分支的合并与嫁接等。
 
 简单来说```rebase```就是把某个分支上的一部分commit嫁接到另一个commit后面，而在这个过程中这些commit的base（基）变了，所以这个操作叫做『变基』。
 
@@ -15,9 +15,9 @@ tags: [tech]
          A---B---C topic(HEAD)
         /
     D---E---F---G master
-    
+
 我们执行了如下任何一个命令之后：
-    
+
     $ git rebase master
     $ git rebase master topic
 
@@ -26,7 +26,7 @@ tags: [tech]
                   A'--B'--C' topic(HEAD)
                  /
     D---E---F---G master
-    
+
 可以看出git把```A---B---C```这段commit嫁接到了```G```之后，不过虽然这些新commit的内容是一样的，但是hash值是不同的（```A'--B'--C'```），原因将在后面解释。
 
 命令完整的形式如下：
@@ -37,9 +37,9 @@ tags: [tech]
 
     $ git rebase master topic
     $ git rebase master
-    
+
 的区别是第一种形式会首先checkout到topic分支，然后再执行rebase的操作。
-    
+
 那么rebase都做了什么事情呢？
 
 1. 首先，git会对topic分支和```<upstream>```做一个差集，把不同的commit找出来，类似于执行```git log <upstream>..HEAD```，对于以上例子来说结果就是```A---B---C```，然后把这些commit存在一个临时的地方。
@@ -53,7 +53,7 @@ tags: [tech]
               A---B---C topic
              /
         D---E---A'---F master
-        
+
 执行完git rebase master之后，结果如下：
 
                    B'---C' topic
@@ -79,13 +79,13 @@ tags: [tech]
             |             o'--o'--o'  topic
              \
               o---o---o---o---o  next
-              
+
 那我们需要如下操作：
 
     $ git rebase --onto master next topic
-          
+
 这个操作会把从```next```开始的commit嫁接到```master```上。如果你提供```<branch>```，那么首先会checkout到这个```<branch>```，然后再进行rebase操作。
-    
+
 我们再看一个例子，比如我们有如下的branch tree：
 
     E---F---G---H---I---J  topicA
@@ -99,9 +99,9 @@ tags: [tech]
     E---H'---I'---J'  topicA
 
 同样，rebase也会产生冲突，当解决完冲突之后你可以继续rebase的进程：
-    
+
     $ git rebase --continue
-    
+
 或者取消此次rebase：
 
     $ git rebase --abort
@@ -111,7 +111,7 @@ tags: [tech]
     $ git rebase -i <upstream>
 
 chitsaou写的[《Git-rebase 小筆記》](http://blog.yorkxin.org/posts/2011/07/29/git-rebase/)中有详细的介绍，可以自行查看。
-        
+
 ## 参考
 
 * [http://git-scm.com/docs/git-rebase](http://git-scm.com/docs/git-rebase)

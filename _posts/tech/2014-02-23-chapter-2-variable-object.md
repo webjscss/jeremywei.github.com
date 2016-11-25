@@ -20,8 +20,8 @@ tags: [tech, translate]
 7. [总结](#conclusion)
 8. [额外资料](#additional-literature)
 
-<span id="introduction"></span>
-## 介绍
+
+## 介绍 {#introduction}
 
 我们一直会在程序中声明函数和变量，之后用它们来成功地构建我们的系统。但解释器是如何、并且是去哪里找到我们的数据（函数、变量）的呢？当我们引用所需对象的时候，到底发生了什么？
 
@@ -46,8 +46,7 @@ tags: [tech, translate]
 
 让我们看看更多细节，关于我们声明数据的时候到底发生了什么。
 
-<span id="data-declaration"></span>
-## 数据声明
+## 数据声明 {#data-declaration}
 
 如果变量是和执行上下文相关联的，那么它应该知道它的数据存在了什么地方并且如何获取到它们。这个机制叫做变量对象(variable object)。
 
@@ -103,8 +102,7 @@ tags: [tech, translate]
 
 但是在实现层面（以及规范），变量对象是一个抽象的精髓。实际上，在具体的执行上下文中，VO的叫法是不同的，并且拥有不同的初始数据结构。
 
-<span id="variable-object-in-different-execution-contexts"></span>
-## 不同执行环境中的变量对象
+## 不同执行环境中的变量对象 {#variable-object-in-different-execution-contexts}
 
 变量对象的一些操作（比如变量实例化）和行为对所有类型的执行上下文是一样的。从这个角度来看用一个抽象的基础事物来表述变量对象是很便捷的。函数上下文也可以定义与变量对象有关的额外细节。
 
@@ -119,8 +117,7 @@ tags: [tech, translate]
 
 让我们看看细节。
 
-<span id="variable-object-in-global-context"></span>
-###  全局上下文中的变量对象
+###  全局上下文中的变量对象 {#variable-object-in-global-context}
 
 那么，首先很有必要给出全局对象的定义。
 
@@ -161,8 +158,7 @@ tags: [tech, translate]
 	alert(window[aKey]); // indirectly, with dynamic property name: "test"
 
 
-<span id="variable-object-in-function-context"></span>
-###  函数上下文中的变量对象
+###  函数上下文中的变量对象 {#variable-object-in-function-context}
 
 关于函数执行上下文－VO无法直接访问，并且它扮演的角色被叫作活动对象（activation object，缩写－AO）。
 
@@ -224,8 +220,7 @@ tags: [tech, translate]
 
 在<abbr title="ECMA-262-5">ES5</abbr>中，活动对象的概念也被[词法环境](http://dmitrysoshnikov.com/ecmascript/es5-chapter-3-2-lexical-environments-ecmascript-implementation/)的通用和单独模型（common and single model of lexical environments）所替代。
 
-<span id="phases-of-processing-the-context-code"></span>
-## 处理上下文代码的各种阶段
+## 处理上下文代码的各种阶段 {#phases-of-processing-the-context-code}
 
 现在我们到了本文最关键的地方。处理执行上下文代码分为两个基本阶段：
 
@@ -236,8 +231,8 @@ tags: [tech, translate]
 
 注意，这两个阶段的处理过程是通用行为并且独立于上下文类型（也就是说，对于全局和函数上下文是公平的）。
 
-<span id="entering-the-execution-context"></span>
-###  进入执行上下文
+
+###  进入执行上下文 {#entering-the-execution-context}
 
 在进入执行上下文（但是代码执行之前），VO被如下属性（它们在篇头介绍过）所填充：
 
@@ -275,8 +270,7 @@ tags: [tech, translate]
 
 这个之后，接下来是上下文代码处理过程的第二个阶段－代码执行阶段。
 
-<span id="code-execution"></span>
-###  代码执行
+###  代码执行 {#code-execution}
 
 此时，AO/VO已经被各种属性所填充（尽管，不是所有的属性都有真实的值，大部分属性的值仍然只是初始的```undefined```）。
 
@@ -334,8 +328,7 @@ AO['e'] = <reference to FunctionExpression "_e">;
 	alert(a); // 1
 	alert(b); // undefined, but not "b is not defined"
 
-<span id="about-variables"></span>
-## 关于变量
+## 关于变量 {#about-variables}
 
 经常有一些文章甚至一些JavaScript图书声称：「使用var关键字（在全局上下文）和不使用var关键词（在任何地方）都可以声明全局变量」。事实并非如此。记住：
 
@@ -404,8 +397,7 @@ AO['e'] = <reference to FunctionExpression "_e">;
 
 对于在一些debug工具（比如Firebug）的终端上测试这些例子的同学：注意，Firebug也是使用```eval```来执行你从终端中输入的代码。所以那些变量也不会有{DontDelete}，并且可以被删除。
 
-<span id="feature-of-implementations-property-__parent__"></span>
-## 实现带来的特性：\__parent__属性
+## 实现带来的特性：\__parent__属性 {#feature-of-implementations-property-__parent__}
 
 就像已经被提到过的，按照标准的话，直接访问活动对象是不可能的。	但是，在一些实现中，换句话说在SpiderMonkey和Rhino中，函数拥有一个特殊的属性```__parent__```，这个属性是对创建这些函数的活动对象（或者全局变量对象）的引用。
 
@@ -453,15 +445,13 @@ AO['e'] = <reference to FunctionExpression "_e">;
 
 	})();
 
-<span id="conclusion"></span>
-## 总结
+## 总结 {#conclusion}
 
 通过这篇文章，我们在学习ECMAScript中与执行上下文相关的对象方面，迈了一步。我希望这些资料有用处，并可以明晰一些特性和你之前遇到的模棱两可的地方。按照计划，接下来的章节将会是[作用域链](http://dmitrysoshnikov.com/ecmascript/chapter-4-scope-chain/)，[标识符方案](http://dmitrysoshnikov.com/ecmascript/chapter-4-scope-chain/#function-activation)，以及作为结论的[闭包](http://dmitrysoshnikov.com/ecmascript/chapter-6-closures/)。
 
 如果你有问题，欢迎留言。
 
-<span id="additional-literature"></span>
-## 额外资料
+## 额外资料 {#additional-literature}
 * 10.1.3 – [Variable Instantiation](http://bclary.com/2004/11/07/#a-10.1.3);
 * 10.1.5 – [Global Object](http://bclary.com/2004/11/07/#a-10.1.5);
 * 10.1.6 – [Activation Object](http://bclary.com/2004/11/07/#a-10.1.6);

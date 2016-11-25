@@ -67,6 +67,7 @@ tags: [tech, translate]
 	<![endif]-->
 
 ## CSS
+
 ###  重置HTML5元素为块元素
 下面的CSS将会把HTML元素（article，aside，figure，header，footer等等）重置为块元素。
 

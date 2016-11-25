@@ -18,6 +18,7 @@ tags: [tech]
 	$ npm install weixin-api
 
 ##  功能
+
 ###   消息监听
 
 根据微信公众平台的API规范，对四种消息进行监听，通过传递`callback`来对消息进行处理，其中callback只有一个参数`msg`，不同消息其`msg`内容不同，各属性代表的含义请对照微信公众平台的API规范。

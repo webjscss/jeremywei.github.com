@@ -116,6 +116,7 @@ _Nitro比WebKit之前的JavaScript引擎性能有所提升的最大原因是其�
 （截屏来自[@timanrebel](https://twitter.com/timanrebel)，[社会化滑雪和滑雪板应用，Snowciety](http://snowcietyapp.com/)的创始人。）
 
 ## 如何使你的混合应用拥有原生的体验
+
 ###  UIWebView的阴影和背景颜色
 
 默认情况下，`UIWebViews`会显示一个阴影，以及背景颜色或者一个位于渲染页面下面的图案（取决于iOS版本和硬件）。这个外观和感觉明显是非原生的，所以你将会需要移除它们两个。幸运的是，这么做很简单：为了使视图变得扁平（flat），所有你需要做的事情就是一个`UIWebView`子类里边的几行代码。check out我的那个MIT协议的项目，[FlatWebView](http://cocoacontrols.com/platforms/ios/controls/flatwebview)，看看例子里边是如何做的。
