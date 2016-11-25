@@ -5,7 +5,7 @@ city: 南京
 tags: [tech]
 ---
 
-##什么是引用
+## 什么是引用
 
 PHP中的引用可以理解成变量的别名。由于PHP的变量名是存储在符号表(symbol table)中的，变量内容是存储在堆中，引用就是用符号表中的不同符号(symbol)名称来访问同一存储内容，和Unix文件系统中的[hardlink][1]是同一个概念，比如：
 
@@ -18,7 +18,7 @@ echo $b; //2
 echo $a; //2
 ```
 
-##传递引用
+## 传递引用
 
 引用传递很简单，就是一个「&」符号，比如：
 
@@ -33,7 +33,7 @@ foo($b);
 echo $b; //2
 ```
 
-##返回引用
+## 返回引用
 
 大多数情况下并不需要返回引用来提高性能，zend引擎会自己进行优化，但是如果你非得返回引用得话，可以按照以下方式来返回引用：
 
@@ -53,7 +53,7 @@ $obj->value = 2;              // 修改对象的$value属性
 echo $myValue;                // 输出2，$myValue与class foo中的$value值相同
 ```
 
-##与指针的区别
+## 与指针的区别
 
 引用与指针很像，但是其并不是指针，看如下的代码：
 
@@ -82,7 +82,7 @@ int main(int argc, char const *argv[]) {
 
 由于b是指向a的指针，所以释放了b的内存之后，再访问a就会出现错误，比较明显的说明了PHP引用与C指针的区别。
 
-##对象与引用
+## 对象与引用
 
 在PHP中使用对象的时候，大家总是被告知“对象是按照引用传递的”，其实这是个误区。PHP的对象变量存储的是此对象的一个标示符，在传递对象的时候，其实传递的就是这个标示符，而并不是引用，看如下代码：
 
@@ -182,7 +182,7 @@ echo "object cc: "; var_dump($cc); //["testB"]=>string(15) "Changed Class B"
 
 此时$aa，$bb，$cc三者内容完全一样，所以可以看出对象并不是按照引用传递，要尽快走出这个误区。
 
-##参考
+## 参考
 
 * [http://www.php.net/manual/en/language.references.php](http://www.php.net/manual/en/language.references.php)
 * [http://www.php.net/manual/en/language.oop5.references.php](http://www.php.net/manual/en/language.oop5.references.php)

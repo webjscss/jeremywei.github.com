@@ -5,11 +5,11 @@ city: 南京
 tags: [tech]
 ---
 
-##前言
+## 前言
 
 JavaScript做为一门前端开发语言越来越受到关注，对于后端开发者（JAVA，C++，PHP等）来说想要掌握JavaScript，其中最容易出现问题的地方就是对象模型以及原型链继承模型，本文作者根据自身的经验和理解，对JavaScript的对象和prototype（原型）进行介绍。
 
-##对象
+## 对象
 
 在JavaScript中数据类型分为原生数据类型（Primitive type）， 其中包括数字，字符串，布尔，undefined，null）和对象（Object）。注意不要把`String`，`Number`，`Boolean`等包装对象与原生类型混淆，看下面的例子：
 
@@ -59,7 +59,7 @@ JavaScript环境中预先定义了很多[全局对象][1]，其中包括：
 * RegExp
 * Math
 
-##原型
+## 原型
 
 有了对象，那么我们就需要继承，这也是OOP的精华所在，在JAVA,C++等OO的语言中继承是在定义类的时候进行指定的，既然JavaScript中没有类的概念，那么其实现继承的方式需要与众不同了，对，这就是接下来的重点内容：Prototype（原型）。
 
@@ -193,7 +193,7 @@ console.log(book.__proto__.__proto__.__proto__); // null
   +---------------+     +---------------+     +---------------+
 ```
 
-##参考
+## 参考
 * [https://developer.mozilla.org/en-US/docs/JavaScript/Guide/](https://developer.mozilla.org/en-US/docs/JavaScript/Guide/)
 
 [1]: https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Predefined_Core_Objects

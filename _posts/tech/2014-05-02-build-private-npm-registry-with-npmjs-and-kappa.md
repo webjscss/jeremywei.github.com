@@ -6,7 +6,7 @@ tags: [tech]
 
 ![NPM](http://{{ site.cdn }}/images/tech/npm.png "NPM")
 
-##写在前面
+## 写在前面
 
 采用Node.js开发私有或者商业项目的时候，我们需要创建一些内部使用的module供多个项目之间共用，这些module显然你不想发布到社区，默认情况下```npm publish```和```npm install```都是对[registry.npmjs.org](https://registry.npmjs.org/)进行操作，而我们需要的是这样一种仓库：对于一个module，首先操作私有仓库，如果私有仓库中不存在此module，则操作官方的仓库，架构大致如下：
 
@@ -14,7 +14,7 @@ tags: [tech]
 
 本文采用eBay开源的[kappa](https://github.com/krakenjs/kappa)代理和[NPM官方registry](https://github.com/npm/npm-registry-couchapp)来实现以上架构。
 
-##CouchDB
+## CouchDB
 
 [CouchDB](http://docs.couchdb.org/en/latest/intro/index.html)是专门为Web而生的数据库，它以JSON的格式对数据进行存储，数据库的操作是通过HTTP REST方法进行。CouchDB需要的版本为1.5.0及以上。（以下是在Mac上安装CouchDB的方法，其他系统安装方法见[官方文档](http://docs.couchdb.org/en/latest/install/index.html)）
 
@@ -59,7 +59,7 @@ $ HOST="http://127.0.0.1:5984"
 $ curl -X PUT $HOST/_config/admins/admin -d '"admin"'
 ```
 
-##NPM Registry
+## NPM Registry
 
 接下来我们来安装NPM Registry应用
 
@@ -132,7 +132,7 @@ $ npm publish
 
 这样，我们就搭建好了私有的npm仓库，并且已经可以向其中发布module了。那么接下来我们要实现架构图中的```Proxy```。
 
-##Kappa
+## Kappa
 
 [Kappa](https://github.com/krakenjs/kappa)是由eBay创建的一个基于[npm-delegate](https://npmjs.org/package/npm-delegate)和[hapi](https://github.com/spumko/hapi)的npm代理，通过kappa我们不需要复制整个公共的仓库数据就能创建自己的私有仓库。
 
@@ -223,7 +223,7 @@ npm http GET http://npm.myorg.com:8100/mocha
 
 如果以上没有问题，那么恭喜你终于有了自己的私有npm仓库。
 
-##参考
+## 参考
 * [https://github.com/npm/npm-registry-couchapp](https://github.com/npm/npm-registry-couchapp)
 * [https://github.com/krakenjs/kappa](https://github.com/krakenjs/kappa)
 * [http://clock.co.uk/blog/how-to-create-a-private-npmjs-repository](http://clock.co.uk/blog/how-to-create-a-private-npmjs-repository)

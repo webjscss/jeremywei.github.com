@@ -5,17 +5,17 @@ city: 南京
 tags: [tech]
 ---
 
-##前言
+## 前言
 
 对于访问量较大的网站来说，随着流量的增加单台服务器已经无法处理所有的请求，这时候需要多台服务器对大量的请求进行分流处理，即负载均衡。而如果实现负载均衡，必须在网站的入口部署服务器（不只是一台）对这些请求进行分发，这台服务器即反向代理。由于反向代理服务器是网站的入口，其负载压力大且易遭到攻击，存在单点故障的风险，所以我们需要一个高可用的方案来实现当一台反向代理服务器宕机的时候，另一台服务器会自动接管服务。基于以上要求，我们使用HAProxy，KeepAlived来构建高可用的反向代理系统。
 
-##介绍
+## 介绍
 
 [HAProxy][1]是高性能的代理服务器，其可以提供7层和4层代理，具有healthcheck，负载均衡等多种特性，性能卓越，包括Twitter，Reddit，StackOverflow，GitHub在内的多家知名互联网公司在[使用][2]。
 
 [KeepAlived][3]是一个高可用方案，通过VIP(即虚拟IP)和心跳检测来实现高可用。其原理是存在一组（两台）服务器，分别赋予Master,Backup两个角色，默认情况下Master会绑定VIP到自己的网卡上，对外提供服务。Master,Backup会在一定的时间间隔向对方发送心跳数据包来检测对方的状态，这个时间间隔一般为2秒钟，如果Backup发现Master宕机，那么Backup会发送ARP包到网关，把VIP绑定到自己的网卡，此时Backup对外提供服务，实现自动化的故障转移，当Master恢复的时候会重新接管服务。
 
-##环境
+## 环境
 
 OS: CentOS Linux release 6.0 (Final) 2.6.32-71.29.1.el6.x86_64    
 HAProxy: 1.4.18   
@@ -24,7 +24,7 @@ VIP: 192.168.1.99
 M: 192.168.1.222   
 S: 192.168.1.189   
 
-##架构
+## 架构
 
 	                    192.168.1.99
 	             +-----------VIP----------+   
@@ -46,7 +46,7 @@ S: 192.168.1.189
 	| WEB1 |  | WEB2 |  | WEB3 |
 	+------+  +------+  +------+
 
-##安装HAProxy
+## 安装HAProxy
 
 安装pcre
 
@@ -101,7 +101,7 @@ backend pool1
 
 查看HAProxy的状态：http://192.168.1.99/haproxy-stats，这个页面会显示HAProxy本身以及后端服务器的状态。
 
-##日志
+## 日志
 
 haproxy会把日志记录发送到syslog server(CentOS6下是rsyslogd，UDP514端口)， 编辑/etc/rsyslog.conf文件，添加如下内容：
 
@@ -139,7 +139,7 @@ haproxy会把日志记录发送到syslog server(CentOS6下是rsyslogd，UDP514�
 	#使用方式
 	$ /etc/init.d/haproxy start|stop|restart
 
-##安装KeepAlived
+## 安装KeepAlived
 
 安装依赖库
 
@@ -271,7 +271,7 @@ chk_haproxy.sh内容
         fi
 	fi
 
-##高可用测试
+## 高可用测试
 
 1. 在Master上停止keepalived，查看系统日志，发现MASTER释放了VIP
 
@@ -307,7 +307,7 @@ chk_haproxy.sh内容
 		Keepalived_vrrp: VRRP_Instance(VI_1) removing protocol VIPs.
 
 
-##并发测试
+## 并发测试
 
 我们使用webbench来对HAProxy进行并发测试
 
@@ -336,7 +336,7 @@ Mem：2G
 
 并发访问txt文件，HAProxy的session数量为10000左右，这说明HAProxy能够hold住10000个并发连接；并发访问php文件，HAProxy的session峰值为200左右，接近于后端PHP的并发处理能力(100x2)。
 
-##参考
+## 参考
 
 * [http://haproxy.1wt.eu/download/1.4/doc/configuration.txt](http://haproxy.1wt.eu/download/1.4/doc/configuration.txt)
 * [http://kevin.vanzonneveld.net/techblog/article/haproxy_logging/](http://kevin.vanzonneveld.net/techblog/article/haproxy_logging/)

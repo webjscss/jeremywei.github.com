@@ -17,12 +17,12 @@ tags: [tech, translate]
 5. [额外资料](#additional-literature)
 
 <span id="introduction"></span>
-##介绍
+## 介绍
 
 在这篇文章中，我们将会谈论到ECMAScript的执行上下文（execution contexts）以及与其相关的可执行代码（executable code）的类型。
 
 <span id="definitions"></span>
-##定义
+## 定义
 
 每次当控制权转移到ECMAScript可执行的代码中的时候，控制权也进入了一个`执行上下文中`。
 
@@ -34,7 +34,7 @@ tags: [tech, translate]
 从逻辑上来说，一些活动的执行上下文会组成一个栈。栈底一直是一个`全局上下文`，栈顶－是当前（活动）执行上下文。在进入和退出各种EC的时候，这个栈会被修改（push/pop）。
 
 <span id="types-of-executable-code"></span>
-##可执行代码的类型
+## 可执行代码的类型
 
 由于执行上下文的抽象概念，`可执行代码的类型`(type of an executable code)的概念被引入。说到代码类型，它在一定的时刻可以意指执行上下文。
 
@@ -45,7 +45,7 @@ tags: [tech, translate]
 在每次在进入一个函数（即使这个函数被递归的调用或者被当作构造函数），同时也包括内置的eval函数的时候，这个栈会被推入相应的元素。
 
 <span id="global-code"></span>
-##全局代码
+## 全局代码
 
 这个类型的代码是在等级`程序`（level Program）中进行被执行：换句话说，也就是加载了的外部`.js`文件或者本地的行内代码（位于`<script></script>`标签之中）。全局代码不包含任何位于函数中的代码。
 
@@ -56,7 +56,7 @@ tags: [tech, translate]
 	];
 
 <span id="function-code"></span>
-##函数代码
+## 函数代码
 
 在进入函数代码（所有类型的函数）的时候，`ECStack`会被推入新的元素。很有必要指出一下具体函数的代码不包括内部函数的代码。
 
@@ -95,7 +95,7 @@ tags: [tech, translate]
 	})();
 
 <span id="evalcode-code"></span>
-##Eval代码
+## Eval代码
 
 与`eval`代码相关的东西更加有趣。在这个例子中，存在一个`调用上下文(calling context)`的概念，换句话说就是`eval`函数被_调用_时所在的上下文。
 
@@ -165,11 +165,11 @@ tags: [tech, translate]
 	However, due to security reasons in modern engines it was fixed and is not significant anymore.
 
 <span id="conclusion"></span>
-##总结
+## 总结
 
 这个简化了的理论是以后分析与执行上下文相关内容细节所必需的，比如[像变量对象( variable object )](http://dmitrysoshnikov.com/ecmascript/chapter-2-variable-object/)或者[作用域链(scope chain, )](http://dmitrysoshnikov.com/ecmascript/chapter-4-scope-chain/)，关于它们的描述可以在对应章节找到。
 
 <span id="additional-literature"></span>
-##额外资料
+## 额外资料
 
 ECMA-262-3规范的对应部分－[10. Execution Contexts](http://bclary.com/2004/11/07/#a-10)

@@ -8,7 +8,7 @@ tags: [tech]
 
 原文：[http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api](http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#json-requests)
 
-##TL;DR
+##   TL;DR
 
 * [API是开发者的用户界面 - 所以多花点功夫使其更友好](#requirements)
 * [使用RESTful的URL和action](#restful)
@@ -34,7 +34,7 @@ tags: [tech]
 * [高效的使用HTTP状态码](#http-status)
 
 <span id="requirements"></span>
-##API的关键要求
+##    API的关键要求
 网上很多关于API设计的意见都是一些学术讨论，里边充斥着对模糊标准非常主观的解释，而不是讨论在现实世界中如何落地。这篇文章的目标是描述一个最佳实践：如何为当今的web应用设计一个务实的API。如果一个标准不合理，我不会去尝试满足这个标准。为了帮助决策过程进行，我写下了一些API必须要满足的要求：
 
 * 它应该使用合理的web标准
@@ -45,7 +45,7 @@ tags: [tech]
 API是开发者使用的UI - 就像任何UI一样，保证用户体验是很重要的。
 
 <span id="restful"></span>
-##使用RESTful的URL和action
+##   使用RESTful的URL和action
 
 如果说有一个理念被广泛的采用，那就是RESTful原则。这些原则由Roy Fielding在其博士论文
 [《network based software architectures》](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)的[第五章](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)中被首次提出。
@@ -88,7 +88,7 @@ REST牛逼的地方在于你只需要在/tickets这个单一入口上利用已�
 3. 有时候你真的没有办法把action映射到一个合理的RESTful结构上。比如，通用搜索这个操作就没法被映射到一个指定的资源入口上。这种情况下， /search是最好的选择，即使它不是一个资源。这没什么问题 - 尽可能做对API消费者有益的设计，并确保有清晰的文档说明，以免造成困惑。
 
 <span id="ssl"></span>
-##所有地方都要使用SSL - 没有例外
+##   所有地方都要使用SSL - 没有例外
 
 要一直使用SSL。没有例外。如今，你的web API可以从任何有互联网的地方（像图书馆，咖啡馆，机场等等）被访问到。这些地方并不都是安全的。很多地方根本没有对网络连接进行加密，如果验证凭证被劫持的话，这样很容易被窃听或者被冒充。
 
@@ -97,7 +97,7 @@ REST牛逼的地方在于你只需要在/tickets这个单一入口上利用已�
 需要注意的一件事是以非SSL的形式访问API的URL。不要把请求跳转到它们的SSL版本上。直接抛出一个严重错误！
 
 <span id="docs"></span>
-##文档
+##   文档
 
 一个API的好用与否取决于它的文档。文档应该很容易被找到并且能够公开访问。大部分开发者在尝试进行任何集成之前都会先看看文档。当文档被隐藏在一个PDF文件里或者需要登录才能查看的时候，文档不仅很难被找到而且也很不容易被检索。
 
@@ -106,7 +106,7 @@ REST牛逼的地方在于你只需要在/tickets这个单一入口上利用已�
 一旦你发布一个公共API，实际上你已经承诺不会在没有通知的情况下使其不可用。文档中API更新的地方必须包含废弃功能的时间表以及细节。更新应该通过博客（比如changelog）或者通过邮件列表来发布（二者都有的话就更完美了）。
 
 <span id="versioning"></span>
-##版本控制
+##   版本控制
 
 你要始终对自己的API进行版本控制。版本控制可以帮助你更快的迭代，并且可以防止无效的请求访问新的API。这还可以帮助你平滑过渡任何大版本的升级，在这个过程中你还可以继续提供老版本的API一段时间。
 
@@ -117,7 +117,7 @@ REST牛逼的地方在于你只需要在/tickets这个单一入口上利用已�
 一个API永远不会完全稳定。变化是必然的。重点是变化该如何管理。对于大部分API来说，优秀的文档和提前声明的定时更新计划是可以接受的方案。对于行业和API的潜在消费者来说这么做是比较靠谱的。
 
 <span id="advanced-queries"></span>
-##结果过滤、排序以及搜索
+##  结果过滤、排序以及搜索
 
 最好尽可能保持资源的基础URL精简。复杂的结果过滤、排序等要求和高级搜索（当被限制在一个单独的资源上）都可以通过简单得在基础URL上添加查询参数来实现。让我们看看具体例子：
 
@@ -141,7 +141,7 @@ REST牛逼的地方在于你只需要在/tickets这个单一入口上利用已�
 为了给用户提供更好的API体验，可以考虑把多个查询条件合并成更容易访问的RESTful路径。比如，上面提到过的查询最近关闭的ticket列表就可以被合并成`GET /tickets/recently_closed`
 
 <span id="limiting-fields"></span>
-##对API返回的字段进行限制
+##  对API返回的字段进行限制
 
 API消费者并不都一直需要资源的所有内容。提供选择返回字段的能力对API消费者最小化网络流量，并且加快他们对API的调用大有益处。
 
@@ -150,14 +150,14 @@ API消费者并不都一直需要资源的所有内容。提供选择返回字�
 * GET /tickets?fields=id,subject,customer_name,updated_at&state=open&sort=-updated_at
 
 <span id="useful-post-responses"></span>
-##更新和创建操作应该返回资源内容
+##  更新和创建操作应该返回资源内容
 
 PUT、POST或者PATCH操作可能会对资源的底层字段进行修改，这些字段并没有在API中提供（比如created_at或者updated_at这类的时间戳）。为了防止API消费者重复更新资源，这个API要在响应中包含updated（或者created）字段。
 
 如果是用POST来创建一个资源，那么返回[201状态码](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.5)并在[Location header](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)中指明新资源的URL。
 
 <span id="hateoas"></span>
-## 你该用HATEOAS吗？
+##   你该用HATEOAS吗？
 
 对于到底是API消费者自己生成链接还是API提供链接，有很多不同的意见。RESTful设计原则提出了[HATEOAS](https://blog.apigee.com/detail/hateoas_101_introduction_to_a_rest_api_style_video_slides)，其大体上的意思是：与API的交互动作应该由API返回的metadata提供，而不是基于外部信息。
 
@@ -168,7 +168,7 @@ PUT、POST或者PATCH操作可能会对资源的底层字段进行修改，这�
 还有一点，这篇文章提倡把版本号放在URL里边，API消费者存储资源标识符而不是URL从长远来看是合理的。毕竟，无论版本如何变化标识符是稳定的，而URL则不是。
 
 <span id="json-responses"></span>
-##响应格式只使用JSON
+##  响应格式只使用JSON
 
 是时候在API中放弃XML了。XML臃肿，难解析，难读，并且它的数据模型和大部分编程语言的数据模型不兼容，而且它的扩展优势基本用不上，因为你主要的需求是把资源的内部表现形式以一种序列化的形式输出。
 
@@ -183,7 +183,7 @@ PUT、POST或者PATCH操作可能会对资源的底层字段进行修改，这�
 数据格式的选择到底是通过Accept header实现还是通过URL实现？为了能够通过浏览器查看，应该通过URL来实现。最合理的方法是在URL后面加一个.json或.xml扩展名。
 
 <span id="snake-vs-camel"></span>
-##字段名称采用下划线还是驼峰命名方式
+##  字段名称采用下划线还是驼峰命名方式
 
 如果你在使用JSON(JavaScript Object Notation)作为你API的主要输出格式，那么「正确」的做法是遵循JavaScript的命名规则 - 这意味着字段名要使用驼峰方式命名！如果你又去为各种语言开发客户端库的话，你最好使用每种语言各自的命名惯例 - C#和Java使用驼峰命名方式，python和ruby使用下划线命名方式。
 
@@ -192,7 +192,7 @@ PUT、POST或者PATCH操作可能会对资源的底层字段进行修改，这�
 很多流行的JSON API都是使用下划线命名方式。我怀疑这么做的原因可能是因为序列化库使用了底层语言的命名规则。可能我们需要JSON序列化库可以处理命名规则转换。
 
 <span id="pretty-print-gzip"></span>
-##默认情况下不要过滤API输出中的空格，并且要支持gzip
+##  默认情况下不要过滤API输出中的空格，并且要支持gzip
 
 如果对API的输出结果进行空格压缩，从浏览器访问的话，体验很差。即使通过一些查询参数（比如?pretty=true）可以输出不过滤空格的内容，但是对于一个API来说默认输出未过滤空格的内容是更友好的。额外增加的数据传输是微不足道的，特别是当开启gzip之后。
 
@@ -221,7 +221,7 @@ $ gzip -c without-whitespace.txt > without-whitespace.txt.gz
 )（某些情况下）。Stack Exchange做得更绝，[从不返回一个未经压缩的响应内容](https://api.stackexchange.com/docs/compression)。
 
 <span id="envelope"></span>
-##默认情况下不要再外层套一个大括号，但是当需要的时候可以加
+##  默认情况下不要再外层套一个大括号，但是当需要的时候可以加
 
 很多API都会像下面一样在它们的响应内容外边套一个大括号：
 
@@ -255,7 +255,7 @@ callback_function({
 类似地，如果想要支持受限的HTTP客户端，可以提供一个额外的查询参数?envelope=true，这将会在响应内容外层嵌套大括号（没有JSONP回调函数）。
 
 <span id="json-requests"></span>
-##对POST、PUT和PATCH方法的body使用JSON格式
+##  对POST、PUT和PATCH方法的body使用JSON格式
 
 如果你正在使用本文所介绍的方案，那么你的API输出的内容都是JSON格式。让我们考虑考虑在API输入的地方也使用JSON。
 
@@ -268,7 +268,7 @@ callback_function({
 一个API如果接受JSON编码的POST、PUT和PATCH请求，需要保证请求头Content-Type为application/json，不然就返回`415 Unsupported Media Type`HTTP状态码。
 
 <span id="pagination"></span>
-##分页
+##  分页
 
 喜欢在返回结果外层嵌套大括号的API通常会在大括号中包含分页数据。我并不会责备它们 - 因为到目前为止，没有更好的方案了。现如今包含详细分页信息的正确做法是使用[RFC 5988提出的Link header](http://tools.ietf.org/html/rfc5988#page-6)。
 
@@ -282,7 +282,7 @@ Link: <https://api.github.com/user/repos?page=3&per_page=100>; rel="next",<https
 `X-Total-Count`。
 
 <span id="autoloading"></span>
-##自动加载相关资源的内容
+##  自动加载相关资源的内容
 
 很多情况下API消费者需要加载跟请求的资源相关（或者相互依赖）的资源。比起为了获取这个信息而对API进行重复请求，在原始资源的响应内容中包含相关资源的数据是一个效率很高的做法。
 
@@ -311,7 +311,7 @@ GET /tickets/12?embed=customer.name,assigned_user
 当然，是不是能实现这个功能取决于内部系统的复杂性。这类功能可能会引起[N+1查询问题](http://stackoverflow.com/questions/97197/what-is-the-n1-selects-issue)。
 
 <span id="method-override"></span>
-##覆盖HTTP方法
+##  覆盖HTTP方法
 
 一些HTTP客户端只支持GET和POST请求。为了能够加强这些客户端的访问能力，API需要一种能够覆盖HTTP方法的做法。尽管这里没有任何强制的标准，但流行的做法是API会接收一个请求头`X-HTTP-Method-Override`，它的值可以是PUT、PATCH或者DELETE三者之一。
 
@@ -319,7 +319,7 @@ GET /tickets/12?embed=customer.name,assigned_user
 
 <span id="rate-limiting"></span>
 
-##请求频次限制
+##  请求频次限制
 
 为了防止滥用，给API加上请求频次限制是标准做法。[RFC 6585](http://tools.ietf.org/html/rfc6585)引入了一个HTTP状态码[429 Too Many Requests](http://tools.ietf.org/html/rfc6585#section-4)来解决这个问题。
 
@@ -340,7 +340,7 @@ GET /tickets/12?embed=customer.name,assigned_user
 为什么说在`X-Rate-Limit-Reset`中使用UNIX时间戳是个坏主意？[HTTP标准](http://www.w3.org/Protocols/rfc2616/rfc2616.txt)中已经[指定](http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3)要使用[RFC 1123日期格式](http://www.ietf.org/rfc/rfc1123.txt)（正在[Date](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.18)、[If-Modified-Since](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.25)和[Last-Modified](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.29)等header中使用）。如果我们想要指定一个新的HTTP header，那么应该遵循RFC 1123规定而不是使用UNIX时间戳。
 
 <span id="authentication"></span>
-##认证
+##  认证
 
 RESTful API应该是无状态。这意味着对请求的认证不应该基于cookie或者session。相反，每个请求应该带有一些认证凭证。
 
@@ -353,7 +353,7 @@ RESTful API应该是无状态。这意味着对请求的认证不应该基于coo
 不管怎么样，以上三种方法是用来在API之间传输token的方法。实际传输的token可以是一样的。
 
 <span id="caching"></span>
-##缓存
+##  缓存
 
 HTTP内置了缓存策略。你只需要在API响应中增加几个header，在处理请求的时候对一些请求header做点校验。
 
@@ -364,7 +364,7 @@ ETag：当处理一个请求的时候，在响应中包含一个名为`ETag`的H
 Last-Modified：基本上跟ETag的工作原理差不多，区别在于这个header使用的是时间戳。响应header`Last-Modified`中包含一个[RFC 1123](http://www.ietf.org/rfc/rfc1123.txt)格式的时间戳，用来对`If-Modified-Since`的值进行校验。注意HTTP协议接受[三种不同的日期格式](http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3)，所以对这三种格式服务器应该都能处理。
 
 <span id="errors"></span>
-##错误处理
+##  错误处理
 
 就像HTML的出错页面向访问者展示了有用的错误消息一样，API也应该用之前熟悉易读的格式来提供有用的错误消息。错误的表现形式应该跟其他资源保持一致，只是用一些自己的字段。
 
@@ -402,7 +402,7 @@ JSON错误内容应该为开发者提供一些东西 - 有用的错误消息，�
 ```
 
 <span id="http-status"></span>
-##HTTP状态码
+## HTTP状态码
 
 HTTP定义了很多[有意义的状态码](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes)，你可以在你的API中使用。这些状态码可以帮助API消费者用来路由它们获取到的响应内容。我整理了一个你肯定会用到的状态码列表：
 

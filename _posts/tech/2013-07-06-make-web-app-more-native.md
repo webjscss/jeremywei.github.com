@@ -5,7 +5,7 @@ city: 南京
 tags: [tech]
 ---
 
-##前言
+## 前言
 
 iOS上的一个Web App（下图中的「念」）和Native App(原生应用)在外观上看起来基本上一样，但是其使用的技术是HTML，CSS，Javascript，而不是原生应用所使用的Objective-C。
 
@@ -13,7 +13,7 @@ iOS上的一个Web App（下图中的「念」）和Native App(原生应用)在�
 
 本文简单介绍一下如何把一个Web站点改造成iOS上的Web App，这里假设你的网站是响应式设计（responsive design）或者已经做过移动端的适配。
 
-##viewport
+## viewport
 
 我们在HTML中加上viewport(这里假设用户已经对viewport有所了解)　meta标签：
 
@@ -23,7 +23,7 @@ iOS上的一个Web App（下图中的「念」）和Native App(原生应用)在�
 
 ![02](http://{{ site.cdn }}/images/web-app/02.jpg "02")
 
-##Icon
+## Icon
 
 当用户通过safari访问我们网站的时候，用户是可以把网站的URL以一个快捷方式的形式添加到主屏幕的，展示形式跟原生的应用是一样，所以我们要给我们的网站添加应用Icon。
 
@@ -54,7 +54,7 @@ iOS所用的icon是`png`格式的，其提供了`apple-touch-icon`和`apple-touc
 * apple-touch-icon-precomposed.png
 * apple-touch-icon.png
 
-##启动界面
+## 启动界面
 
 像原生应用一样，你也可以给Web App加上一个启动界面，很简单：
 
@@ -62,7 +62,7 @@ iOS所用的icon是`png`格式的，其提供了`apple-touch-icon`和`apple-touc
 
 在`iPhone`和`iPod touch`上，尺寸大小必须为`320 x 460`。
 
-##隐藏Safari用户栏
+## 隐藏Safari用户栏
 
 为了更加像原生应用，我们还可以对Safari的用户栏和地址栏进行隐藏，这个叫作`standalone`模式，加入以下meta进入此模式：
 
@@ -72,7 +72,7 @@ iOS所用的icon是`png`格式的，其提供了`apple-touch-icon`和`apple-touc
 
 ![04](http://{{ site.cdn }}/images/web-app/04.jpg "04")
 
-##链接问题
+## 链接问题
 
 在Safari中，如果点击一个链接，那么Safari将会打开一个新的tab，显然做为一个应用这体验简直太差了，需要在HTML中加入以下JavaScript来阻止此行为：
 
@@ -104,11 +104,11 @@ iOS所用的icon是`png`格式的，其提供了`apple-touch-icon`和`apple-touc
 
 以上代码来自[gist](https://gist.github.com/kylebarrow/1042026)。
 
-##最后
+## 最后
 
 Have fun　：）
 
-##参考
+## 参考
 
 * [Configuring Web Applications](http://developer.apple.com/library/ios/#documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html)
 * [Everything you always wanted to know about touch icons](http://mathiasbynens.be/notes/touch-icons)

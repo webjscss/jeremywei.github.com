@@ -7,7 +7,7 @@ tags: [tech, translate]
 
 原文：[http://devzone.zend.com/node/view/id/1023](http://devzone.zend.com/node/view/id/1023)
 
-##拷贝 VS 引用
+## 拷贝 VS 引用
 
 这有两个方法来引用一个`zval`。第一种，上面介绍过的，叫做**copy-on-write referencing**。第二种，叫做**full referencing**，就是用户空间脚本编写者非常熟悉的「引用」关系，当写出如下代码：`$a = &$b;`的时候就会发生。
 在一个zval中，这两种类型通过成员`is_ref`区分开来，当`is_ref`为0的时候是拷贝引用（copy references），非0的时候就是完全引用（full references）。注意一个`zval`不可能既是拷贝引用，又是完全引用。所以如果一个变量刚开始`is_ref`值非0，然后作为一个拷贝被赋给了一个新变量，那么肯定会执行一个完全拷贝。考虑下面的用户空间代码：
@@ -29,11 +29,11 @@ tags: [tech, translate]
 
 最终的结果是一样的，`$b`是`$a`的完全引用，`$c`是`$a`的一个拷贝。这次，内部的行为稍微有些不同。像之前一样，在开始的时候为`$a`创建了一个新的`zval`，然后设置`is_ref==0`，`refcount=1`。之后，`$c = $a;`这个语句把上面那个相同的`zval`赋给`$c`变量，同时增加`refcount`到2，`is_ref`仍然是0。当Zend Engine遇到`$b = &amp;$a;`的时候，它只是想要设置is_ref为1，但是不能这么做因为这么做会影响`$c`。替代的做法是它创建一个新的`zval`，通过zval_copy_ctor()来把原始的内容拷贝进来，然后对原始`zval`的`refcount`减一从而来指明$a不在使用那个`zval`了。它把新`zval`的`is_ref`设置为1，`refcount`设置为2，然后更新`$a`和`$b`变量，让其引用这个`zval`。
 
-##完整性检查
+## 完整性检查
 
 像之前一样，我们三个主要文件中的完整代码已经列在下面了：
 
-##config.m4
+## config.m4
 
 	PHP_ARG_ENABLE(hello, [whether to enable Hello World support],
 	[ --enable-hello   Enable Hello World support])
@@ -43,7 +43,7 @@ tags: [tech, translate]
 	  PHP_NEW_EXTENSION(hello, hello.c, $ext_shared)
 	fi
 
-##php_hello.h
+## php_hello.h
 
 ```
 	#ifndef PHP_HELLO_H
@@ -99,7 +99,7 @@ tags: [tech, translate]
 	#endif
 ```
 
-##hello.c
+## hello.c
 
 ```
 	#ifdef HAVE_CONFIG_H

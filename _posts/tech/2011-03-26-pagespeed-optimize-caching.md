@@ -9,13 +9,13 @@ tags: [tech, translate]
 
 大多数网页中会包含很多资源，比如CSS，JavaScript，图片，这些资源一般很少有改动，所以可以缓存在浏览器。浏览器缓存可以减少HTTP的请求数量，减少请求的交互时间，减少响应的大小，减少带宽使用量。
 
-##改进浏览器缓存(Leverage browser caching)
+## 改进浏览器缓存(Leverage browser caching)
 
-###概述
+###  概述
 
 给资源加上一个过期时间(Expire)或者生存时间(Cache-Control: max-age)可以在浏览器上缓存那些不经常变化的资源，本地访问肯定比网络访问要快。
 
-###具体
+###  具体
 
 HTTP和HTTPS支持本地缓存，最新的浏览器(比如IE7,Chrome等)用heuristic的方式来决定对没有明确设置缓存header的资源缓存多长时间。对于老旧的浏览器，必须要对资源明确设置了缓存header才能缓存，并且有些浏览器无法缓存通过SSL加密传输的资源。为了兼容所有浏览器，还是需要对资源进行明确的缓存header设置，可缓存的资源包括图片，CSS，JavaScript，以及其他二进制文件(包 括多媒体文件，PDF，FLASH等)，HTML不需要进行缓存。
 
@@ -31,7 +31,7 @@ HTTP/1.1提供以下缓存用的响应头：
 
 对于网页中可以缓存的资源，Expires和Cache-Control: max-age之间需要有一个被设置，Last-Mofidied和Etag之间需要有一个被设置。这个四个header不需要都被设置，因为他们的功能用重复。
 
-###建议
+###  建议
 
 1. 给静态资源设置缓存头(Set caching headers aggressively for all static resources)
 
@@ -53,17 +53,17 @@ HTTP/1.1提供以下缓存用的响应头：
 
    一些版本的Firefox需要在设置了普通缓存头的基础上，设置Cache-Control：public才能缓存HTTPS的资源。这个头是用来在代理服务器上缓存资源用的，但是即使设置了，代理服务器也无法缓存HTTPS的资源，所以这个调整是安全的。
 
-##改进代理缓存(Leverage proxy caching)
+## 改进代理缓存(Leverage proxy caching)
 
-###概述
+###  概述
 
 对静态资源使用public缓存，让浏览器从更近的代理服务器访问资源，而不是从原始服务器访问。
 
-###具体
+###  具体
 
 HTTP除了提供浏览器缓存，还提供了代理服务器缓存机制，静态资源可以被缓存在代理服务器上，一般是ISP的服务器。即使一个用户首次访问你的网站，但 是很有可能他的资源是来自代理服务器上的缓存。使用代理缓存的益处是可以降低延迟和节省带宽。你可以通过设置Cache-control: public头来使用代理缓存。
 
-###建议
+###  建议
 
 1. 不要在静态资源中包含查询字串(Don’t include a query string in the URL for static resources)     
 

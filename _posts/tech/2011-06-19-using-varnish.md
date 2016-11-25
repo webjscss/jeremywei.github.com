@@ -5,11 +5,11 @@ city: 南京
 tags: [tech]
 ---
 
-##介绍
+## 介绍
 
 [Varnish][varnish]是一款高性能的开源HTTP加速器，挪威最大的在线报纸[Verdens Gang][VerdensGang]使用3台Varnish代替了原来的12台Squid，性能居然比以前更好。Varnish 的作者Poul-Henning Kamp是FreeBSD的内核开发者之一，他认为现在的计算机比起1975年已经复杂许多。在1975年时，储存媒介只有两种：内存与硬盘。但现在计算机系统的内存除了主存外，还包括了cpu内的L1、L2，甚至有L3快取。硬盘上也有自己的快取装置，因此Squid cache自行处理物件替换的架构不可能得知这些情况而做到最佳化，但操作系统可以得知这些情况，所以这部份的工作应该交给操作系统处理，这就是Varnish cache设计架构。目前很多互联网公司在使用Varnish，其中包括[Facebook](http://www.facebook.com "非死不可")。
 
-##特性
+## 特性
 
 * [VCL][1](Varnish Configuration Language)：区别于其他系统，Varnish采用了自身的配置语言来配置，非常容易上手，这些配置会被编译成二进制机器码，明显加快了执行速度。
 * [Health checks][2]：完善的健康检查机制。
@@ -19,12 +19,12 @@ tags: [tech]
 * [Logging in Varnish][6]：Varnish的log不是记录在文件中的，而是记录在共享内存中。当日志大小达到分配的共享内存容量，覆盖掉旧的日志。以这种方式记录日志比文件的形式要快很多，并且不需要磁盘空间。
 * 丰富的管理程序：varnishadm，varnishtop，varnishhist，varnishstat以及varnishlog等。
 
-##环境
+## 环境
 
 OS: CentOS 5.5   
 varnish: 2.1.5    
 
-##安装
+## 安装
 
 首先安装ncurses-devel，否则`varnishstat`，`varnishtop`都无法编译完成
 
@@ -47,7 +47,7 @@ varnish: 2.1.5
 其中`-f`用来指定配置文件，`-T`指定管理台的访问地址，`-a`指定Varnish监听地址，`-s`指定Varnish以文件方式来缓存资源，地址为/tmp，大小200MB。
 
 
-##配置
+## 配置
 
 ```
 	#后端处理器b1
@@ -195,14 +195,14 @@ varnish: 2.1.5
 	}
 ```
 
-##启动脚本
+## 启动脚本
 
 	$ wget -O varnishd https://raw.github.com/gist/3671408/3a51578bbd60a4cf8317bdc9508527b81eb23da5/varnishd
 	$ cp varnishd /etc/init.d/varnishd
 	$ chmod +x /etc/init.d/varnishd
 	$ /etc/init.d/varnishd start
 
-##Subroutine列表
+## Subroutine列表
 
 * **vcl_recv**
 在请求开始时候被调用，在请求已经被接收到并且解析后调用。目的就是决定是否处理这个请求，怎么处理，使用哪个后端。vcl_recv以`return`结束，参数可以为如下关键字：    
@@ -257,7 +257,7 @@ varnish: 2.1.5
 **deliver**：发送对象到客户端。      
 **restart**：重新启动这个事务，增加重启计数。如果重启的次数高于`max_restarts`，varnish会引起一个错误。      
 
-##重要变量
+## 重要变量
 
 subroutine不带参数，一般通过全局变量来实现信息的传递。
 

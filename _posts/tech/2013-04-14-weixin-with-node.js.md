@@ -7,18 +7,18 @@ tags: [tech]
 
 ![Node.js](http://{{ site.cdn }}/images/tech/nodejs.jpg "Node.js")
 
-##介绍
+## 介绍
 `weixin-api`是对微信公众平台[消息接口][1]的Node.js实现。
 
 * NPM：[https://npmjs.org/package/weixin-api](https://npmjs.org/package/weixin-api)
 * Github：[https://github.com/JeremyWei/weixin_api](https://github.com/JeremyWei/weixin_api)
 
-##安装
+## 安装
 
 	$ npm install weixin-api
 
-## 功能
-### 消息监听
+##  功能
+###   消息监听
 
 根据微信公众平台的API规范，对四种消息进行监听，通过传递`callback`来对消息进行处理，其中callback只有一个参数`msg`，不同消息其`msg`内容不同，各属性代表的含义请对照微信公众平台的API规范。
 
@@ -101,7 +101,7 @@ msg结构：
 		eventKey : ""
 	}
 ```
-### 消息回复
+###   消息回复
 消息的回复统一使用`sendMsg(msg)`方法，其中`msg`可以为以下内容：
 
 * 回复文本消息
@@ -163,13 +163,13 @@ msg结构：
 # 示例
 我们使用[express][2]来创建一个简单的微信应用
 
-##安装express
+## 安装express
 
 ```
 $ npm install express -g
 ```
 
-##创建应用
+## 创建应用
 
 ```
 $ express myweixin
@@ -194,7 +194,7 @@ $ express myweixin
 
 然后执行`npm install`
 
-##app.js
+## app.js
 
 ```
 var express = require('express'),
@@ -318,7 +318,7 @@ app.post('/', function(req, res) {
 app.listen(3000);
 ```
 
-##启动
+## 启动
 
 ```
 	$ cd myweixin

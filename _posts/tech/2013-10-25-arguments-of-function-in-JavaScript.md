@@ -5,10 +5,10 @@ city: 南京
 tags: [tech]
 ---
 
-##前言
+## 前言
 JavaScript从做为浏览器上唯一的开发语言，到近期HTML5以及Node.js等后端技术的兴起，其发展势头已经不可限量，本文主要介绍JavaScript中函数参数的传递方式，是[《JavaScript高级程序设计第三版》](http://book.douban.com/subject/10546125/)的读书笔记。
 
-##变量类型
+## 变量类型
 
 JavaScript中的变量有5个基本数据类型（Undefined, Null, Boolean, Number, String）和引用数据类型（Object，Function，Array等）。
 
@@ -44,7 +44,7 @@ JavaScript中的变量有5个基本数据类型（Undefined, Null, Boolean, Numb
     </tbody>
 </table>
 
-##基本类型和引用类型的区别
+## 基本类型和引用类型的区别
 基本类型和引用类型的变量声明方式是一样的：
 
 	// 声明一个String类型的变量
@@ -69,7 +69,7 @@ JavaScript中的变量有5个基本数据类型（Undefined, Null, Boolean, Numb
 	obj2.name = "James";
 	console.log(obj1.name); //James
 
-##参数传递
+## 参数传递
 在JavaScript中无论是基本类型还是引用类型，函数参数都是按值传递的，先来看基本类型：
 
 	function test(num) {

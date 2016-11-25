@@ -5,7 +5,7 @@ city: 南京
 tags: [tech, translate]
 ---
 
-###介绍
+###  介绍
 
 如果你在读这篇入门文章，那么你可能对写PHP扩展有点兴趣。如果不是… 好吧，那么等我们写完这篇文章，你将会发现一个之前自己完全不知道，但是非常有趣的东西。
 
@@ -20,7 +20,7 @@ tags: [tech, translate]
 
 这儿有很多完美的原因，但是要想创建一个扩展，你首先要需要明白什么是扩展。
 
-###什么是扩展？
+###  什么是扩展？
 
 如果你用过PHP，那么你就用过扩展。除了一些极少的特殊情况之外，PHP语言中的每个用户空间函数都是以组的形式分布在一个或多个扩展之中。这些函数中的大部分是位于标准扩展中的 – 总共超过400个。PHP源码中包含86个扩展，平均每个扩展中有30个函数。算一下，大概有2500个函数。如果这个不够用，[PECL](http://pecl.php.net/ "PECL")仓库还提供了超过100个其他扩展，或者还可以在互联网上找到更多的扩展。
 
@@ -28,7 +28,7 @@ tags: [tech, translate]
 
 PHP的核心是由两个独立的部分组成的。在最底层是**Zend Engine (ZE)**。ZE 负责把人类可以理解的脚本解析成机器可以理解的符号（token），然后在一个进程空间内执行这些符号。ZE还负责内存管理，变量作用域，以及函数调用的调度。另一部分是**PHP**。PHP负责与**SAPI**层（Server Application Programming Interface，经常被用来与Apache, IIS, CLI, CGI等host环境进行关联）的交互以及绑定。它也为`safe_mode`和`open_basedir`检查提供了一个统一的控制层，就像streams层把文件和网络I/O与用户空间函数（例如`fopen()`，`fread()`和`fwrite()`）关联起来一样。
 
-###生命周期
+###  生命周期
 
 当一个给定的SAPI启动后，以`/usr/local/apache/bin/apachectl start`的响应为例，PHP便以初始化它的核心子系统作为开始。随着SAPI启动程序的结束，PHP开始加载每个扩展的代码，然后调用它们的**模块初始化**(`MINIT`)程序。这就给每个扩展机会用来初始化内部变量，申请资源，注册资源处理器，并且用ZE注册自己的函数，这样如果一个脚本调用这些函数中的一个，ZE就知道执行哪些代码。
 
@@ -42,7 +42,7 @@ PHP的核心是由两个独立的部分组成的。在最底层是**Zend Engine 
 
 这个过程第一次听令人有些费解，但是一旦你深入到一个扩展的开发过程中，它就会逐渐的清晰起来。
 
-###内存分配
+###  内存分配
 
 为了避免写的很糟糕的扩展泄露内存，ZE以自己内部的方式来进行内存管理，通过用一个附加的标志来指明**持久化**。一个**持久化分配**的内存比单个页面请求存在的时间要长。一个**非持久化分配**的内存，相比之下，在请求结束的时候就会被释放，不管free函数是否被调用。例如用户空间变量，都是非持久化分配的内存，因为在请求结束之后这些变量都没有用了。
 
@@ -57,7 +57,7 @@ Traditional Non-Persistent Persistent
 `strdup(str)` `strndup(str, len)` `estrdup(str)`
 `estrndup(str, len)` `pestrdup(str, 1)` `pemalloc() &amp; memcpy()``free(ptr)``efree(ptr)``pefree(ptr, 1)``realloc(ptr, newsize)``erealloc(ptr, newsize)``perealloc(ptr, newsize, 1)``malloc(count * num + extr)`<sup>**</sup>`safe_emalloc(count, num, extr)``safe_pemalloc(count, num, extr)`* __The `pemalloc()` family include a ‘persistent’ flag which allows them to behave like their non-persistent counterparts.<br/>For example: `emalloc(1234)` is the same as `pemalloc(1234, 0)`__<br/>** __`safe_emalloc()` and (in PHP 5) `safe_pemalloc()` perform an additional check to avoid integer overflows__
 
-###建立一个开发环境
+###  建立一个开发环境
 
 现在你已经掌握了一些关于PHP和ZE的工作原理，我估计你希望要深入进去，并且开始写些什么。无论如何在你能做之前，你需要收集一些必要的开发工具，并且建立一个满足自己目标的环境。
 
@@ -67,7 +67,7 @@ Traditional Non-Persistent Persistent
 
 选项，这两个选项在开发过程中非常方便。第一个是`--enable-debug`。这个选项将会用附加符号信息来编译PHP所以，如果一个段错误发生，那么你将可以从PHP收集到一个核心dump信息，然后使用gdb来跟踪这个段错误是在哪里发生的，为什么会发生。另一个选项依赖于你将要进行扩展开发的PHP版本。在PHP4.3这个选项叫`--enable-experimental-zts`，在PHP5和以后的版本中叫`--enable-maintainer-zts`。这个选项将会让PHP思考在多线程环境中的行为，并且可以让你捕获常见的程序错误，这些错误在非线程环境中不会引起问题，但在多线程环境中却使你的扩展变得不可用。一旦你已经使用这些额外的选项编译好了PHP，并且已经安装在了你的开发服务器（或者工作站）上，那么你可以开始建立你的第一个扩展了。
 
-###Hello World
+###  Hello World
 
 如果一门语言的入门介绍没有**Hello World**程序，那么这个介绍就是不完整的。在这种情况下，你将会建立一个扩展，这个扩展会导出一个返回”Hello World”字符串的函数。如果用PHP，你可能这么写：
 
@@ -80,7 +80,7 @@ Traditional Non-Persistent Persistent
 
 现在你将会把这个逻辑放到一个PHP扩展中。首先让我们在你PHP源码树的**ext/**目录下创建一个名叫**hello**的目录，并进入(`chdir`)到这个目录中。这个目录实际上可以放在任何地方，PHP源码树内或者PHP源码树外，但是我希望你把它放在源码树内为了接下来的文章使用。在这你需要创建三个文件：一个包含你`hello_world`函数的**源文件**，一个**头文件**，其中包含PHP加载你扩展时候所需的引用，一个**配置文件**，它会被phpize用来准备扩展的编译环境。
 
-###config.m4
+###  config.m4
 
 	PHP_ARG_ENABLE(hello, whether to enable Hello World support,
 	[ --enable-hello Enable Hello World support])
@@ -91,7 +91,7 @@ Traditional Non-Persistent Persistent
 	fi
 
 
-###php_hello.h
+###  php_hello.h
 
 	#ifndef PHP_HELLO_H
 		#define PHP_HELLO_H 1
@@ -105,7 +105,7 @@ Traditional Non-Persistent Persistent
 	#endif
 
 
-###hello.c
+###  hello.c
 
 	#ifdef HAVE_CONFIG_H
 		#include "config.h"
@@ -164,7 +164,7 @@ Traditional Non-Persistent Persistent
 
 在这个版本中，你手动为”Hello World”字符串分配了内存，最终返回给调用脚本，然后把内存“给了”`RETURN_STRING`，第二个参数值0说明不需要为这个字符串做拷贝。
 
-###建立你的扩展
+###  建立你的扩展
 
 这个练习的最后一步是把你的扩展编译成一个动态加载的模块。如果你已经正确的拷贝以上的例子，那么这个工作就是在__ext/hello/__目录下执行三个命令：
 
@@ -234,7 +234,7 @@ Traditional Non-Persistent Persistent
 
 这还有三个额外的返回类型：`RESOURCE`（`mysql_connect()`, `fsockopen()`和`ftp_connect()`等函数返回的类型），`ARRAY`（也就是`HASH`表），`OBJECT`（`new`关键字返回的）。这些类型我们将会在[第二部分](http://weizhifeng.net/write-php-extension-part2-1.html)也就是深入变量的时候来介绍。
 
-###INI设置
+###  INI设置
 
 Zend引擎提供了两种管理`INI`值的方法。我们现在先看一下简单的方法，之后当你有机会使用全局变量的时候，再看一下更加完整，更加复杂的方法。
 
@@ -322,7 +322,7 @@ Zend引擎提供了两种管理`INI`值的方法。我们现在先看一下简�
 
 当前我们将要跳过第四个参数，只是提一下这个参数允许传递一个回调方法，这个方法会在__ini__配置被修改的时候触发，无论什么时候，比如用__ini_set()__修改。这就允许一个扩展可以在配置被修改的时候做一些更准确的控制，或者触发一个需要依赖新配置的动作。
 
-###全局变量
+###  全局变量
 
 通常，一个扩展在一个特殊的请求中需要跟踪一个值，并保证这个值与同一时间其他的请求是独立开来的。在一个非线程SAPI中那很简单：在源文件中直接声明一个全局变量，在需要的时候访问它。麻烦是，自从PHP被设计成可以运行在多线程的web服务器上（像Apache2和IIS），所以需要把一个线程使用的全局变量与其他线程使用的全局变量分离开来。PHP用TSRM (Thread Safe Resource Management)抽象层，有时有也叫ZTS (Zend Thread Safety)，非常简单的解决了这个问题。
 
@@ -417,7 +417,7 @@ Zend引擎提供了两种管理`INI`值的方法。我们现在先看一下简�
 
 关键在于这两个函数什么时候被调用。`php_hello_init_globals()`只有当一个新的进程或者线程启动的时候才会被调用；而与此同时，每个进程可以处理多个请求，所以用这个函数来初始化我们的`counter`为`0`的话，那么这个初始化只会在第一个页面请求到达的时候工作。等随后到达这个相同进程的页面请求，得到的仍然是旧的`counter`值，因此也就不会从0开始计数了。为了让每个单独的页面请求都能初始化`counter`为`0`，我们实现了`RINIT`函数，就像你之前了解的那样，这个函数在每次页面请求的时候都会被调用。我们在这个时候包含了`php_hello_init_globals()`函数是因为你将会在一段时间后使用它，同时也是由于如果把一个`NULL`做为初始化函数传递给`ZEND_INIT_MODULE_GLOBALS()`将会在非线程平台上引起一个段错误。
 
-###INI配置项作为全局变量值
+###  INI配置项作为全局变量值
 
 如果你回想起之前，一个用`PHP_INI_ENTRY()`声明的__php.ini__的配置项被解析成一个字符串值，并且在需要的时候可以用`INI_INT()`，`INI_FLT()`和`INI_BOOL()`转换成对应的类型。
 
@@ -456,7 +456,7 @@ Zend引擎提供了两种管理`INI`值的方法。我们现在先看一下简�
 
 这就是全部了。在`INI_ENTRY`中指定的`OnUpdateBool`方法将会自动的转换__php.ini__，__.htaccess__文件提供的或者在脚本中通过`ini_set()`设置的值称为TRUE或者FALSE。`STD_PHP_INI_ENTRY`的最后三个参数是来告诉PHP修改哪个全局变量，我们扩展的全局变量的数据结构，以及这些全局变量被保存到的全局容器的名称。
 
-###稳妥的检查
+###  稳妥的检查
 
 到现在我们的三个文件看起来应该像下面所列的一样。（一些内容已经被移除了，并且规整到一起，只为了易读）
 **config.m4**
@@ -608,7 +608,7 @@ Zend引擎提供了两种管理`INI`值的方法。我们现在先看一下简�
 	    RETURN_NULL();
 	}
 
-###接下来是什么？
+###  接下来是什么？
 
 在这个教程中，我们探寻了一个简单PHP扩展的结构，这个扩展向用户空间增加了函数，返回了值，声明了INI配置，跟踪了一个请求过程中的内部状态。
 

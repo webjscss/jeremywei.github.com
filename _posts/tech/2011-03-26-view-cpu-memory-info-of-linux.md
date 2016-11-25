@@ -5,7 +5,7 @@ city: 南京
 tags: [tech]
 ---
 
-###内存信息
+###  内存信息
 
 使用[free]查看内存信息：
 
@@ -35,7 +35,7 @@ tags: [tech]
 
 PS:跑的虚拟机，内存有些小，见笑~~~
 
-###CPU信息
+###  CPU信息
 
 Linux系统中的CPU信息存在于`/proc/cpuinfo`文件中，如果想了解全部的信息，可以直接查看这个文件。
 
@@ -55,7 +55,7 @@ CPU是几个核心的？
 
 如何查看每个CPU的使用情况？执行[top]指令，然后按1就可以看到CPU的使用情况了。
 
-###参考
+###  参考
 
 [http://www.php-oa.com/2008/04/04/linux-free.html](http://www.php-oa.com/2008/04/04/linux-free.html)
 

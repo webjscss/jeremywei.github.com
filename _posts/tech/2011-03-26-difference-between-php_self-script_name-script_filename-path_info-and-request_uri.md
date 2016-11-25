@@ -5,12 +5,12 @@ city: 南京
 tags: [tech]
 ---
 
-###前言
+###  前言
 
 [PHP]的[$_SERVER][3]数组中存在五个和路径相关的变量：`PHP_SELF`，`SCRIPT_NAME`，      
 `SCRIPT_FILENAME`，`PATH_INFO`，`REQUEST_URI`，这五个变量经常会被混淆，做下区分。
 
-###测试环境
+###  测试环境
 
 Nginx0.8.54 + FastCGI + PHP5.3.4
 
@@ -63,7 +63,7 @@ Nginx0.8.54 + FastCGI + PHP5.3.4
 	       |---test
 	             |---test.php
 
-###测试脚本
+###  测试脚本
 
 使用如下脚本进行测试：
 
@@ -74,7 +74,7 @@ Nginx0.8.54 + FastCGI + PHP5.3.4
 	    echo 'REQUEST_URI=' . $_SERVER['REQUEST_URI'] . '<br />';
 	?>
 
-###测试结果
+###  测试结果
 
 * PHP_SELF: 当前所执行的脚本的文件名，这个值是相对于根目录来说。  
    
@@ -105,7 +105,7 @@ Nginx0.8.54 + FastCGI + PHP5.3.4
   如果请求**http://example.com/test/test.php?k=v**，则`REQUEST_URI`     
   为**/test/test.php?k=v**
 
-###区别
+###  区别
 
 * PHP_SELF VS SCRIPT_NAME：
   
@@ -126,7 +126,7 @@ Nginx0.8.54 + FastCGI + PHP5.3.4
 	
   那么`REQUEST_URI`为**/test/test.php**，`SCRIPT_NAME`为**/test/test2.php**。
 
-###参考
+###  参考
 
 [http://tools.ietf.org/html/draft-robinson-www-interface-00](http://tools.ietf.org/html/draft-robinson-www-interface-00)      
 [http://stackoverflow.com/questions/279966/php-self-vs-path-info-vs-script-name-vs-request-uri](http://stackoverflow.com/questions/279966/php-self-vs-path-info-vs-script-name-vs-request-uri)   

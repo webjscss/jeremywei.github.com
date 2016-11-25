@@ -8,7 +8,7 @@ tags: [tech, design]
 
 『大自然是灵感最大的源泉。大自然是和谐的，你需要做的是把这个和谐带到数字世界之中。你应该选择那些来自大自然的颜色，比如天空、云朵、落日以及植物。』
 
-##颜色轮（Color Wheel）
+## 颜色轮（Color Wheel）
 颜色轮是学习颜色搭配的基础，这个理论是由[艾萨克·牛顿爵士](http://zh.wikipedia.org/wiki/%E8%89%BE%E8%90%A8%E5%85%8B%C2%B7%E7%89%9B%E9%A1%BF)（没错，就是那个物理单位：牛）在1666年首创，之后许多的科学家和艺术家都对其进行了演化，延续到现在。
 
 ![color-wheel-01](http://{{ site.cdn }}/images/design/basic-color-theory/color-wheel-01.jpeg "color-wheel-01")
@@ -21,9 +21,9 @@ tags: [tech, design]
 
 ![color-wheel-02](http://{{ site.cdn }}/images/design/basic-color-theory/color-wheel-02.jpeg "color-wheel-02")
 
-##颜色关系
+## 颜色关系
 
-###单一（Monochrome）
+###  单一（Monochrome）
 
 要想弄清什么是单一色（Monochrome color），我们首先要先介绍几个概念
 
@@ -37,25 +37,25 @@ tags: [tech, design]
 
 ![monochrome-03](http://{{ site.cdn }}/images/design/basic-color-theory/monochrome-03.png "monochrome-03")
 
-###相似（Analogous）
+###  相似（Analogous）
 
 相似色就是颜色轮上相邻的颜色，这些颜色过渡自然，比如：
 
 ![analogous-01](http://{{ site.cdn }}/images/design/basic-color-theory/analogous-01.png "analogous-01")
 
-###互补（Complementary）
+###  互补（Complementary）
 
 互补色就是位于颜色轮上相对位置的两个颜色，这些颜色对比强烈，比如：
 
 ![complementary-01](http://{{ site.cdn }}/images/design/basic-color-theory/complementary-01.png "complementary-01")
 
-###三色组（Triadic）
+###  三色组（Triadic）
 
 这个关系是取三个互相平衡的颜色，这三个颜色分别位于颜色轮的三等分处，比如：
 
 ![Triadic-01](http://{{ site.cdn }}/images/design/basic-color-theory/triadic-01.png "Triadic-01")
 
-##颜色冷暖
+## 颜色冷暖
 
 颜色的冷暖会给人带来不同的感觉和体验，其中
 
@@ -65,7 +65,7 @@ tags: [tech, design]
 
 ![warm-and-cool](http://{{ site.cdn }}/images/design/basic-color-theory/warm-and-cool.png "warm-and-cool")
 
-##参考
+## 参考
 * [http://www.rocket-design.fr/color-template/](http://www.rocket-design.fr/color-template/)
 * [http://www.colormatters.com/color-and-design/basic-color-theory](http://www.colormatters.com/color-and-design/basic-color-theory)
 * [http://en.wikipedia.org/wiki/Tints_and_shades](http://en.wikipedia.org/wiki/Tints_and_shades)

@@ -112,7 +112,7 @@ tags: [tech]
 
 chitsaou写的[《Git-rebase 小筆記》](http://blog.yorkxin.org/posts/2011/07/29/git-rebase/)中有详细的介绍，可以自行查看。
         
-##参考
+## 参考
 
 * [http://git-scm.com/docs/git-rebase](http://git-scm.com/docs/git-rebase)
 * [http://blog.yorkxin.org/posts/2011/07/29/git-rebase/](http://blog.yorkxin.org/posts/2011/07/29/git-rebase/)

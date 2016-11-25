@@ -5,11 +5,11 @@ city: 南京
 tags: [tech]
 ---
 
-##写在前面
+## 写在前面
 
 Node版本的迭代速度很快，版本很多（横跨0.6到0.11），升级Node版本成为了一个问题。目前有```n```和```nvm```这两个工具可以对Node进行无痛升级，本文简单介绍一下二者的使用。
 
-##n
+## n
 
 `n`是Node的一个模块，作者是[TJ Holowaychuk](https://github.com/visionmedia)（鼎鼎大名的[Express](http://expressjs.com/)框架作者），就像它的名字一样，它的理念就是简单：
 
@@ -33,7 +33,7 @@ Node版本的迭代速度很快，版本很多（横跨0.6到0.11），升级Nod
 	install : 0.11.12
        mkdir : /usr/local/n/versions/0.11.12
        fetch : http://nodejs.org/dist/v0.11.12/node-v0.11.12-darwin-x64.tar.gz
-	####                                                     5.9%
+	###  #                                                     5.9%
 
 安装最新的版本
 
@@ -52,7 +52,7 @@ Node版本的迭代速度很快，版本很多（横跨0.6到0.11），升级Nod
 	$ n use 0.10.21 some.js
 
 
-##nvm
+## nvm
 
 [nvm](https://github.com/creationix/nvm)全称Node Version Manager，它与```n```的实现方式不同，其是通过shell脚本实现的。
 
@@ -92,10 +92,10 @@ Node版本的迭代速度很快，版本很多（横跨0.6到0.11），升级Nod
 	$ rm -rf ~/.nvm
 
 
-##总结
+## 总结
 
 以上就是两种Node版本管理工具的安装和基本使用方法，选择适合你的那一种口味。
 
-##参考
+## 参考
 * [https://github.com/creationix/nvm](https://github.com/creationix/nvm)
 * [https://github.com/visionmedia/n](https://github.com/visionmedia/n)

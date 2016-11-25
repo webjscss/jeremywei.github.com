@@ -5,7 +5,7 @@ city: 南京
 tags: [tech]
 ---
 
-##前言
+## 前言
 在使用JavaScript的时候经常会看见类似如下的函数调用方式：
 
 	(function(){
@@ -26,7 +26,7 @@ tags: [tech]
 
 社区对此种用法的称呼不尽相同，其中包括「自执行匿名函数」（self-executing anonymous function），「立即执行函数表达式」（Immediately-Invoked Function Expression，以下简称IIFE），笔者倾向于第二种叫法。本文浅析一下IIFE是什么以及为什么要如此用。
 
-##立即执行函数表达式
+## 立即执行函数表达式
 
 普通的函数声明与调用方式有以下几种：
 
@@ -102,7 +102,7 @@ A的调用方式明显是有语法错误的，所以才会抛出异常```SyntaxE
 	new function(){ /* code */ }()
 ```
 
-##为什么要用立即执行函数表达式
+## 为什么要用立即执行函数表达式
 
 为什么要用立即执行函数表达式呢？有以下几个场景。
 
@@ -204,10 +204,10 @@ libb.js
 	counter.increment(); // 4
 	counter.increment(); // 5
 
-##总结
+## 总结
 本文浅析了JavaScript中的立即执行函数表达式（Immediately-Invoked Function Expression），指出其存在的原因和其原理，最后举了常用的应用场景，希望对大家有所帮助。
 
-##参考
+## 参考
 
 * [http://benalman.com/news/2010/11/immediately-invoked-function-expression/#iife](http://benalman.com/news/2010/11/immediately-invoked-function-expression/#iife)  
 * [http://blog.coolaj86.com/articles/how-and-why-auto-executing-function.html](http://blog.coolaj86.com/articles/how-and-why-auto-executing-function.html)  

@@ -7,7 +7,7 @@ tags: [tech]
 
 ![Git](http://{{ site.cdn }}/images/tech/git.jpg "Git")
 
-##安装gitosis
+## 安装gitosis
 
 首先是获取gitosis（这里假设你已经安装过git）：
 
@@ -98,7 +98,7 @@ ln -s /usr/local/bin/git /usr/bin/git
 sudo chmod 755 /home/git/repositories/gitosis-admin.git/hooks/post-update
 ```
 
-##添加新仓库
+## 添加新仓库
 
 gitosis的管理是通过git来管理的，clone一下：
 
@@ -164,7 +164,7 @@ git remote add origin git@localhost:test.git
 git push origin master
 ```
 
-##添加用户
+## 添加用户
 
 假设我们要添加的用户为jeremy，那么需要创建key pair：
 
@@ -216,7 +216,7 @@ fatal: The remote end hung up unexpectedly
 
 是因为使用了内容相同，名字不同的public key(.pub)。
 
-##其他
+## 其他
 
 如果SSH使用的不是22端口，那么请如下修改：
 
@@ -226,7 +226,7 @@ Host myserver.com
 Port 2345      
 ```
 
-##参考
+## 参考
 
 * [http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way/][1]    
 * [http://lukhnos.org/blog/en/archives/162/][2]   

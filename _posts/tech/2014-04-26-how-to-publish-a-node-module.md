@@ -6,7 +6,7 @@ tags: [tech]
 
 ![Node.js](http://{{ site.cdn }}/images/tech/nodejs.jpg "Node.js")
 
-##安装node和npm
+## 安装node和npm
 
 安装node(注意：需要Python 2.6或2.7已经安装)
 
@@ -19,11 +19,11 @@ tags: [tech]
 	$ npm
 	Usage: npm <command>
 
-##创建repository
+## 创建repository
 
 接下来我们需要创建module所需的repository，默认你拥有一个github账号（如果没有自行解决），这个repository用来托管我们module的代码，并方便用户报告bug，最重要的是可以让其他开发者向module贡献代码，这也是乐趣所在。
 
-##初始化package.json
+## 初始化package.json
 
 接下来我们创建```package.json```文件，这个文件包含了module的所有信息，比如名称、版本、描述、依赖、作者、license等。笔者以自己的easy_mongo(注意：npm要求项目的名称必须为小写字母)项目为例，看如何创建```package.json```。
 
@@ -96,7 +96,7 @@ tags: [tech]
 		"mongodb" : "1.3.19"
 	}
 
-##项目结构
+## 项目结构
 
 `package.json`文件只是第一步，要完成一个module，我们还需要许多其他文件，整体的文件夹结构如下：
 
@@ -124,7 +124,7 @@ tags: [tech]
 * makefile方便我们用```make test```进行测试
 * ```README.md```是此module的描述和使用方法
 
-##持续集成
+## 持续集成
 
 开源项目多如牛毛，从中找出靠谱的项目需要花费一定的精力，开发者都会对持续更新，并且经过测试（很多公司采用）的项目更加的信赖，对于刚上线并且用户数量很少的项目开发者都会有个疑虑：这项目靠谱吗？所以你需要对自己的项目打上一个标识：老子的项目靠谱。如何做？持续集成。
 
@@ -145,7 +145,7 @@ tags: [tech]
 
 这个例子的是让travis在node.js的0.6.x，0.8.x，0.10.x三个版本下对项目进行测试，并且需要mongodb的服务。
 
-##发布
+## 发布
 
 完成了上面的步骤之后，我们接下来要在www.npmjs.org注册一个账号，这个账号会被添加到npm本地的配置中，用来发布module用。
 
@@ -190,7 +190,7 @@ npm社区版本号规则采用的是[semver](http://semver.org/)(语义化版本
 
 Have fun :)
 
-##参考
+## 参考
 * [https://github.com/npm/npm](https://github.com/npm/npm)
 * [https://www.npmjs.org/doc/api/npm-publish.html](https://www.npmjs.org/doc/api/npm-publish.html)
 * [https://www.npmjs.org/doc/cli/npm-adduser.html](https://www.npmjs.org/doc/cli/npm-adduser.html)

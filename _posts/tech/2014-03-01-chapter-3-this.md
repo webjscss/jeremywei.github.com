@@ -20,7 +20,7 @@ tags: [tech, translate]
 5. [额外资料](#-additional-literature)
 
 <span id="introduction"></span>
-##介绍
+## 介绍
 
 在这篇文章中我们将会再次讨论和[执行上下文](/chapter-1-execution-contexts.html)直接相关的细节。讨论的主题是```this```关键字。
 
@@ -31,7 +31,7 @@ tags: [tech, translate]
 让我们详细看下ECMAScript中的this值到底为何物。
 
 <span id="definitions"></span>
-##声明
+## 声明
 
 `this`的值是执行上下文中的一个属性：
 
@@ -47,7 +47,7 @@ tags: [tech, translate]
 让我们更加详细地看下这些情况。
 
 <span id="this-value-in-the-global-code"></span>
-##全局代码中的this值
+## 全局代码中的this值
 
 事情非常简单。在全局代码中，`this`的值一直是全局对象本身。因此，可以间接的引用它：
 
@@ -68,7 +68,7 @@ tags: [tech, translate]
 	alert(this.c); // 30
 
 <span id="this-value-in-the-function-code"></span>
-##函数代码中的this值
+## 函数代码中的this值
 
 当在函数代码中使用```this```的时候，事情变得更加有趣。这个情况是最难的，并且会引起很多问题。
 
@@ -152,7 +152,7 @@ tags: [tech, translate]
 那么调用表达式的形式是如何影响```this```值的？为了能够全面理解```this```值的确定过程，那么必须详细的了解内部类型之一－```引用```(Reference)类型。
 
 <span id="-reference-type"></span>
-###引用类型
+###  引用类型
 
 如果使用伪代码，那么引用类型的值可以表示为一个对象，此对象拥有两个属性：base（也就是属性的所有者）以及这个base中的属性名称（propertyName）：
 
@@ -320,7 +320,7 @@ tags: [tech, translate]
 
 
 <span id="function-call-and-non-reference-type"></span>
-###函数调用和非引用类型
+###  函数调用和非引用类型
 
 那么，就像我们提到过的，当调用括号左侧的值不是```引用```类型而是其他任意类型的话，```this```的值会自动地设置为```null```并且会成为全局对象。
 
@@ -360,7 +360,7 @@ tags: [tech, translate]
 第四个和第五个例子也是类似－逗号操作符和逻辑或表达式调用了```GetValue```方法，相应地我们失去了引用类型的值而得到了函数类型的值；并且```this```的值又被设置成了全局对象。
 
 <span id="-reference-type-and-null-this-value"></span>
-###引用类型和this的null值
+###  引用类型和this的null值
 
 有一种情况是当调用表达式确定调用括号的左侧是引用类型的值，但是```this```的值却被设置为了null，也就是全局对象。这个情况发生在当```引用```类型值的base对象是[活动对象(activation object)](http://dmitrysoshnikov.com/ecmascript/chapter-2-variable-object/#variable-object-in-function-context)的时候。
 
@@ -440,7 +440,7 @@ var  fooReference = {
 	})(); // global
 
 <span id="this-value-in-function-called-as-the-constructor"></span>
-###构造函数中this的值
+###  构造函数中this的值
 
 函数上下文中```this```值的变化还有一种情况－就是以构造函数的方式来调用函数：
 
@@ -455,7 +455,7 @@ var  fooReference = {
 在这种情况下，[new](http://bclary.com/2004/11/07/#a-11.2.2)操作符会调用函数```A```内部的[[[Construct]]](http://bclary.com/2004/11/07/#a-13.2.2)方法，接下来在对象创建完成之后，调用函数```A```内部的[[[Call]]](http://bclary.com/2004/11/07/#a-13.2.1)方法，并把新创建的对象作为```this```的值。
 
 <span id="manual-setting-of-this-value-for-a-function-call"></span>
-###调用函数时手动设置this值
+###  调用函数时手动设置this值
 
 在```Function.prototype```中定义了两个方法（因此它们可以被所有的函数访问到），通过它们可以手动制定函数调用时```this```的值。它们是```apply```和```call```方法。
 
@@ -476,12 +476,12 @@ var  fooReference = {
 	a.apply({b: 30}, [40]) // this === {b: 30}, this.b == 30, c == 40
 
 <span id="conclusion"></span>
-##总结
+## 总结
 
 在这篇文章里我们讨论了ECMAScript中```this```关键字的一些特性（与C++或Java相比来说，它们的确是特性）。我希望这篇文章可以对理解ECMAScript中```this```关键字如何工作有所帮助。还是和平时一样，欢迎留言，我很乐意回答你的问题。
 
 <span id="-additional-literature"></span>
-##额外资料
+## 额外资料
 
 * 10.1.7 – [This](http://bclary.com/2004/11/07/#a-10.1.7);
 * 11.1.1 – [The this keyword](http://bclary.com/2004/11/07/#a-11.1.1);

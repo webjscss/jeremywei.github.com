@@ -9,8 +9,8 @@ tags: [tech, translate]
 
 此规范指出了如何编写可以在同类模块系统中所共用的模块，这类模块系统可以同时在客户端和服务端，以[安全的](http://wiki.commonjs.org/wiki/Modules/Secure)或者不安全的方式已经被实现了或者通过语法扩展可以被未来的系统所支持。这些模块需要提供顶级作用域的私有性，并提供从其他模块导入单例对象到自身并且可以导出自身API的能力。含蓄的说，这个规范定义了如果一个模块系统要支持共用模块，那么它需要提供的最少的功能特性。
 
-##契约
-###模块上下文
+## 契约
+###  模块上下文
 
 1. 在一个模块中，存在一个自由的变量"require"，它是一个函数。
 	1. 这个"require"函数接收一个模块标识符。
@@ -20,7 +20,7 @@ tags: [tech, translate]
 2. 在一个模块中，会存在一个名为"exports"的自由变量，它是一个对象，模块可以在执行的时候把自身的API加入到其中。
 3. 模块必须使用"exports"对象来做为输出的唯一表示。
 
-###模块标识符
+###  模块标识符
 
 1. 模块标识符是一个以正斜杠分隔的多个"term"组成的字符串。
 2. 一个term必须是一个驼峰格式的标识符，"."或者".."。
@@ -29,18 +29,18 @@ tags: [tech, translate]
 5. 顶级标识符是概念上的模块命名空间的根。
 6. 相对标识符是相对于在其内部调用了"require"的模块的标识符来进行解析的。
 
-###未规范
+###  未规范
 此规范对如下关于协同工作能力方面的重要内容未进行规范：
 
 1. 模块是否可以通过数据库，文件系统或者工厂函数进行存储，或者可以通过链接库进行内部交换。
 2. 模块加载器是否应该支持PATH变量用来解析模块标识符。
 
-###单元测试
+###  单元测试
 
 * [Unit Tests at Google Code](http://code.google.com/p/interoperablejs/) by Kris Kowal
 * [Unit Tests Git Mirror](http://github.com/ashb/interoperablejs/tree/master) by Ash Berlin
 
-###实例代码
+###  实例代码
 
 math.js
 
@@ -66,7 +66,7 @@ program.js
 	inc(a); // 2
 
 <span id="Module-Context"></span>
-###依赖闭环解释（译者添加）
+###  依赖闭环解释（译者添加）
 
 因为node.js完全实现了CommonJS Modules/1.0规范，那么我们用其来解释CommonJS Modules/1.0中的依赖闭环问题。看如下代码：
 
@@ -121,7 +121,7 @@ a.js
 
 注意，虽然main.js同时require了a.js和b.js，但是根据node.js的[模块缓存策略](http://nodejs.org/api/modules.html#modules_caching)，模块只执行一次。
 
-##参考
+## 参考
 
 * [http://wiki.commonjs.org/wiki/Modules/1.0](http://wiki.commonjs.org/wiki/Modules/1.0)
 * [http://nodejs.org/api/modules.html#modules_cycles](http://nodejs.org/api/modules.html#modules_cycles)

@@ -7,7 +7,7 @@ tags: [translate]
 
 [HAR][1]（HTTP Archive），是一个用来储存HTTP请求/响应信息的通用文件格式，基于[JSON]。这个格式的出现可以使HTTP监测工具以一种通用的格式导出所收集的数据，这些数据可以被其他支持HAR的HTTP[分析工具]（包括[Firebug]，[httpwatch]，[Fiddler]等）所使用，来分析网站的性能瓶颈。目前HAR规范最新版本为[HAR 1.2][1]。HAR文件必须是UTF-8编码，有无BOM无所谓。
 
-###HAR数据结构：
+###  HAR数据结构：
 
 一个HAR文件就是一个JSON对象，如下：
 
@@ -31,7 +31,7 @@ tags: [translate]
 
 注：每个页面对应一个 对象，每个HTTP请求对应一个对象。如果HTTP的监测分析工具不能把请求按照page分组，那么为空。
 
-###&lt;creator&gt; & &lt;browser&gt;
+###  &lt;creator&gt; & &lt;browser&gt;
 
 这两个对象的结构是一样的
 
@@ -51,7 +51,7 @@ tags: [translate]
 * version [string] – HAR生成工具或者浏览器的版本。
 * comment [string, 可选]（new in 1.2） – 注释。
 
-###&lt;pages&gt;
+###  &lt;pages&gt;
 	
 这个对象保存了页面列表，格式如下：
 
@@ -71,7 +71,7 @@ tags: [translate]
 * pageTimings[object] – 页面加载过程中详细的时间信息。
 * comment [string, 可选]（new in 1.2） – 注释。
 
-###&lt;pageTimings&gt;
+###  &lt;pageTimings&gt;
 
 这个对象描述了在页面加载过程中各个事件发生的时间点。所有的时间都是以毫秒计算的。如果有的时间无法计算出来，那么相应字段置为-1。
 
@@ -89,7 +89,7 @@ tags: [translate]
 
 由于不同浏览器实现不一样，onContentLoad属性可能代表**DOMContentLoad**事件触发，也可能代表document.readyState等于**interactive**。
 
-###&lt;entries&gt;
+###  &lt;entries&gt;
 
 这个对象包含了一个数组，数组中每个元素的内容就是一个HTTP请求的相应信息。用startedDateTime来排序的话可以加快数据导出的速度。HAR分析工具要确保此数组是按照startedDateTime排序的。
 
@@ -119,7 +119,7 @@ tags: [translate]
 * connection [string, 可选]（new in 1.2）– TCP/IP连接的唯一标示。 如果程序不支持，直接忽略此字段。
 * comment [string, optional]（new in 1.2） – 注释。
 
-###&lt;request&gt;
+###  &lt;request&gt;
 	
 这个对象包含了请求的详细信息
 
@@ -147,7 +147,7 @@ tags: [translate]
 * bodySize [number] – 请求body字节数（POST数据）。如果不可用，设置为-1。
 * comment [string, 可选]（new in 1.2）– 注释。
 
-###&lt;response&gt;
+###  &lt;response&gt;
 
 这个对象包含响应的详细信息。
 
@@ -176,7 +176,7 @@ tags: [translate]
 * comment [string, optional]（new in 1.2） – 注释。
 注：headersSize – 响应头大小只对从服务器接收到的header进行计算。被浏览器加上的header不计算在内，但是会加在header列表中。
 
-###&lt;cookies&gt;
+###  &lt;cookies&gt;
 		
 这个对象包含了所有的cookie（在和中被使用）。
 
@@ -202,7 +202,7 @@ tags: [translate]
 * secure [boolean, 可选]（new in 1.2） – 如果cookie通过ssl传送，此值设置为true，否则设置为false。
 * comment [string, 可选]（new in 1.2） – 注释。
 
-###&lt;headers&gt;
+###  &lt;headers&gt;
 	
 这个对象包含了所有的header（可以在**lt;request&gt;**and**&lt;response&gt;**中使用）
 
@@ -221,7 +221,7 @@ tags: [translate]
 	]
 
 
-###&lt;queryString&gt;
+###  &lt;queryString&gt;
 	
 这个对象包含了查询字符串中所有的paramter-value对（嵌在对象中）。
 
@@ -239,7 +239,7 @@ tags: [translate]
 	    }
 	]
 
-###&lt;postData&gt;
+###  &lt;postData&gt;
 	
 这个对象描述了POST的数据（嵌在对象中）
 
@@ -256,7 +256,7 @@ tags: [translate]
 * comment [string, optional]（new in 1.2） – 注释。
 注意：text和params字段是互斥的。
 
-###&lt;params&gt;
+###  &lt;params&gt;
 
 POST请求参数列表（嵌在 对象中）
 
@@ -276,7 +276,7 @@ POST请求参数列表（嵌在 对象中）
 * contentType [string, 可选] – POST文件的类型。
 * comment [string, 可选]（new in 1.2） – 注释。
 
-###&lt;content&gt;
+###  &lt;content&gt;
 
 这个对象描述了响应内容的详细情况（嵌在 对象中）
 
@@ -310,7 +310,7 @@ POST请求参数列表（嵌在 对象中）
 	}
 
 
-###&lt;cache&gt;
+###  &lt;cache&gt;
 
 这个对象包含了命中的浏览器缓存信息
 
@@ -370,7 +370,7 @@ beforeRequest和afterRequest对象使用以下相同的结构：
 * hitCount [number] – 缓存被访问的次数。
 * comment [string, 可选]（new in 1.2） – 注释
 
-###&lt;timings&gt;
+###  &lt;timings&gt;
 
 这个对象描述了请求/响应过程的各个阶段。时间都是以毫秒为单位。
 
@@ -399,7 +399,7 @@ beforeRequest和afterRequest对象使用以下相同的结构：
 一个请求所花的时间等于这些时间的和，不包括值为-1的。     
 **entry.time == entry.timings.blocked + entry.timings.dns + entry.timings.connect + entry.timings.send + entry.timings.wait + entry.timings.receive**
 
-###自定义字段
+###  自定义字段
 
 HAR规范允许自定义字段，但是要遵循如下规则：
 
@@ -408,7 +408,7 @@ HAR规范允许自定义字段，但是要遵循如下规则：
 * 当HAR工具不知道如何解析非自定义字段的时候，忽略它们。
 * 当文件包含了已经被废弃的非自定义字段时候，HAR工具可以拒绝解析此文件。
 
-###版本格式
+###  版本格式
 
 HAR规范的版本号有如下规则：
 <主版本号>.<副版本号>

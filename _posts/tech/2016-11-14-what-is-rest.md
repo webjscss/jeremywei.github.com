@@ -99,7 +99,7 @@ client-server约束的原则是把用户端和服务端的关注点进行分离�
       在访问了一个REST应用的初始URI（就像人类用户访问了一个网站的首页）之后，REST客户端应该可以使用服务端动态提供的链接来发现所有可用的操作和资源。当访问继续，服务端会返回包括超链接的文本，这些超链接指向当前可用的其他操作。客户端没有必要把REST服务的结构或者动态行为硬编码。
 
 
-##参考
+## 参考
 
 * [https://en.wikipedia.org/wiki/Representational_state_transfer](https://en.wikipedia.org/wiki/Representational_state_transfer)
 * [http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
