@@ -8,7 +8,7 @@ tags: [tech]
 
 原文：[http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api](http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#json-requests)
 
-##   TL;DR
+## TL;DR
 
 * [API是开发者的用户界面 - 所以多花点功夫使其更友好](#requirements)
 * [使用RESTful的URL和action](#restful)
@@ -34,7 +34,7 @@ tags: [tech]
 * [高效的使用HTTP状态码](#http-status)
 
 <span id="requirements"></span>
-##    API的关键要求
+## API的关键要求
 网上很多关于API设计的意见都是一些学术讨论，里边充斥着对模糊标准非常主观的解释，而不是讨论在现实世界中如何落地。这篇文章的目标是描述一个最佳实践：如何为当今的web应用设计一个务实的API。如果一个标准不合理，我不会去尝试满足这个标准。为了帮助决策过程进行，我写下了一些API必须要满足的要求：
 
 * 它应该使用合理的web标准
@@ -45,7 +45,7 @@ tags: [tech]
 API是开发者使用的UI - 就像任何UI一样，保证用户体验是很重要的。
 
 <span id="restful"></span>
-##   使用RESTful的URL和action
+## 使用RESTful的URL和action
 
 如果说有一个理念被广泛的采用，那就是RESTful原则。这些原则由Roy Fielding在其博士论文
 [《network based software architectures》](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)的[第五章](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)中被首次提出。
@@ -97,7 +97,7 @@ REST牛逼的地方在于你只需要在/tickets这个单一入口上利用已�
 需要注意的一件事是以非SSL的形式访问API的URL。不要把请求跳转到它们的SSL版本上。直接抛出一个严重错误！
 
 <span id="docs"></span>
-##   文档
+## 文档
 
 一个API的好用与否取决于它的文档。文档应该很容易被找到并且能够公开访问。大部分开发者在尝试进行任何集成之前都会先看看文档。当文档被隐藏在一个PDF文件里或者需要登录才能查看的时候，文档不仅很难被找到而且也很不容易被检索。
 
