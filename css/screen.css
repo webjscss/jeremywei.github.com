@@ -164,23 +164,26 @@ blockquote {
 .site {
   font-size: 100%;
   text-align: justify;
-  margin: 3em auto 2em auto;
+  margin-top: 1em;
+  margin-bottom: 1em;
   line-height: 1.5em;
   word-break: break-word;
 }
 
 /* media query */
-@media screen
-and (min-device-width : 320px)
-and (max-device-width : 480px) {
+@media (max-width: 700px) {
 	.site {
-		width: 320px;
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
 	}
 }
 
-@media screen and (min-width: 1024px) {
+@media (min-width: 700px) {
     .site {
         width: 700px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
