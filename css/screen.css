@@ -97,9 +97,9 @@ tr td{
 img {
 	max-width: 100%;
 	height: auto;
-	-moz-border-radius: 5px;
+	/*-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
-	border-radius: 5px;
+	border-radius: 5px;*/
 /*	border: 5px solid #cccccc;*/
 }
 
