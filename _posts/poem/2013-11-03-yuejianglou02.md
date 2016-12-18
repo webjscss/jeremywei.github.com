@@ -15,8 +15,8 @@ tags: [poem]
 鳥鳴黃昏初升月  
 他日再來嘆河山  
 
-[![](http://{{ site.cdn }}/images/poem/yjl01.jpg "")](http://{{ site.cdn }}/images/poem/yjl01.jpg)
+[](http://{{ site.cdn }}/images/poem/yjl01.jpg "")]
 
-[![](http://{{ site.cdn }}/images/poem/yjl02.jpg "")](http://{{ site.cdn }}/images/poem/yjl02.jpg)
+[](http://{{ site.cdn }}/images/poem/yjl02.jpg "")]
 
-[![](http://{{ site.cdn }}/images/poem/yjl03.jpg "")](http://{{ site.cdn }}/images/poem/yjl03.jpg)
+[](http://{{ site.cdn }}/images/poem/yjl03.jpg "")]

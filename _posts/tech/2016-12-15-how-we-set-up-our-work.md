@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 我们在Basecamp如何组织工作和团队 - 深入了解「我们决定做什么以及怎么做」的细节
+title: 我们在Basecamp如何组织工作和团队
 tags: [tech]
 ---
 

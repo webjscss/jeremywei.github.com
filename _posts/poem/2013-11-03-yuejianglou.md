@@ -11,4 +11,4 @@ tags: [poem]
 漫步下山踱石徑  
 滿山春色為我紅  
 
-[![](http://{{ site.cdn }}/images/poem/yjl04.jpg "")](http://{{ site.cdn }}/images/poem/yjl04.jpg)
+![登阅江楼之一](http://{{ site.cdn }}/images/poem/yjl04.jpg "登阅江楼之一")

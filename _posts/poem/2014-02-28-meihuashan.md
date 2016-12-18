@@ -11,4 +11,4 @@ tags: [poem]
 暖風吹過處  
 何处不是家  
 
-[![](http://{{ site.cdn }}/images/poem/meihuashan-small.jpg "")](http://{{ site.cdn }}/images/poem/meihuashan-large.jpg)
+![春遊梅花山](http://{{ site.cdn }}/images/poem/meihuashan-small.jpg "春遊梅花山")
